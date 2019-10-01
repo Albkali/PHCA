@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "556886381111",
+    "firebase_url": "https://phca-project.firebaseio.com",
+    "project_id": "phca-project",
+    "storage_bucket": "phca-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556886381111:android:e2533876c640cbe8",
+        "android_client_info": {
+          "package_name": "com.example.masood.phca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556886381111-ng01uonsucsm2nasfki630oqf2uoilth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.masood.phca",
+            "certificate_hash": "c96c6f975a3e0eb94db8c42a101bf781f02c0c70"
+          }
+        },
+        {
+          "client_id": "556886381111-fbuhnk9iht92e7769t18704hhktjsgfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7SdZmCjLTfG_G7iliRLwx_-LTcsF-7Ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556886381111-fbuhnk9iht92e7769t18704hhktjsgfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
