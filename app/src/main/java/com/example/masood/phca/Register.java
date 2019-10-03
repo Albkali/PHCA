@@ -29,7 +29,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-
+        btn_register= (Button)findViewById(R.id.register_button);
         firebaseAuth = FirebaseAuth.getInstance();
 
 
@@ -47,9 +47,9 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                 } else {
-                                    Log.i("PROBEM", "Failed");
+                                    Log.i("PROBEM","Failed");
                                 }
 
                                 // ...
