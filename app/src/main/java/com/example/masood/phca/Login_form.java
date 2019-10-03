@@ -45,7 +45,7 @@ public class Login_form extends AppCompatActivity {
                String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                /*firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Login_form.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -57,10 +57,10 @@ public class Login_form extends AppCompatActivity {
 
                                 // ...
                             }
-                        });
+                        });*/
 
 
-                /*firebaseAuth.signInWithEmailAndPassword(email, password)
+                firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Login_form.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -69,13 +69,13 @@ public class Login_form extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
                                 } else {
-                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    //startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     Toast.makeText(Login_form.this,"Login Failed ", Toast.LENGTH_SHORT);
                                 }
 
                                 // ...
                             }
-                        });*/
+                        });
 
             }
         });
