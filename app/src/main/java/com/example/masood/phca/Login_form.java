@@ -20,7 +20,7 @@ import org.w3c.dom.Text;
 public class Login_form extends AppCompatActivity {
 
     EditText txtEmail,txtPassword;
-    Button btn_login;
+    Button btn_login,btn_register;
 
 
     private FirebaseAuth firebaseAuth;
@@ -34,6 +34,7 @@ public class Login_form extends AppCompatActivity {
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
         btn_login = (Button) findViewById(R.id.login_button);
+        btn_register = (Button)findViewById(R.id.register_button);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -76,6 +77,13 @@ public class Login_form extends AppCompatActivity {
                                 // ...
                             }
                         });
+
+            }
+        });
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Register.class));
 
             }
         });

@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="#009688" />
+        android:background="#009688" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="#FFC107" />
+        android:background="#FFC107" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_blue_light" />
+        android:background="@android:color/holo_blue_light" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -82,5 +82,5 @@
         app:layout_constraintBottom_toTopOf="@+id/imageButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="#8BC34A" />
+        android:background="#8BC34A" />
 </android.support.constraint.ConstraintLayout>
