@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Register"></activity>
+        <activity android:name=".cal"></activity>
+        <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Login_form">
             <intent-filter>
