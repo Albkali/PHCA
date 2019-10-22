@@ -24,20 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        calbtn2= (ImageButton)findViewById(R.id.cal_btn);
-        calbtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calclick();
-            }
-            });
-        }
-        public void calclick(){
-            Intent intent = new Intent(this, cal.class);
-            startActivity(intent);
-
-
-
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
