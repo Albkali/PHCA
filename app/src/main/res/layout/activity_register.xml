@@ -9,34 +9,18 @@
 
 
     <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="71dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="9dp"
-        android:text="Other"
-        app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox6"
-        app:layout_constraintTop_toBottomOf="@+id/editText10" />
-
-    <CheckBox
         android:id="@+id/checkBox6"
         android:layout_width="73dp"
         android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="9dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
         android:layout_marginBottom="9dp"
         android:text="Fmale"
-        app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView2"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox7"
+        app:layout_constraintBottom_toTopOf="@+id/spinner1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/editText10" />
 
@@ -55,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
 
     <Button
         android:id="@+id/register_button"
@@ -122,7 +106,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
-        app:layout_constraintEnd_toStartOf="@+id/autoCompleteTextView2"
+        app:layout_constraintEnd_toStartOf="@+id/spinner1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -169,8 +153,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="9dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
         android:layout_marginBottom="9dp"
         android:text="Gender"
         android:textSize="16sp"
@@ -281,6 +265,8 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:inputType="date"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -300,6 +286,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="textPersonName"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -319,6 +306,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="textPassword"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -338,6 +326,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="textEmailAddress"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -356,7 +345,9 @@
         android:layout_marginEnd="57dp"
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="textPersonName"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -376,6 +367,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="number"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -395,6 +387,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="phone"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -407,33 +400,18 @@
         android:id="@+id/checkBox"
         android:layout_width="71dp"
         android:layout_height="35dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="9dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="9dp"
         android:text="Male"
-        app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView2"
+        app:layout_constraintBottom_toTopOf="@+id/spinner1"
         app:layout_constraintEnd_toStartOf="@+id/checkBox6"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/editText10" />
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="215dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginRight="57dp"
-        android:layout_marginBottom="9dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <EditText
         android:id="@+id/editText9"
@@ -446,6 +424,7 @@
         android:layout_marginRight="57dp"
         android:layout_marginBottom="9dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:inputType="number"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -454,15 +433,37 @@
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/editText8" />
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="215dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/common_google_signin_btn_text_dark_normal_background"
+        android:entries="@array/blood"
+        android:focusableInTouchMode="false"
+        android:spinnerMode="dropdown"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
+
+
+
+
     <android.support.constraint.Group
         android:id="@+id/group2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <android.support.constraint.Constraints
-        android:id="@+id/constraints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 
 </android.support.constraint.ConstraintLayout>
