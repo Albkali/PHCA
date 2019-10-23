@@ -1,33 +1,22 @@
 package com.example.masood.phca;
 
-import android.content.Intent;
-import android.icu.lang.UCharacter;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewDebug;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-
-
-public class cal extends AppCompatActivity {
+public class BMI_Calculate extends AppCompatActivity {
 
     EditText weight, height;
     TextView resulttext;
     String calculation, BMIresult;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cal);
-
+        setContentView(R.layout.activity_bmi__calculate);
         weight = findViewById(R.id.weight);
         height = findViewById(R.id.height);
         resulttext = findViewById(R.id.result);
@@ -66,7 +55,9 @@ public class cal extends AppCompatActivity {
     }
 
 
+
+
+
+
+
 }
-
-
-

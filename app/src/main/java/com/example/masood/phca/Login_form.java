@@ -67,7 +67,7 @@ public class Login_form extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
 
-                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    startActivity(new Intent(getApplicationContext(),MyDrawer.class));
 
                                 } else {
                                     //startActivity(new Intent(getApplicationContext(),MainActivity.class));

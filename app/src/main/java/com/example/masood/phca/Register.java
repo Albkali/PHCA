@@ -18,7 +18,7 @@ public class Register extends AppCompatActivity {
 
     EditText txtEmail,txtPassword;
     Button btn_register;
-
+    Button  btn_next;
     private FirebaseAuth firebaseAuth;
 
 
@@ -29,33 +29,49 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-        btn_register= (Button)findViewById(R.id.register_button);
+        btn_register= (Button)findViewById(R.id.nextregister2);
         firebaseAuth = FirebaseAuth.getInstance();
 
 
 
-        btn_register.setOnClickListener(new View.OnClickListener() {
+        //btn_register.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
+           // @Override
+           // public void onClick(View view) {
 
-                String email = txtEmail.getText().toString().trim();
-                String password = txtPassword.getText().toString().trim();
+                //String email = txtEmail.getText().toString().trim();
+               // String password = txtPassword.getText().toString().trim();
 
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                } else {
-                                    Log.i("PROBEM","Failed");
-                                }
+              //  firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    //    .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+                          //  @Override
+                          //  public void onComplete(@NonNull Task<AuthResult> task) {
+                           //     if (task.isSuccessful()) {
+                           //         startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                          //      } else {
+                          //          Log.i("PROBEM","Failed");
+                            //    }
 
                                 // ...
-                            }
-                        });
-            }
-        });
+                          //  }
+                       // });
+          //  }
+        //});
     }
+
+
+    public void ClickToRegister1(View view)
+    {
+        Intent intent = new Intent( this, activity_Register1.class);
+        startActivity(intent);
+    }
+
+    public void ClickBackToLogin(View view)
+    {
+        Intent intent = new Intent( this, Login_form.class);
+        startActivity(intent);
+    }
+
+
+
 }

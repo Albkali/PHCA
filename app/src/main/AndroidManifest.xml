@@ -11,12 +11,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cal"></activity>
-        <activity android:name=".Register" />
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-        />
-        <activity android:name=".Login_form">
+        <activity android:name=".BMI_Calculate" />
+        <activity android:name=".Article" />
+        <activity android:name=".CSHCN" />
+        <activity android:name=".Pediatrician" />
+        <activity android:name=".Vaccination" />
+        <activity android:name=".activity_Register1" />
+        <activity
+            android:name=".MyDrawer"
+            android:label="@string/title_activity_my_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Register"
+            android:theme="@style/AppTheme.Transparent" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login_form"
+            android:theme="@style/AppTheme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
