@@ -121,12 +121,13 @@
         </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/textViewLogin"
+        android:id="@+id/textViewBackToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:onClick="ClickBackToLogin"
         android:text="@string/back_to_login"
         android:textColor="#0A0A0A" />
     </LinearLayout>

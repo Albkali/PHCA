@@ -27,7 +27,7 @@
 
     <EditText
         android:id="@+id/etName"
-        android:layout_width="215dp"
+        android:layout_width="193dp"
         android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -50,7 +50,7 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="215dp"
+        android:layout_width="193dp"
         android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"

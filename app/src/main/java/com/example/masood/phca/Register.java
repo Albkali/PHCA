@@ -66,4 +66,12 @@ public class Register extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void ClickBackToLogin(View view)
+    {
+        Intent intent = new Intent( this, Login_form.class);
+        startActivity(intent);
+    }
+
+
+
 }

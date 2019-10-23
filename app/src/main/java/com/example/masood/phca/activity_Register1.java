@@ -14,4 +14,11 @@ public class activity_Register1 extends AppCompatActivity {
     }
 
 
+
+    public void ClickBackToLogin2(View view)
+    {
+        Intent intent = new Intent( this, Login_form.class);
+        startActivity(intent);
+    }
+
 }
