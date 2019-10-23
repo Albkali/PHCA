@@ -13,6 +13,7 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/vaccination"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="ClickToVaccination"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/btn_pediatrician"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="ClickToPediatrician"
         app:layout_constraintEnd_toEndOf="@+id/vac_btn"
         app:layout_constraintStart_toStartOf="@+id/vac_btn"
         app:layout_constraintTop_toBottomOf="@+id/vac_btn" />
@@ -47,6 +49,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/btn2_sn"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="ClickToCSHCN"
         app:layout_constraintEnd_toEndOf="@+id/cal_btn"
         app:layout_constraintStart_toStartOf="@+id/cal_btn"
         app:layout_constraintTop_toBottomOf="@+id/cal_btn" />
@@ -58,6 +61,7 @@
         android:layout_marginTop="3dp"
         android:background="@drawable/btn_ar"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="ClickToArticle"
         app:layout_constraintEnd_toEndOf="@+id/sn_btn"
         app:layout_constraintStart_toStartOf="@+id/sn_btn"
         app:layout_constraintTop_toBottomOf="@+id/sn_btn" />

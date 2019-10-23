@@ -22,10 +22,16 @@ public class MyDrawer extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_drawer);
+
+
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -41,7 +47,8 @@ public class MyDrawer extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_home, R.id.nav_notifications, R.id.nav_profile,
+                R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
@@ -51,11 +58,40 @@ public class MyDrawer extends AppCompatActivity {
     }
 
 
-    public void click_bnt_mbi(View view)
+
+    public void ClickToVaccination(View view)
     {
-        Intent intent = new Intent( this, cal.class);
+        Intent intent = new Intent ( this, Vaccination.class);
         startActivity(intent);
     }
+
+    public void ClickToPediatrician(View view)
+    {
+        Intent intent = new Intent ( this, Pediatrician.class);
+        startActivity(intent);
+    }
+
+
+    public void click_bnt_mbi(View view)
+    {
+        Intent intent = new Intent( this, BMI_Calculate.class);
+        startActivity(intent);
+    }
+
+
+    public void ClickToCSHCN(View view)
+    {
+        Intent intent = new Intent ( this, CSHCN.class);
+        startActivity(intent);
+    }
+
+    public void ClickToArticle(View view)
+    {
+        Intent intent = new Intent ( this, Article.class);
+        startActivity(intent);
+    }
+
+
 
 
     @Override
