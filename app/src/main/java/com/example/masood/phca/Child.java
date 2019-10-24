@@ -2,24 +2,24 @@ package com.example.masood.phca;
 
 public class Child {
 
-private  String ChildName , ChildLastName,password,Email;
+private  String ChildName , ChildLastName,password,Email ,childMotherName;
+    private Number Phone;
+
+    ;
 
 
-
-
-
-    public Child(){
-
-
-
-    }
-    public Child(String childName, String childLastName, String password, String email) {
+    public Child(String childName, String childLastName, String password, String email, String childMotherName, Number phone) {
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
         Email = email;
+        this.childMotherName = childMotherName;
+        Phone = phone;
     }
 
+    public Child() {
+
+    }
 
     public String getChildName() {
         return ChildName;
@@ -51,5 +51,21 @@ private  String ChildName , ChildLastName,password,Email;
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public String getChildMotherName() {
+        return childMotherName;
+    }
+
+    public void setChildMotherName(String childMotherName) {
+        this.childMotherName = childMotherName;
+    }
+
+    public Number getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(Number phone) {
+        Phone = phone;
     }
 }
