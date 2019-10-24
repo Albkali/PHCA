@@ -98,7 +98,7 @@
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/editTextPhoneNum"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number" />
@@ -115,7 +115,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_fill2"
-                android:onClick="ClickToRegister1"
+                android:onClick="btninsert"
                 android:text="Next"
                 android:textSize="24sp" />
         </android.support.design.widget.TextInputLayout>
