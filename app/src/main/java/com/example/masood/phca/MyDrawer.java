@@ -2,8 +2,6 @@ package com.example.masood.phca;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -24,6 +22,7 @@ public class MyDrawer extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    Pediatrician pediatrician;
 
 
     @Override
@@ -31,11 +30,12 @@ public class MyDrawer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_drawer);
 
+        pediatrician = new Pediatrician();
 
 
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.ped_toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,7 @@ public class MyDrawer extends AppCompatActivity {
 
     public void ClickToPediatrician(View view)
     {
+
         Intent intent = new Intent ( this, Pediatrician.class);
         startActivity(intent);
     }

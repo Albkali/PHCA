@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "399442896068",
+    "firebase_url": "https://phca-8c9e2.firebaseio.com",
+    "project_id": "phca-8c9e2",
+    "storage_bucket": "phca-8c9e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399442896068:android:476fcf508d85787b695591",
+        "android_client_info": {
+          "package_name": "com.example.masood.phca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399442896068-th4vp4e2tuar1uv82cubpe6q86pl7k55.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.masood.phca",
+            "certificate_hash": "5a431f23b24b2b5b07df6cf2580741442a843762"
+          }
+        },
+        {
+          "client_id": "399442896068-hhvudmoh5ei5rsumn35m3k8nemk6ld6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPRftFzQA30n-qO60ELxGlQ7AdZEJprvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399442896068-hhvudmoh5ei5rsumn35m3k8nemk6ld6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
