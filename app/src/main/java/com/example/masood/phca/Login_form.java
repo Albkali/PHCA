@@ -19,8 +19,8 @@ import org.w3c.dom.Text;
 
 public class Login_form extends AppCompatActivity {
 
-    EditText txtEmail,txtPassword;
-    Button btn_login,btn_register;
+   private EditText txtEmail,txtPassword;
+    private Button btn_login,btn_register;
 
 
     private FirebaseAuth firebaseAuth;

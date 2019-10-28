@@ -29,9 +29,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_form"
-            android:theme="@style/AppTheme.Transparent">
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

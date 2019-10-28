@@ -57,7 +57,7 @@ public class Pediatrician extends AppCompatActivity {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference noteRef = db.document("Pediatrician/101");
+    private DocumentReference noteRef = db.document("Pediatrician/100");
 
 
 
@@ -78,8 +78,9 @@ public class Pediatrician extends AppCompatActivity {
     }
 
 
-
-    public void loadNote(View view) {
+    @Override
+    protected void onResume() {
+        super.onResume();
         noteRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -112,4 +113,9 @@ public class Pediatrician extends AppCompatActivity {
                     }
                 });
     }
+
+    public void loadNote(View view) {
+
+    }
+
 }

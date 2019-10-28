@@ -1,20 +1,59 @@
 package com.example.masood.phca;
 
+import android.text.format.DateFormat;
+
 public class Child {
 
 private  String ChildName , ChildLastName,password,Email ,childMotherName;
-    private Number Phone;
+    private Integer Phone , Height ,Weight,Birthday ;
 
-    ;
+    public Integer getBirthday() {
+        return Birthday;
+    }
+
+    public void setBirthday(Integer birthday) {
+        Birthday = birthday;
+    }
+
+    public Integer getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(Integer phone) {
+        Phone = phone;
+    }
+
+    public Integer getHeight() {
+        return Height;
+    }
+
+    public void setHeight(Integer height) {
+        Height = height;
+    }
+
+    public Integer getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(Integer weight) {
+        Weight = weight;
+    }
 
 
-    public Child(String childName, String childLastName, String password, String email, String childMotherName, Number phone) {
+
+
+
+    public Child(String childName, String childLastName, String password, String email, String childMotherName,
+                 Integer phone,Integer height, Integer weight, Integer birthday) {
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
         Email = email;
         this.childMotherName = childMotherName;
         Phone = phone;
+        Height = height;
+        Weight = weight;
+        Birthday = birthday;
     }
 
     public Child() {
@@ -61,11 +100,7 @@ private  String ChildName , ChildLastName,password,Email ,childMotherName;
         this.childMotherName = childMotherName;
     }
 
-    public Number getPhone() {
-        return Phone;
-    }
 
-    public void setPhone(Number phone) {
-        Phone = phone;
-    }
+
+
 }

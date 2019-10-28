@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+
 public class MyDrawer extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -94,7 +95,6 @@ public class MyDrawer extends AppCompatActivity {
         Intent intent = new Intent ( this, Article.class);
         startActivity(intent);
     }
-
 
 
 
