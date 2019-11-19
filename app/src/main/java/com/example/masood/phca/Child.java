@@ -1,10 +1,34 @@
 package com.example.masood.phca;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Child {
+
+    private static FirebaseFirestore db;
+
+
+    public static FirebaseAuth firebaseAuth = null;
+    public static FirebaseUser firebaseUser = null;
+
+    public static String username = "";
+    public static String useremail = "";
+
 
 private  String ChildName , ChildLastName,password,Email;
 
 
+    public static void firebaseAuthInit() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+    }
 
 
 
@@ -20,8 +44,29 @@ private  String ChildName , ChildLastName,password,Email;
         Email = email;
     }
 
+    public static void getUserData(final Runnable then) {
+        db = FirebaseFirestore.getInstance();
 
-    public String getChildName() {
+        // Get user name and set greetings
+        db.collection("child")
+                .document(Child.firebaseUser.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String name = task.getResult().get("Fname").toString();
+                            Child.username = name;
+                            // After Got data
+                            then.run();
+                        } else {
+                            Log.w(this.toString(), "Error getting documents", task.getException());
+                        }
+                    }
+                });
+
+    }
+        public String getChildName() {
         return ChildName;
     }
 

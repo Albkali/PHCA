@@ -18,20 +18,22 @@
         <activity android:name=".Vaccination" />
         <activity android:name=".activity_Register1" />
         <activity
-            android:name=".MyDrawer"
+            android:name=".MainActivity"
             android:label="@string/title_activity_my_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme.Transparent" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MyDrawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_form"
-            android:theme="@style/AppTheme.Transparent">
+            android:theme="@style/AppTheme.Transparent"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
