@@ -1,6 +1,6 @@
 package com.example.masood.phca;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,13 +30,10 @@ private  String ChildName , ChildLastName,password,Email;
         firebaseUser = firebaseAuth.getCurrentUser();
     }
 
-
-
     public Child(){
 
-
-
     }
+
     public Child(String childName, String childLastName, String password, String email) {
         ChildName = childName;
         ChildLastName = childLastName;

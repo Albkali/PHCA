@@ -1,7 +1,8 @@
 package com.example.masood.phca;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +18,10 @@ public class BMI_Calculate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmi__calculate);
+
+        getSupportActionBar().setTitle("BMI_Calculate");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
+
         weight = findViewById(R.id.weight);
         height = findViewById(R.id.height);
         resulttext = findViewById(R.id.result);
@@ -52,6 +57,16 @@ public class BMI_Calculate extends AppCompatActivity {
 
 
         resulttext.setText(calculation);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //  Auto-generated method stub
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
