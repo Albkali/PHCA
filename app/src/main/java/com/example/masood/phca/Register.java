@@ -48,6 +48,48 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+<<<<<<< HEAD
+=======
+                int phonenumber=Integer.parseInt(txtPhone.getText().toString());
+
+               child.setChildName(txtFirstName.getText().toString());
+               child.setChildLastName(txtLastName.getText().toString());
+                child.setChildMotherName(txtMotherName.getText().toString());
+                child.setEmail(txtEmail1.getText().toString().trim());
+                child.setPassword(txtPassword1.getText().toString().trim());
+                child.setPhone(phonenumber);
+
+                //  Map<String, Object> child = new HashMap<>();
+               // child.put("FirstName", txtFirstName.getText().toString());
+               // child.put("LastName", txtLastName.getText().toString());
+               // child.put("MatherName", txtMotherName.getText().toString());
+               // child.put("Email", txtEmail1.getText().toString());
+               // child.put("Password", txtPassword1.getText().toString());
+               // child.put("NPhone", txtPhone.getText().toString());
+                //child.put("Birthday", txtBirthday.getText().toString());
+               // child.put("Height", txtHeight.getText().toString());
+               // child.put("Weight", txtWeight.getText().toString());
+
+
+                String email = txtEmail1.getText().toString().trim();
+                String password = txtPassword1.getText().toString().trim();
+
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                  .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+                  @Override
+                  public void onComplete(@NonNull Task<AuthResult> task) {
+                     if (task.isSuccessful()) {
+
+                     } else {
+                         Toast.makeText(Register.this, "Email or password not correct", Toast.LENGTH_LONG).show();
+
+                     }
+
+                 }
+                 });
+
+                db.collection("Child")
+>>>>>>> master
 
                 final String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
@@ -82,8 +124,45 @@ public class Register extends AppCompatActivity {
                             }
                         });
             }
+<<<<<<< HEAD
         });
     }
+=======
+            //reff.push().setValue(child);
+            // Toast.makeText(Register.this,"data inserted",Toast.LENGTH_LONG).show();
+
+                //Intent intent = new Intent( Register.this, activity_Register1.class);
+                //startActivity(intent);
+
+            //}
+            // });
+
+            //btn_register.setOnClickListener(new View.OnClickListener() {
+
+            // @Override
+            // public void onClick(View view) {
+
+            //String email = txtEmail.getText().toString().trim();
+            // String password = txtPassword.getText().toString().trim();
+
+            //  firebaseAuth.createUserWithEmailAndPassword(email, password)
+            //    .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+            //  @Override
+            //  public void onComplete(@NonNull Task<AuthResult> task) {
+            //     if (task.isSuccessful()) {
+            //         startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+            //      } else {
+            //          Log.i("PROBEM","Failed");
+            //    }
+
+            // ...
+            //  }
+            // });
+            //  }
+            //});
+
+    });
+>>>>>>> master
 
 
     public void ClickToRegister1(View view)
