@@ -1,5 +1,6 @@
 package com.example.masood.phca;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import android.util.Log;
 
@@ -13,34 +14,90 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class Child {
 
     private static FirebaseFirestore db;
+=======
+import android.text.format.DateFormat;
 
+public class Child {
 
+private  String ChildName , ChildLastName,password,Email ,childMotherName;
+    private Integer Phone , Height ,Weight,Birthday ;
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
+
+    public Integer getBirthday() {
+        return Birthday;
+    }
+
+<<<<<<< HEAD
     public static FirebaseAuth firebaseAuth = null;
     public static FirebaseUser firebaseUser = null;
 
     public static String username = "";
     public static String useremail = "";
+=======
+    public void setBirthday(Integer birthday) {
+        Birthday = birthday;
+    }
 
+    public Integer getPhone() {
+        return Phone;
+    }
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
+    public void setPhone(Integer phone) {
+        Phone = phone;
+    }
+
+<<<<<<< HEAD
 private  String ChildName , ChildLastName,password,Email;
+=======
+    public Integer getHeight() {
+        return Height;
+    }
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
+    public void setHeight(Integer height) {
+        Height = height;
+    }
 
+<<<<<<< HEAD
     public static void firebaseAuthInit() {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
     }
 
     public Child(){
+=======
+    public Integer getWeight() {
+        return Weight;
+    }
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
+    public void setWeight(Integer weight) {
+        Weight = weight;
     }
 
+<<<<<<< HEAD
     public Child(String childName, String childLastName, String password, String email) {
+=======
+
+
+
+
+    public Child(String childName, String childLastName, String password, String email, String childMotherName,
+                 Integer phone,Integer height, Integer weight, Integer birthday) {
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
         Email = email;
+        this.childMotherName = childMotherName;
+        Phone = phone;
+        Height = height;
+        Weight = weight;
+        Birthday = birthday;
     }
 
+<<<<<<< HEAD
     public static void getUserData(final Runnable then) {
         db = FirebaseFirestore.getInstance();
 
@@ -61,6 +118,11 @@ private  String ChildName , ChildLastName,password,Email;
                         }
                     }
                 });
+=======
+    public Child() {
+
+    }
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
     }
         public String getChildName() {
@@ -94,4 +156,16 @@ private  String ChildName , ChildLastName,password,Email;
     public void setEmail(String email) {
         Email = email;
     }
+
+    public String getChildMotherName() {
+        return childMotherName;
+    }
+
+    public void setChildMotherName(String childMotherName) {
+        this.childMotherName = childMotherName;
+    }
+
+
+
+
 }

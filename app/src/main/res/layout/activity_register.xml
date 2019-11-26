@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:layout_gravity="center_vertical"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Register">
 
 
         <ImageView
@@ -98,10 +100,10 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPhoneNum"
-                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone Number" />
+                    android:hint="Phone Number"
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,7 +117,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_fill2"
+<<<<<<< HEAD
 
+=======
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
                 android:text="Next"
                 android:textSize="24sp" />
         </com.google.android.material.textfield.TextInputLayout>

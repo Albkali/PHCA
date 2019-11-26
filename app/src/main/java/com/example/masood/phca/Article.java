@@ -1,10 +1,16 @@
 package com.example.masood.phca;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+=======
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-public class Article extends AppCompatActivity {
+public class Article  extends AppCompatActivity {
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,4 +30,6 @@ public class Article extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

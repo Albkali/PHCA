@@ -1,8 +1,13 @@
 package com.example.masood.phca;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+=======
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
 public class CSHCN extends AppCompatActivity {
 
@@ -24,4 +29,6 @@ public class CSHCN extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

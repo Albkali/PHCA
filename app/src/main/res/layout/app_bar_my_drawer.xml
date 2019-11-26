@@ -11,8 +11,13 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+<<<<<<< HEAD
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+=======
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/ped_toolbar"
+>>>>>>> af91993625362e162d809184145891fe96a7e2ed
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
