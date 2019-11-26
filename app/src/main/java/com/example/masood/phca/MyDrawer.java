@@ -2,15 +2,10 @@ package com.example.masood.phca;
 
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
 import androidx.annotation.NonNull;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.MenuItem;
-=======
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
->>>>>>> af91993625362e162d809184145891fe96a7e2ed
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -25,10 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
-<<<<<<< HEAD
 import com.google.firebase.auth.FirebaseAuth;
-=======
->>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
 public class MyDrawer extends AppCompatActivity {
 
@@ -36,7 +28,6 @@ public class MyDrawer extends AppCompatActivity {
 //    private FirebaseAuth firebaseAuth;
 //    private FirebaseAuth.AuthStateListener authStateListener;
 
-    Pediatrician pediatrician;
 
 
     @Override
@@ -44,12 +35,11 @@ public class MyDrawer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_drawer);
 
-        pediatrician = new Pediatrician();
 
 
 
 
-        Toolbar toolbar = findViewById(R.id.ped_toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +86,6 @@ public class MyDrawer extends AppCompatActivity {
 
     public void ClickToPediatrician(View view)
     {
-
         Intent intent = new Intent ( this, Pediatrician.class);
         startActivity(intent);
     }
@@ -122,7 +111,6 @@ public class MyDrawer extends AppCompatActivity {
     }
 
 
-<<<<<<< HEAD
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.action_logout){
@@ -134,8 +122,6 @@ public class MyDrawer extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-=======
->>>>>>> af91993625362e162d809184145891fe96a7e2ed
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
