@@ -113,9 +113,12 @@ public class MyDrawer extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_settings){
+        if(item.getItemId() == R.id.action_logout){
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

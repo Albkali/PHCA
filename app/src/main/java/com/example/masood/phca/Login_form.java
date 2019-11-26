@@ -27,21 +27,16 @@ public class Login_form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
 
-        Child.firebaseAuthInit();
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        if(Child.firebaseUser == null) {
-            // If not logged in, proceed login activity
-            setContentView(R.layout.activity_login_form);
-        } else {
-            // If the user is logged in
-            Child.getUserData(new Runnable() {
-                public void run() {
-                    finish();
-                    Intent i = new Intent(Login_form.this, MyDrawer.class);
-                    startActivity(i);
-                }
-            });
+        if (firebaseAuth.getCurrentUser() != null) {
+            Intent groceryItemsIntent = new Intent(Login_form.this,
+                    MyDrawer.class);
+            startActivity(groceryItemsIntent);
+            finish();
         }
+
+//        Child.firebaseAuthInit();
 
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
