@@ -104,6 +104,7 @@ public class Register extends AppCompatActivity {
                   @Override
                   public void onComplete(@NonNull Task<AuthResult> task) {
                      if (task.isSuccessful()) {
+
                      } else {
                          Toast.makeText(Register.this, "Email or password not correct", Toast.LENGTH_LONG).show();
 
@@ -140,6 +141,8 @@ public class Register extends AppCompatActivity {
             //reff.push().setValue(child);
             // Toast.makeText(Register.this,"data inserted",Toast.LENGTH_LONG).show();
 
+                //Intent intent = new Intent( Register.this, activity_Register1.class);
+                //startActivity(intent);
 
             //}
             // });
