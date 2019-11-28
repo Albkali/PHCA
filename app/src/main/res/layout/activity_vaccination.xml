@@ -1,40 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vaccination">
+    tools:context=".VaccinationActivity">
 
-
-    <LinearLayout
-        android:id="@+id/layout_Vaccination"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_vacc_items"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Pediatrician"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="241dp">
+        android:layout_height="match_parent" />
 
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/Vaccination_toolbar"
-            android:layout_width="418dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
-            android:background="#68C022"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Vaccination"
-            app:titleTextColor="#C3131010">
-
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="219dp"
-            android:layout_height="212dp" />
-
-    </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
