@@ -12,13 +12,16 @@
     <TextView
         android:id="@+id/txtViewFname"
         android:layout_width="match_parent"
-        android:layout_height="53dp" />
+        android:layout_height="53dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtViewEmail"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:textSize="18sp"
+        android:textAlignment="viewStart"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
 

@@ -1,6 +1,8 @@
 package com.example.masood.phca;
 
+import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +18,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class activity_Register1 extends Register {
+public class activity_Register1 extends AppCompatActivity {
 
 
     EditText txtBirthday,txtHeight  ,txtWeight;
@@ -32,6 +36,8 @@ public class activity_Register1 extends Register {
     FirebaseFirestore db ;
     Child child;
     private FirebaseAuth firebaseAuth;
+
+
 
 
     @Override
@@ -69,44 +75,52 @@ public class activity_Register1 extends Register {
                 //child.put("Weight", txtWeight.getText().toString());
 
 
+
                 int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
 
+                getIntent().hasExtra("ChildFirstName");
+                String ChildFirstName = getIntent().getStringExtra("ChildFirstName");
+                child.setChildName(ChildFirstName);
 
+                getIntent().hasExtra("ChildLastName");
+                String ChildLastName = getIntent().getStringExtra("ChildLastName");
+                child.setChildLastName(ChildLastName);
 
+                getIntent().hasExtra("ChildMotherName");
+                String ChildMotherName = getIntent().getStringExtra("ChildMotherName");
+                child.setChildMotherName(ChildMotherName);
+
+                getIntent().hasExtra("Phone");
+                String Phone = getIntent().getStringExtra("Phone");
+                child.setPhone(Phone);
 
                 child.setBirthday(Birthnumber);
-                child.setHeight(Heightnumber);
-                child.setWeight(Weightnumber);
-
-
+//                child.setHeight(Heightnumber);
+//                child.setWeight(Weightnumber);
 
 
                 //child.put("Birthday", txtBirthday.getText().toString());
                 // child.put("Height", txtHeight.getText().toString());
                 // child.put("Weight", txtWeight.getText().toString());
 
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String id = user.getUid();
+Map<String,Object> userh = new HashMap<>();
+userh.put("weight",Weightnumber);
+userh.put("height",Heightnumber);
+
+                db.collection("child").document(id).set(child);
+                db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
 
-                db.collection("Child")
-                        .add(child)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(activity_Register1.this, "data inserted", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(activity_Register1.this, MyDrawer.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(activity_Register1.this, "data  not inserted", Toast.LENGTH_LONG).show();
-                            }
+                Toast.makeText(activity_Register1.this, "data inserted", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(activity_Register1.this, MyDrawer.class);
+                startActivity(intent);
+            }
                         });
-                }
-            });
+
 
         }
 

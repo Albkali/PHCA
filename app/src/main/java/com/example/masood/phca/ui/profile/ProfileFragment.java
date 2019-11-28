@@ -85,14 +85,50 @@ public class ProfileFragment extends Fragment {
         final String id = userID.getProviderId();
         if (userID != null) {
             // Name, email address, and profile photo Url
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+             DocumentReference noteRef =
+            db.collection("child").document(id).collection("IBM").document(id);
+
+            // DocumentReference noteRef = db.document("child").;
+           // DocumentReference docRef = db.collection("child/");
+           // DocumentReference noteRef = db.document("/IBM/".concat( userID.getUid()));
 
 
-            String name = userID.getDisplayName();
+
+            //db.document("child/".concat(userID.getUid()));
+
+            noteRef.get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String h = documentSnapshot.getString("height");
+                                txtViewname.setText(h);
+
+
+
+
+
+                                // Map<String, Object> note = documentSnapshot.getData();
+
+
+
+
+                            } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+        }
+
+
+//            String name = userID.getDisplayName();
             String email = userID.getEmail();
 
 
-            txtViewname.setText(name);
-            txtViewEmail.setText(" Email :  " + email);
 
             // Check if user's email is verified
             boolean emailVerified = userID.isEmailVerified();
@@ -103,7 +139,7 @@ public class ProfileFragment extends Fragment {
             String uid = userID.getUid();
         }
     }
-}
+
 
 
 

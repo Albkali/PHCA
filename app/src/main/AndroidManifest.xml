@@ -4,6 +4,8 @@
     package="com.example.masood.phca">
 
     <application
+
+        android:name=".NotificationChannels"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,21 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".BMI_Calculate" />
-        <activity android:name=".Article" />
-        <activity android:name=".CSHCN" />
-        <activity android:name=".Pediatrician" />
-        <activity android:name=".Vaccination" />
+        <activity android:name=".BMI_Calculate"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".Article"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".CSHCN"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".Pediatrician"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name=".Vaccination"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+
         <activity android:name=".activity_Register1" />
         <activity
-            android:name=".MyDrawer"
+            android:name=".MainActivity"
             android:label="@string/title_activity_my_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Register"
             android:theme="@style/AppTheme.Transparent" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MyDrawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login_form"

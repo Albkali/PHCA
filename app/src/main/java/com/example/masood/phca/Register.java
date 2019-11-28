@@ -1,6 +1,8 @@
 package com.example.masood.phca;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,12 +19,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -41,7 +45,12 @@ public class Register extends AppCompatActivity {
     //DatabaseReference reff;
     private FirebaseAuth firebaseAuth;
     FirebaseFirestore db ;
+//    public List<Child> groceryItems;
+    Context context;
 
+//    public Register(Context con) {
+//        this.context = con;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +75,14 @@ public class Register extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int phonenumber=Integer.parseInt(txtPhone.getText().toString());
-
-               child.setChildName(txtFirstName.getText().toString());
-               child.setChildLastName(txtLastName.getText().toString());
-                child.setChildMotherName(txtMotherName.getText().toString());
-                child.setEmail(txtEmail1.getText().toString().trim());
-                child.setPassword(txtPassword1.getText().toString().trim());
-                child.setPhone(phonenumber);
+//                int phonenumber = Integer.parseInt(txtPhone.getText().toString());
+//
+//               child.setChildName(txtFirstName.getText().toString());
+//               child.setChildLastName(txtLastName.getText().toString());
+//                child.setChildMotherName(txtMotherName.getText().toString());
+//                child.setEmail(txtEmail1.getText().toString().trim());
+//                child.setPassword(txtPassword1.getText().toString().trim());
+//                child.setPhone(phonenumber);
 
                 //  Map<String, Object> child = new HashMap<>();
                // child.put("FirstName", txtFirstName.getText().toString());
@@ -102,27 +111,30 @@ public class Register extends AppCompatActivity {
 
                  }
                  });
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                 String id = user.getUid();
+//                db.collection("child").document(id).set(child);
 
-                db.collection("Child")
 
-                        .add(child)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                child.setChildName(txtFirstName.getText().toString());
+//                child.setChildLastName(txtLastName.getText().toString());
+//                child.setChildMotherName(txtMotherName.getText().toString());
+//                child.setEmail(txtEmail1.getText().toString().trim());
+//                child.setPhone(phonenumber);
 
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
 
                                 Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent( Register.this, activity_Register1.class);
-                                startActivity(intent);
 
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Register.this, "data  not inserted", Toast.LENGTH_LONG).show();
-                            }
-                         });
+                Intent intent = new Intent(Register.this, activity_Register1.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                intent.putExtra("ChildFirstName",  txtFirstName.getText().toString());
+                intent.putExtra("ChildLastName",  txtLastName.getText().toString());
+                intent.putExtra("ChildMotherName",  txtMotherName.getText().toString());
+                intent.putExtra("Phone", txtPhone.getText().toString());
+
+                startActivity(intent);
+
 
             }
             //reff.push().setValue(child);
