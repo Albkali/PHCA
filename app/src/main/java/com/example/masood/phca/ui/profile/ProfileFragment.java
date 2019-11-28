@@ -1,23 +1,57 @@
 package com.example.masood.phca.ui.profile;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import com.example.masood.phca.Child;
+import com.example.masood.phca.Pediatrician;
 import com.example.masood.phca.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.AdditionalUserInfo;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+import static android.support.constraint.Constraints.TAG;
 
-    EditText  weight ,height;
+public class ProfileFragment extends Fragment {
+
+    EditText weight, height;
     TextView resulttext;
     String calculation, BMIresult;
     Button calc;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
+
+    Button CheckDataUser;
+    TextView txtViewname;
+    TextView txtViewEmail;
+
+    private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
     @Nullable
 
     @Override
@@ -26,59 +60,92 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-        weight = (EditText) v.findViewById(R.id.weight);
-        height = (EditText) v.findViewById(R.id.height);
-        calc = (Button) v.findViewById(R.id.calculate_button);
-        resulttext = (TextView) v.findViewById(R.id.result);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
-        calc.setOnClickListener( this);
+        DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        StorageReference storageReference = firebaseStorage.getReference();
+
+
+        txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
+        txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
+
+
+
+
 
         return v;
-
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.calculate_button:
+    public void onResume() {
+        super.onResume();
+        final String id = userID.getProviderId();
+        if (userID != null) {
+            // Name, email address, and profile photo Url
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                calculateBMI2();
+             DocumentReference noteRef =
+            db.collection("child").document(id).collection("IBM").document(id);
 
-                break;
+            // DocumentReference noteRef = db.document("child").;
+           // DocumentReference docRef = db.collection("child/");
+           // DocumentReference noteRef = db.document("/IBM/".concat( userID.getUid()));
+
+
+
+            //db.document("child/".concat(userID.getUid()));
+
+            noteRef.get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String h = documentSnapshot.getString("height");
+                                txtViewname.setText(h);
+
+
+
+
+
+                                // Map<String, Object> note = documentSnapshot.getData();
+
+
+
+
+                            } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+        }
+
+
+//            String name = userID.getDisplayName();
+            String email = userID.getEmail();
+
+
+
+            // Check if user's email is verified
+            boolean emailVerified = userID.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = userID.getUid();
         }
     }
-    public void calculateBMI2(){
-        String S1 = weight.getText().toString();
-        String S2 = height.getText().toString();
-
-
-        float weightValue = Float.parseFloat(S1);
-        float heightValue = Float.parseFloat(S2) / 100;
-
-
-        float bmi = weightValue / (heightValue * heightValue);
-
-
-        if (bmi < 16) {
-            BMIresult = "Severely Under Weight";
-        } else if (bmi < 18.5) {
-            BMIresult = "Under Weight";
-        } else if (bmi >= 18.5 && bmi <= 24.9) {
-            BMIresult = "Normal Weight";
-        } else if (bmi >= 25 && bmi <= 29.9) {
-            BMIresult = "Overweight";
-        } else {
-            BMIresult = "Obese";
-        }
-
-
-        calculation = "BMI is : " + bmi + "\n" + "The Status is " + BMIresult;
-
-
-        resulttext.setText(calculation);
-    }
 
 
 
 
-}
+
+
+
+
+
+

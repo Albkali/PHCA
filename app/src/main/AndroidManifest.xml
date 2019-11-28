@@ -21,7 +21,7 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity android:name=".Pediatrician"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity android:name=".VaccinationActivity"
+        <activity android:name=".Vaccination"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
         <activity android:name=".activity_Register1" />

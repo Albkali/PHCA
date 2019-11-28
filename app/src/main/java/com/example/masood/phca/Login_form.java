@@ -44,7 +44,12 @@ public class Login_form extends AppCompatActivity {
         btn_register = (Button)findViewById(R.id.toRegister_button);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
+//        if (firebaseAuth.getCurrentUser() != null) {
+//            Intent Intent = new Intent(Login_form.this,
+//                    MyDrawer.class);
+//            startActivity(Intent);
+//            finish();
+//        }
         btn_login.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -1,69 +1,66 @@
 package com.example.masood.phca;
 
-import androidx.annotation.NonNull;
-import android.util.Log;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import android.text.format.DateFormat;
 
 public class Child {
 
-    private static FirebaseFirestore db;
+private  String ChildName , ChildLastName,password,Email ,childMotherName , Phone ;
+    private Integer  Height ,Weight,Birthday ;
 
-
-    public static FirebaseAuth firebaseAuth = null;
-    public static FirebaseUser firebaseUser = null;
-
-    public static String username = "";
-    public static String useremail = "";
-
-
-private  String ChildName , ChildLastName,password,Email;
-
-
-    public static void firebaseAuthInit() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+    public Integer getBirthday() {
+        return Birthday;
     }
 
-    public Child(){
-
+    public void setBirthday(Integer birthday) {
+        Birthday = birthday;
     }
 
-    public Child(String childName, String childLastName, String password, String email) {
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone( String phone) {
+        Phone = phone;
+    }
+
+//    public Integer getHeight() {
+//        return Height;
+//    }
+
+//    public void setHeight(Integer height) {
+//        Height = height;
+//    }
+//
+//    public Integer getWeight() {
+//        return Weight;
+//    }
+//
+//    public void setWeight(Integer weight) {
+//        Weight = weight;
+//    }
+
+
+
+
+
+    public Child(String childName, String childLastName, String password, String email, String childMotherName,
+                 String phone,Integer height, Integer weight, Integer birthday) {
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
         Email = email;
+        this.childMotherName = childMotherName;
+        Phone = phone;
+        Height = height;
+        Weight = weight;
+        Birthday = birthday;
     }
 
-    public static void getUserData(final Runnable then) {
-        db = FirebaseFirestore.getInstance();
-
-        // Get user name and set greetings
-        db.collection("child")
-                .document(Child.firebaseUser.getUid())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            String name = task.getResult().get("Fname").toString();
-                            Child.username = name;
-                            // After Got data
-                            then.run();
-                        } else {
-                            Log.w(this.toString(), "Error getting documents", task.getException());
-                        }
-                    }
-                });
+    public Child() {
 
     }
-        public String getChildName() {
+
+    public String getChildName() {
         return ChildName;
     }
 
@@ -79,19 +76,31 @@ private  String ChildName , ChildLastName,password,Email;
         ChildLastName = childLastName;
     }
 
-    public String getPassword() {
-        return password;
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+
+//    public String getEmail() {
+//        return Email;
+//    }
+//
+//    public void setEmail(String email) {
+//        Email = email;
+//    }
+
+    public String getChildMotherName() {
+        return childMotherName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setChildMotherName(String childMotherName) {
+        this.childMotherName = childMotherName;
     }
 
-    public String getEmail() {
-        return Email;
-    }
 
-    public void setEmail(String email) {
-        Email = email;
-    }
+
+
 }
