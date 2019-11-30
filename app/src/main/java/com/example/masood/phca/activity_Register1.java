@@ -95,7 +95,7 @@ String strGender ;
                 //child.sett("Birthday", txtBirthday.getText().toString());
                 //child.put("Height", txtHeight.getText().toString());
                 //child.put("Weight", txtWeight.getText().toString());
-                
+
                 int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
