@@ -150,23 +150,6 @@ String strGender ;
 //                child.setHeight(Heightnumber);
 //                child.setWeight(Weightnumber);
 //
-//                if(rMale.isChecked()) {
-//                    strGender = rMale.getText().toString();
-//                    child.setGender(strGender);
-//
-//                    //Toast.makeText(activity_Register1.this,Gender, Toast.LENGTH_LONG).show();
-//                            }
-//                           else
-//                            if(rFemale.isChecked()) {
-//
-//
-//                                 Gender = rFemale.getText().toString();
-//                                child.setGender(strGender);
-//
-//                               // Toast.makeText(activity_Register1.this,Gender, Toast.LENGTH_LONG).show();
-//
-//
-//                            }
 
                 //child.put("Birthday", txtBirthday.getText().toString());
                 // child.put("Height", txtHeight.getText().toString());
