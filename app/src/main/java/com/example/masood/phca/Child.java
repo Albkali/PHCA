@@ -6,9 +6,15 @@ public class Child {
 
 private  String ChildName , ChildLastName,password,Email ,childMotherName , Phone ;
     private Integer  Height ,Weight,Birthday ;
+    String Gender ;
+    String Blood ;
 
     public Integer getBirthday() {
         return Birthday;
+    }
+
+    public Child() {
+
     }
 
     public void setBirthday(Integer birthday) {
@@ -22,6 +28,15 @@ private  String ChildName , ChildLastName,password,Email ,childMotherName , Phon
     public void setPhone( String phone) {
         Phone = phone;
     }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
 
 //    public Integer getHeight() {
 //        return Height;
@@ -40,11 +55,16 @@ private  String ChildName , ChildLastName,password,Email ,childMotherName , Phon
 //    }
 
 
+    public String getBlood() {
+        return Blood;
+    }
 
-
+    public void setBlood(String blood) {
+        Blood = blood;
+    }
 
     public Child(String childName, String childLastName, String password, String email, String childMotherName,
-                 String phone,Integer height, Integer weight, Integer birthday) {
+                 String phone, Integer height, Integer weight, Integer birthday, String gender, String blood) {
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
@@ -54,11 +74,11 @@ private  String ChildName , ChildLastName,password,Email ,childMotherName , Phon
         Height = height;
         Weight = weight;
         Birthday = birthday;
+        Gender = gender;
+        Blood = blood;
     }
 
-    public Child() {
 
-    }
 
     public String getChildName() {
         return ChildName;

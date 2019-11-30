@@ -69,46 +69,46 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/textViewGender"
-            android:layout_width="185dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="10dp"
-            android:text="Gender"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/checkbox_layoyt"
+
+        <RadioGroup
+            android:id="@+id/m_Gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/checkbox_male"
-                android:layout_width="80dp"
+            <TextView
+                android:id="@+id/textViewGender"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="29dp"
-                android:hint="Male"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
-
-            <CheckBox
-                android:id="@+id/checkbox_female"
+                android:layout_marginTop="10dp"
+                android:text="Gender"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <RadioButton
+                android:id="@+id/r_Fmale"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="18dp"
-                android:layout_toRightOf="@+id/checkbox_male"
-                android:hint="Female"
-                android:textColor="#ffffff"
+                android:layout_toRightOf="@+id/r_Male"
+                android:text="Female"
+                android:textColor="#1B1A1A"
                 android:textSize="18dp" />
 
-        </RelativeLayout>
+        </RadioGroup>
+
+        <RadioButton
+            android:id="@+id/r_Male"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:text="Male"
+            android:textColor="#0F0F0F"
+            android:textSize="18dp" />
 
     </android.support.design.widget.TextInputLayout>
-
 
 
     <android.support.design.widget.TextInputLayout

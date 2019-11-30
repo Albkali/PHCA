@@ -82,30 +82,25 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        final String id = userID.getProviderId();
+        final String id = userID.getUid();
+        Log.i("my id", id);
         if (userID != null) {
-            // Name, email address, and profile photo Url
+
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-             DocumentReference noteRef =
-            db.collection("child").document(id).collection("IBM").document(id);
-
-            // DocumentReference noteRef = db.document("child").;
-           // DocumentReference docRef = db.collection("child/");
-           // DocumentReference noteRef = db.document("/IBM/".concat( userID.getUid()));
-
-
-
-            //db.document("child/".concat(userID.getUid()));
+            DocumentReference noteRef =
+                    db.collection("child")
+                            .document(id)
+                    .collection("IBM")
+                            .document(id);
 
             noteRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()) {
-                                String h = documentSnapshot.getString("height");
+                                String h = documentSnapshot.getLong("weight") + "";
                                 txtViewname.setText(h);
-
 
 
 
