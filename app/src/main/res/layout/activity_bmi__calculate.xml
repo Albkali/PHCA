@@ -7,67 +7,90 @@
     android:orientation="vertical"
     tools:context=".BMI_Calculate">
 
+    <LinearLayout
+        android:id="@+id/layout_BMI_Calculate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Pediatrician"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="241dp">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Weight"
-        android:textSize="30dp"
-        android:layout_marginTop="80dp"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/BMI_Calculate_toolbar"
+            android:layout_width="418dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:background="#6D3DC2"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="BMI Calculate"
+            app:titleTextColor="#C3131010">
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Weight"
+            android:textSize="30dp"
+            android:layout_marginTop="80dp"/>
 
 
 
-    <EditText
-        android:id="@+id/weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="6"
-        android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="6"
+            android:textAlignment="center"/>
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Height"
-        android:textSize="30dp"
-        android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Height"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"/>
 
 
 
-    <EditText
-        android:id="@+id/height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="6"
-        android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ems="6"
+            android:textAlignment="center"/>
 
 
-    <Button
-        android:id="@+id/calculate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:onClick="calculateBMI"
-        android:text="Calculate BMI" />
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_fill2"
+            android:onClick="calculateBMI"
+            android:text="Calculate BMI" />
 
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Result"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Result"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
+    </LinearLayout>
 
 
 </LinearLayout>

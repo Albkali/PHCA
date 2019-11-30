@@ -1,8 +1,9 @@
 package com.example.masood.phca.ui.slideshow;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 
 public class SlideshowViewModel extends ViewModel {
 

@@ -96,17 +96,19 @@ String strGender ;
                 //child.put("Height", txtHeight.getText().toString());
                 //child.put("Weight", txtWeight.getText().toString());
 
+                Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
+                String text = spinner.getSelectedItem().toString();
+
                 int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
-
+//                strGender = "Male";
+//                child.setGender(strGender);
                 int selectedId = mGender.getCheckedRadioButtonId();
+
                 // find the radiobutton by returned id
                 mGenderOptions = (RadioButton) findViewById(selectedId);
                 strGender = mGenderOptions.getText().toString();
-
-                Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
-                String text = spinner.getSelectedItem().toString();
 
                 getIntent().hasExtra("ChildFirstName");
                 String ChildFirstName = getIntent().getStringExtra("ChildFirstName");
@@ -128,28 +130,43 @@ String strGender ;
                 child.setGender(strGender);
                 child.setBlood(text);
 
-//                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-////                    @Override
-////                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-////                        mGenderOptions = mGender.findViewById(i);
-////                        switch (i){
-////                            case id.r_Male:
-////                            strGender  = mGenderOptions.getText().toString();
-////                                break;
-////                            case id.r_Fmale:
-////                             strGender  = mGenderOptions.getText().toString();
-////
-////                                break;
-////                            default:
-////
-////
-////                        }
-////                        child.setGender(strGender);
-////                    }
-////                });
+                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        mGenderOptions = mGender.findViewById(i);
+                        switch (i){
+                            case id.r_Male:
+                            case id.r_Fmale:
+                                strGender  = mGenderOptions.getText().toString();
+                                break;
+
+                            default:
+
+
+                        }
+                        child.setGender(strGender);
+                    }
+                });
 //                child.setHeight(Heightnumber);
 //                child.setWeight(Weightnumber);
 //
+//                if(rMale.isChecked()) {
+//                    strGender = rMale.getText().toString();
+//                    child.setGender(strGender);
+//
+//                    //Toast.makeText(activity_Register1.this,Gender, Toast.LENGTH_LONG).show();
+//                            }
+//                           else
+//                            if(rFemale.isChecked()) {
+//
+//
+//                                 Gender = rFemale.getText().toString();
+//                                child.setGender(strGender);
+//
+//                               // Toast.makeText(activity_Register1.this,Gender, Toast.LENGTH_LONG).show();
+//
+//
+//                            }
 
                 //child.put("Birthday", txtBirthday.getText().toString());
                 // child.put("Height", txtHeight.getText().toString());
