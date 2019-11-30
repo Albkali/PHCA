@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,72 +8,62 @@
 
     <Button
         android:id="@+id/vac_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="117dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="3dp"
         android:background="@drawable/vaccination"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="ClickToVaccination"
-        app:layout_constraintBottom_toTopOf="@+id/ped_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/ped_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="117dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
         android:background="@drawable/btn_pediatrician"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="ClickToPediatrician"
-        app:layout_constraintBottom_toTopOf="@+id/cal_btn"
         app:layout_constraintEnd_toEndOf="@+id/vac_btn"
         app:layout_constraintStart_toStartOf="@+id/vac_btn"
         app:layout_constraintTop_toBottomOf="@+id/vac_btn" />
 
     <Button
         android:id="@+id/cal_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="117dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
         android:background="@drawable/btn_cal"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="click_bnt_mbi"
-        app:layout_constraintBottom_toTopOf="@+id/sn_btn"
         app:layout_constraintEnd_toEndOf="@+id/ped_btn"
         app:layout_constraintStart_toStartOf="@+id/ped_btn"
         app:layout_constraintTop_toBottomOf="@+id/ped_btn" />
 
     <Button
         android:id="@+id/sn_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="117dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
         android:background="@drawable/btn2_sn"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="ClickToCSHCN"
-        app:layout_constraintBottom_toTopOf="@+id/article_btn"
         app:layout_constraintEnd_toEndOf="@+id/cal_btn"
         app:layout_constraintStart_toStartOf="@+id/cal_btn"
         app:layout_constraintTop_toBottomOf="@+id/cal_btn" />
 
     <Button
         android:id="@+id/article_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="117dp"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/btn_ar"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:onClick="ClickToArticle"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/sn_btn"
         app:layout_constraintStart_toStartOf="@+id/sn_btn"
         app:layout_constraintTop_toBottomOf="@+id/sn_btn" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
