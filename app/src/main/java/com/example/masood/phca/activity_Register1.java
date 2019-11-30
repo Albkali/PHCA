@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +35,7 @@ public class activity_Register1 extends AppCompatActivity {
     String strGender ;
 
 
+    CheckBox SpecialNeeds ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,10 @@ public class activity_Register1 extends AppCompatActivity {
 
 //        rMale=(RadioButton) findViewById(id.r_Male);
 //        rFemale=(RadioButton) findViewById(id.r_Fmale);
-        //mGender=(RadioGroup) findViewById(id.m_Gender);
+        mGender=(RadioGroup) findViewById(id.m_Gender);
 
-        final RadioGroup rg = (RadioGroup) findViewById(id.m_Gender);
+        SpecialNeeds=(CheckBox) findViewById(id.checkboxsn);
+
 
 
         DoneRegister.setOnClickListener(new View.OnClickListener() {
@@ -76,13 +79,14 @@ public class activity_Register1 extends AppCompatActivity {
                 //child.put("Weight", txtWeight.getText().toString());
 
                 Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
-               String text = spinner.getSelectedItem().toString();
+                String text = spinner.getSelectedItem().toString();
 
                 int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
 //                strGender = "Male";
 //                child.setGender(strGender);
+                int selectedId = mGender.getCheckedRadioButtonId();
 
                 // find the radiobutton by returned id
 //                mGenderOptions = (RadioButton) findViewById(selectedId);
@@ -105,45 +109,36 @@ public class activity_Register1 extends AppCompatActivity {
                 child.setPhone(Phone);
 
                 child.setBirthday(Birthnumber);
-               // child.setGender(strGender);
-               child.setBlood(text);
+                child.setBlood(text);
 
+                final String strGender =
+                        ((RadioButton)findViewById(mGender.getCheckedRadioButtonId()))
+                                .getText().toString();
+                child.setGender(strGender);
 
+                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        mGenderOptions = mGender.findViewById(i);
 
-                // Get the checked Radio Button ID from Radio Grou[
-                int selectedRadioButtonID = rg.getCheckedRadioButtonId();
-
-                // If nothing is selected from Radio Group, then it return -1
-                if (selectedRadioButtonID != -1) {
-
-                    RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
-                    String selectedRadioButtonText = selectedRadioButton.getText().toString();
-
-                    child.setGender(selectedRadioButtonText);
-                }
-                else{
-                }
-
-//                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                        mGenderOptions = mGender.findViewById(i);
-//                        switch (i){
-//                            case id.r_Male:
+                        switch (i){
+                            case id.r_Male:
 //                                strGender  = mGenderOptions.getText().toString();
-//                                break;
-//
-//                            case id.r_Fmale:
+//                                child.setGender(strGender);
+                                break;
+
+                            case id.r_Fmale:
 //                                strGender  = mGenderOptions.getText().toString();
-//                                break;
-//
-//                            default:
-//
-//
-//                        }
-//                        child.setGender(strGender);
-//                    }
-//                });
+//                                child.setGender(strGender);
+
+                                break;
+
+                            default:
+
+
+                        }
+                    }
+                });
 //                child.setHeight(Heightnumber);
 //                child.setWeight(Weightnumber);
 //
@@ -179,7 +174,22 @@ public class activity_Register1 extends AppCompatActivity {
 
                 db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
+                if(SpecialNeeds.isChecked()){
+                    Map<String,Object> SpecialNeeds = new HashMap<>();
+                    SpecialNeeds.put("status","Yes");
+                    SpecialNeeds.put("type",null);
 
+                    db.collection("child").document(id)
+                            .collection("Special Needs").document(id).set(SpecialNeeds);
+
+
+                }
+                else
+                {
+                    db.collection("child").document(id)
+                            .collection("Special Needs").document(id).delete();
+
+                }
 
                 Toast.makeText(activity_Register1.this, "data inserted", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(activity_Register1.this, MyDrawer.class);
