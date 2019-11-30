@@ -4,7 +4,7 @@ import android.text.format.DateFormat;
 
 public class Child {
 
-private  String ChildName , ChildLastName,password,Email ,childMotherName , Phone ;
+    private  String ChildName , ChildLastName,password,Email ,childMotherName , Phone ;
     private Integer  Height ,Weight,Birthday ;
     String Gender ;
     String Blood ;

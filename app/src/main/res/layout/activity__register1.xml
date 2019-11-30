@@ -214,4 +214,3 @@
         android:text="@string/back_to_login"
         android:textColor="#0A0A0A" />
 </LinearLayout>
-

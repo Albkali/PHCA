@@ -84,7 +84,7 @@
 
                 </LinearLayout>
 
-            </RelativeLayout>
+    </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="360dp"

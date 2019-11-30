@@ -2,15 +2,8 @@ package com.example.masood.phca;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -18,18 +11,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toolbar;
 
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MyDrawer extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-//    private FirebaseAuth firebaseAuth;
-//    private FirebaseAuth.AuthStateListener authStateListener;
 
+    Pediatrician pediatrician;
 
 
     @Override
@@ -37,12 +31,13 @@ public class MyDrawer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_drawer);
 
+        pediatrician = new Pediatrician();
 
 
 
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.ped_toolbar);
+        setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,28 +61,17 @@ public class MyDrawer extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        firebaseAuth.addAuthStateListener(authStateListener);
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if(authStateListener != null){
-//            firebaseAuth.removeAuthStateListener(authStateListener);
-//        }
-//    }
+
 
     public void ClickToVaccination(View view)
     {
-        Intent intent = new Intent ( this, VaccinationActivity.class);
+        Intent intent = new Intent ( this, Vaccination.class);
         startActivity(intent);
     }
 
     public void ClickToPediatrician(View view)
     {
+
         Intent intent = new Intent ( this, Pediatrician.class);
         startActivity(intent);
     }
@@ -113,17 +97,6 @@ public class MyDrawer extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_logout){
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-            Intent intent = new Intent ( this, Login_form.class);
-            startActivity(intent);
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

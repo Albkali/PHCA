@@ -1,42 +1,21 @@
 package com.example.masood.phca;
-
-import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import static com.example.masood.phca.R.*;
-
 public class activity_Register1 extends AppCompatActivity {
 
 
@@ -48,11 +27,11 @@ public class activity_Register1 extends AppCompatActivity {
     Child child;
 
     private FirebaseAuth firebaseAuth;
-RadioGroup mGender;
-RadioButton mGenderOptions ;
-//RadioButton rMale ;
+    RadioGroup mGender;
+    RadioButton mGenderOptions ;
+    //RadioButton rMale ;
 //RadioButton rFemale;
-String strGender ;
+    String strGender ;
 
 
 
@@ -74,9 +53,9 @@ String strGender ;
 
 //        rMale=(RadioButton) findViewById(id.r_Male);
 //        rFemale=(RadioButton) findViewById(id.r_Fmale);
-        mGender=(RadioGroup) findViewById(id.m_Gender);
+        //mGender=(RadioGroup) findViewById(id.m_Gender);
 
-
+        final RadioGroup rg = (RadioGroup) findViewById(id.m_Gender);
 
 
         DoneRegister.setOnClickListener(new View.OnClickListener() {
@@ -97,18 +76,17 @@ String strGender ;
                 //child.put("Weight", txtWeight.getText().toString());
 
                 Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
-                String text = spinner.getSelectedItem().toString();
+               String text = spinner.getSelectedItem().toString();
 
                 int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
 //                strGender = "Male";
 //                child.setGender(strGender);
-                int selectedId = mGender.getCheckedRadioButtonId();
 
                 // find the radiobutton by returned id
-                mGenderOptions = (RadioButton) findViewById(selectedId);
-                strGender = mGenderOptions.getText().toString();
+//                mGenderOptions = (RadioButton) findViewById(selectedId);
+//                strGender = mGenderOptions.getText().toString();
 
                 getIntent().hasExtra("ChildFirstName");
                 String ChildFirstName = getIntent().getStringExtra("ChildFirstName");
@@ -127,26 +105,45 @@ String strGender ;
                 child.setPhone(Phone);
 
                 child.setBirthday(Birthnumber);
-                child.setGender(strGender);
-                child.setBlood(text);
-
-                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                        mGenderOptions = mGender.findViewById(i);
-                        switch (i){
-                            case id.r_Male:
-                            case id.r_Fmale:
-                                strGender  = mGenderOptions.getText().toString();
-                                break;
-
-                            default:
+               // child.setGender(strGender);
+               child.setBlood(text);
 
 
-                        }
-                        child.setGender(strGender);
-                    }
-                });
+
+                // Get the checked Radio Button ID from Radio Grou[
+                int selectedRadioButtonID = rg.getCheckedRadioButtonId();
+
+                // If nothing is selected from Radio Group, then it return -1
+                if (selectedRadioButtonID != -1) {
+
+                    RadioButton selectedRadioButton = (RadioButton) findViewById(selectedRadioButtonID);
+                    String selectedRadioButtonText = selectedRadioButton.getText().toString();
+
+                    child.setGender(selectedRadioButtonText);
+                }
+                else{
+                }
+
+//                mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                        mGenderOptions = mGender.findViewById(i);
+//                        switch (i){
+//                            case id.r_Male:
+//                                strGender  = mGenderOptions.getText().toString();
+//                                break;
+//
+//                            case id.r_Fmale:
+//                                strGender  = mGenderOptions.getText().toString();
+//                                break;
+//
+//                            default:
+//
+//
+//                        }
+//                        child.setGender(strGender);
+//                    }
+//                });
 //                child.setHeight(Heightnumber);
 //                child.setWeight(Weightnumber);
 //
@@ -174,9 +171,9 @@ String strGender ;
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String id = user.getUid();
-Map<String,Object> userh = new HashMap<>();
-userh.put("weight",Weightnumber);
-userh.put("height",Heightnumber);
+                Map<String,Object> userh = new HashMap<>();
+                userh.put("weight",Weightnumber);
+                userh.put("height",Heightnumber);
 
                 db.collection("child").document(id).set(child);
 
@@ -184,14 +181,14 @@ userh.put("height",Heightnumber);
 
 
 
-           Toast.makeText(activity_Register1.this, "data inserted", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity_Register1.this, "data inserted", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(activity_Register1.this, MyDrawer.class);
                 startActivity(intent);
             }
-                        });
+        });
 
 
-        }
+    }
 
 
 
@@ -201,9 +198,9 @@ userh.put("height",Heightnumber);
 
 
     public void ClickBackToLogin2(View view) {
-                Intent intent = new Intent(activity_Register1.this, Login_form.class);
-                startActivity(intent);
-            }
+        Intent intent = new Intent(activity_Register1.this, Login_form.class);
+        startActivity(intent);
+    }
 
 
-        }
+}

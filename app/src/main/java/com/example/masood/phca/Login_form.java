@@ -1,10 +1,10 @@
 package com.example.masood.phca;
 
 import android.content.Intent;
-
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
 public class Login_form extends AppCompatActivity {
 
-    EditText txtEmail,txtPassword;
-    Button btn_login,btn_register;
+   private EditText txtEmail,txtPassword;
+    private Button btn_login,btn_register;
 
 
     private FirebaseAuth firebaseAuth;
@@ -28,16 +30,6 @@ public class Login_form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if (firebaseAuth.getCurrentUser() != null) {
-            Intent groceryItemsIntent = new Intent(Login_form.this,
-                    MyDrawer.class);
-            startActivity(groceryItemsIntent);
-            finish();
-        }
-
-//        Child.firebaseAuthInit();
 
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
