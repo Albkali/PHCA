@@ -48,7 +48,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage firebaseStorage;
 
     Button CheckDataUser;
-    TextView txtViewname , txtviewchildPhone , txtviewmotherName ,txtviewbloodtype , txtviewchildGender ;
+    TextView txtViewname , txtviewchildPhone , txtviewmotherName ,txtviewbloodtype ,
+            txtviewchildGender ,txtviewAge, txtviewHeight ,txtviewWeight ;
     TextView txtViewEmail;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,6 +76,10 @@ public class ProfileFragment extends Fragment {
         txtviewmotherName = (TextView) v.findViewById(R.id.txtViewmahterName);
         txtviewbloodtype = (TextView) v.findViewById(R.id.txtViewbloodtype);
         txtviewchildGender = (TextView) v.findViewById(R.id.txtViewchildGender);
+        txtviewAge = (TextView) v.findViewById(R.id.txtViewAge);
+        txtviewHeight = (TextView) v.findViewById(R.id.txtViewHeight);
+        txtviewWeight = (TextView) v.findViewById(R.id.txtViewWeight);
+
 
         // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
 
@@ -112,6 +117,10 @@ public class ProfileFragment extends Fragment {
                                 String childmothername = documentSnapshot.getString("childMotherName" );
                                 String chlidboodtype = documentSnapshot.getString("blood" );
                                 String childgender = documentSnapshot.getString("gender" );
+                                String childPhone = documentSnapshot.getString("phone" );
+                                String childage = documentSnapshot.getLong("birthday") + "" ;
+
+
 
 
                                 txtViewname.setText( name + " " + lastname );
@@ -119,6 +128,10 @@ public class ProfileFragment extends Fragment {
                                 txtviewmotherName.setText(childmothername);
                                 txtviewbloodtype.setText(chlidboodtype);
                                 txtviewchildGender.setText(childgender);
+                                txtviewchildPhone.setText(childPhone);
+                                txtviewAge.setText(childage);
+
+
 
 
 

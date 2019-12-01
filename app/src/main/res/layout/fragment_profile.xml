@@ -96,7 +96,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="1205"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -169,14 +168,14 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_phone" />
+
             <TextView
                 android:id="@+id/txtViewchildPhone"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
