@@ -30,13 +30,19 @@ public class Login_form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            Intent groceryItemsIntent = new Intent(Login_form.this,
+                    MyDrawer.class);
+            startActivity(groceryItemsIntent);
+            finish();
+        }
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
         btn_login = (Button) findViewById(R.id.login_button);
         btn_register = (Button)findViewById(R.id.toRegister_button);
 
-        firebaseAuth = FirebaseAuth.getInstance();
 //        if (firebaseAuth.getCurrentUser() != null) {
 //            Intent Intent = new Intent(Login_form.this,
 //                    MyDrawer.class);

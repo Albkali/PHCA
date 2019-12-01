@@ -1,10 +1,13 @@
 package com.example.masood.phca;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -14,11 +17,20 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import static com.example.masood.phca.R.*;
 public class activity_Register1 extends AppCompatActivity {
 
+    DatePickerDialog datePicker;
+    Calendar calendar;
+    int day;
+    int month;
+    int year;
+  String BDate;
 
     EditText txtBirthday,txtHeight  ,txtWeight;
 
@@ -41,6 +53,11 @@ public class activity_Register1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity__register1);
+
+        calendar = Calendar.getInstance();
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
 
         db = FirebaseFirestore.getInstance();
 
@@ -81,7 +98,7 @@ public class activity_Register1 extends AppCompatActivity {
                 Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
                 String text = spinner.getSelectedItem().toString();
 
-                int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
+//                int Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
                 int Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                 int Weightnumber = Integer.parseInt(txtWeight.getText().toString());
 //                strGender = "Male";
@@ -108,7 +125,8 @@ public class activity_Register1 extends AppCompatActivity {
                 String Phone = getIntent().getStringExtra("Phone");
                 child.setPhone(Phone);
 
-                child.setBirthday(Birthnumber);
+
+//                child.setBirthday(BDate);
                 child.setBlood(text);
 
                 final String strGender =
@@ -166,6 +184,13 @@ public class activity_Register1 extends AppCompatActivity {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String id = user.getUid();
+
+                Map<String,Object> userBD = new HashMap<>();
+                userBD.put("Bdate",DateUtil.getDateFromString(BDate + " 00:00"));
+
+                db.collection("child").document(id).set(userBD);
+
+
                 Map<String,Object> userh = new HashMap<>();
                 userh.put("weight",Weightnumber);
                 userh.put("height",Heightnumber);
@@ -198,6 +223,24 @@ public class activity_Register1 extends AppCompatActivity {
         });
 
 
+    }
+    public void setDate(View view) {
+        final EditText et = (EditText) view;
+
+        datePicker = new DatePickerDialog(activity_Register1.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        int et_id = et.getId();
+                        String date = (dayOfMonth) + "-" + (monthOfYear + 1) + "-" + (year);
+
+                        if(et_id == id.editTextBabeBirthday) {
+                            BDate = date;
+                        }
+                        et.setText(date);
+                    }
+                }, year, month, day);
+        datePicker.show();
     }
 
 
