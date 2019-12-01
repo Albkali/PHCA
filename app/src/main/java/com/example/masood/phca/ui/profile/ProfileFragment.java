@@ -48,7 +48,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage firebaseStorage;
 
     Button CheckDataUser;
-    TextView txtViewname;
+    TextView txtViewname , txtviewchildPhone , txtviewmotherName ,txtviewbloodtype ,
+            txtviewchildGender ,txtviewAge, txtviewHeight ,txtviewWeight ;
     TextView txtViewEmail;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,7 +71,17 @@ public class ProfileFragment extends Fragment {
 
 
         txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
-        txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
+
+        txtviewchildPhone = (TextView) v.findViewById(R.id.txtViewchildPhone);
+        txtviewmotherName = (TextView) v.findViewById(R.id.txtViewmahterName);
+        txtviewbloodtype = (TextView) v.findViewById(R.id.txtViewbloodtype);
+        txtviewchildGender = (TextView) v.findViewById(R.id.txtViewchildGender);
+        txtviewAge = (TextView) v.findViewById(R.id.txtViewAge);
+        txtviewHeight = (TextView) v.findViewById(R.id.txtViewHeight);
+        txtviewWeight = (TextView) v.findViewById(R.id.txtViewWeight);
+
+
+        // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
 
 
 
@@ -90,17 +101,38 @@ public class ProfileFragment extends Fragment {
 
             DocumentReference noteRef =
                     db.collection("child")
-                            .document(id)
-                            .collection("IBM")
                             .document(id);
+//                            .collection("IBM")
+//                            .document(id);
 
             noteRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()) {
-                                String h = documentSnapshot.getLong("weight") + "";
-                                txtViewname.setText(h);
+                               // String h = documentSnapshot.getLong("weight") + "" ;
+                                String name = documentSnapshot.getString("childName" );
+                                String lastname = documentSnapshot.getString("childLastName" );
+
+                                String childmothername = documentSnapshot.getString("childMotherName" );
+                                String chlidboodtype = documentSnapshot.getString("blood" );
+                                String childgender = documentSnapshot.getString("gender" );
+                                String childPhone = documentSnapshot.getString("phone" );
+                                String childage = documentSnapshot.getLong("birthday") + "" ;
+
+
+
+
+                                txtViewname.setText( name + " " + lastname );
+
+                                txtviewmotherName.setText(childmothername);
+                                txtviewbloodtype.setText(chlidboodtype);
+                                txtviewchildGender.setText(childgender);
+                                txtviewchildPhone.setText(childPhone);
+                                txtviewAge.setText(childage);
+
+
+
 
 
 
