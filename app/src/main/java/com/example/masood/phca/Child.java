@@ -2,23 +2,26 @@ package com.example.masood.phca;
 
 import android.text.format.DateFormat;
 
+import java.util.Date;
+
 public class Child {
 
     private  String ChildName , ChildLastName,password,Email ,childMotherName , Phone ;
     private Integer  Height ,Weight,Birthday ;
+    Date bday;
     String Gender ;
     String Blood ;
 
-    public Integer getBirthday() {
-        return Birthday;
+    public Date getBirthday() {
+        return bday;
     }
 
     public Child() {
 
     }
 
-    public void setBirthday(Integer birthday) {
-        Birthday = birthday;
+    public void setBirthday(Date birthday) {
+        bday = birthday;
     }
 
     public String getPhone() {
@@ -64,7 +67,7 @@ public class Child {
     }
 
     public Child(String childName, String childLastName, String password, String email, String childMotherName,
-                 String phone, Integer height, Integer weight, Integer birthday, String gender, String blood) {
+                 String phone, Integer height, Integer weight, Date birthday, String gender, String blood) {
         ChildName = childName;
         ChildLastName = childLastName;
         this.password = password;
@@ -73,7 +76,7 @@ public class Child {
         Phone = phone;
         Height = height;
         Weight = weight;
-        Birthday = birthday;
+        bday = birthday;
         Gender = gender;
         Blood = blood;
     }

@@ -200,6 +200,7 @@
             android:layout_marginTop="25dp"
             android:layout_weight="1"
             android:background="@drawable/button_fill2"
+            android:onClick="submitData"
             android:text="@string/register"
             android:textSize="24sp" />
 
