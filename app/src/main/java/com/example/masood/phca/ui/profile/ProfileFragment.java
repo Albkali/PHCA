@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
 
 
         txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
-        txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
+       // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
 
 
 
@@ -90,17 +90,20 @@ public class ProfileFragment extends Fragment {
 
             DocumentReference noteRef =
                     db.collection("child")
-                            .document(id)
-                            .collection("IBM")
                             .document(id);
+//                            .collection("IBM")
+//                            .document(id);
 
             noteRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()) {
-                                String h = documentSnapshot.getLong("weight") + "";
-                                txtViewname.setText(h);
+                               // String h = documentSnapshot.getLong("weight") + "" ;
+                                String name = documentSnapshot.getString("childName" );
+                                String lastname = documentSnapshot.getString("childLastName" );
+
+                                txtViewname.setText( name + " " + lastname );
 
 
 

@@ -4,8 +4,9 @@
     <color name="colorPrimaryDark">#23a7d8</color>
     <color name="colorAccent">#000000</color>
     <color name="primaryDark2">#292b3d</color>
+
     <color name="graylight">#fafafa</color>
-    <color name="startblue">#09c6df</color>
+    <color name="startblue"><![CDATA[#09c6df]]></color>
     <color name="endblue">#0bcce6</color>
 
 
