@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage firebaseStorage;
 
     Button CheckDataUser;
-    TextView txtViewname;
+    TextView txtViewname , txtviewchildPhone , txtviewmotherName ,txtviewbloodtype , txtviewchildGender ;
     TextView txtViewEmail;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,7 +70,13 @@ public class ProfileFragment extends Fragment {
 
 
         txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
-       // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
+
+        txtviewchildPhone = (TextView) v.findViewById(R.id.txtViewchildPhone);
+        txtviewmotherName = (TextView) v.findViewById(R.id.txtViewmahterName);
+        txtviewbloodtype = (TextView) v.findViewById(R.id.txtViewbloodtype);
+        txtviewchildGender = (TextView) v.findViewById(R.id.txtViewchildGender);
+
+        // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
 
 
 
@@ -103,7 +109,17 @@ public class ProfileFragment extends Fragment {
                                 String name = documentSnapshot.getString("childName" );
                                 String lastname = documentSnapshot.getString("childLastName" );
 
+                                String childmothername = documentSnapshot.getString("childMotherName" );
+                                String chlidboodtype = documentSnapshot.getString("blood" );
+                                String childgender = documentSnapshot.getString("gender" );
+
+
                                 txtViewname.setText( name + " " + lastname );
+
+                                txtviewmotherName.setText(childmothername);
+                                txtviewbloodtype.setText(chlidboodtype);
+                                txtviewchildGender.setText(childgender);
+
 
 
 
