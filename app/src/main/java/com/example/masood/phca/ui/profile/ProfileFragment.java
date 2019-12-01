@@ -72,6 +72,8 @@ public class ProfileFragment extends Fragment {
 
 
         txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
+        txtViewEmail = (TextView) v.findViewById(R.id.txtViewchildEmail);
+
 
         txtviewchildPhone = (TextView) v.findViewById(R.id.txtViewchildPhone);
         txtviewmotherName = (TextView) v.findViewById(R.id.txtViewmahterName);
@@ -92,6 +94,10 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         final String id = userID.getUid();
+        final String Email = userID.getEmail();
+        txtViewEmail.setText(Email);
+
+
         Log.i("my id", id);
         if (userID != null) {
 
