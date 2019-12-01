@@ -48,11 +48,12 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage firebaseStorage;
 
     Button CheckDataUser;
-    TextView txtViewname , txtviewchildPhone , txtviewmotherName ,txtviewbloodtype ,
-            txtviewchildGender ,txtviewAge, txtviewHeight ,txtviewWeight ;
+    TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
+            txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
     TextView txtViewEmail;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
+
     @Nullable
 
     @Override
@@ -71,6 +72,8 @@ public class ProfileFragment extends Fragment {
 
 
         txtViewname = (TextView) v.findViewById(R.id.txtViewFname);
+        txtViewEmail = (TextView) v.findViewById(R.id.txtViewchildEmail);
+
 
         txtviewchildPhone = (TextView) v.findViewById(R.id.txtViewchildPhone);
         txtviewmotherName = (TextView) v.findViewById(R.id.txtViewmahterName);
@@ -84,9 +87,6 @@ public class ProfileFragment extends Fragment {
         // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
 
 
-
-
-
         return v;
     }
 
@@ -94,6 +94,10 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         final String id = userID.getUid();
+        final String Email = userID.getEmail();
+        txtViewEmail.setText(Email);
+
+
         Log.i("my id", id);
         if (userID != null) {
 
@@ -102,28 +106,32 @@ public class ProfileFragment extends Fragment {
             DocumentReference noteRef =
                     db.collection("child")
                             .document(id);
-//                            .collection("IBM")
-//                            .document(id);
+
+
+            DocumentReference noteRef2 =
+                    db.collection("child")
+                            .document(id)
+                            .collection("IBM")
+                            .document(id);
+
 
             noteRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()) {
-                               // String h = documentSnapshot.getLong("weight") + "" ;
-                                String name = documentSnapshot.getString("childName" );
-                                String lastname = documentSnapshot.getString("childLastName" );
+                                // String h = documentSnapshot.getLong("weight") + "" ;
+                                String name = documentSnapshot.getString("childName");
+                                String lastname = documentSnapshot.getString("childLastName");
 
-                                String childmothername = documentSnapshot.getString("childMotherName" );
-                                String chlidboodtype = documentSnapshot.getString("blood" );
-                                String childgender = documentSnapshot.getString("gender" );
-                                String childPhone = documentSnapshot.getString("phone" );
-                                String childage = documentSnapshot.getLong("birthday") + "" ;
-
-
+                                String childmothername = documentSnapshot.getString("childMotherName");
+                                String chlidboodtype = documentSnapshot.getString("blood");
+                                String childgender = documentSnapshot.getString("gender");
+                                String childPhone = documentSnapshot.getString("phone");
+                                String childage = documentSnapshot.getLong("birthday") + "";
 
 
-                                txtViewname.setText( name + " " + lastname );
+                                txtViewname.setText(name + " " + lastname);
 
                                 txtviewmotherName.setText(childmothername);
                                 txtviewbloodtype.setText(chlidboodtype);
@@ -132,39 +140,49 @@ public class ProfileFragment extends Fragment {
                                 txtviewAge.setText(childage);
 
 
-
-
-
-
-
                                 // Map<String, Object> note = documentSnapshot.getData();
-
-
-
 
                             } else {
 //                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+            noteRef2.get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String childWeight = documentSnapshot.getLong("weight") + "";
+                                String childHeight = documentSnapshot.getLong("height") + "";
+
+                                txtviewWeight.setText(childWeight);
+                                txtviewHeight.setText(childHeight);
+
+
+                                // Map<String, Object> note = documentSnapshot.getData();
+
+                            } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    });
+
+//            String name = userID.getDisplayName();
+            String email = userID.getEmail();
+
+
+            // Check if user's email is verified
+            boolean emailVerified = userID.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            String uid = userID.getUid();
+
 
 
         }
-
-
-//            String name = userID.getDisplayName();
-        String email = userID.getEmail();
-
-
-
-        // Check if user's email is verified
-        boolean emailVerified = userID.isEmailVerified();
-
-        // The user's ID, unique to the Firebase project. Do NOT use this value to
-        // authenticate with your backend server, if you have one. Use
-        // FirebaseUser.getIdToken() instead.
-        String uid = userID.getUid();
     }
+
 }
-
-
