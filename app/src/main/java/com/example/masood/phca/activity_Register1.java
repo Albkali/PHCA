@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -135,6 +136,9 @@ public class activity_Register1 extends AppCompatActivity {
             Map<String,Object> userh = new HashMap<>();
             userh.put("weight",Weightnumber);
             userh.put("height",Heightnumber);
+
+
+
 
             db.collection("child").document(id).set(child);
             db.collection("child").document(id).collection("IBM").document(id).set(userh);

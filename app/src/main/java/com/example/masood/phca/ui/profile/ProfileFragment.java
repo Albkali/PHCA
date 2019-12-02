@@ -2,10 +2,12 @@ package com.example.masood.phca.ui.profile;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,8 +20,10 @@ import android.widget.Toast;
 import com.example.masood.phca.Child;
 import com.example.masood.phca.Pediatrician;
 import com.example.masood.phca.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +37,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -99,89 +109,123 @@ public class ProfileFragment extends Fragment {
 
 
         Log.i("my id", id);
-        if (userID != null) {
-
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            DocumentReference noteRef =
-                    db.collection("child")
-                            .document(id);
+        try {
 
 
-            DocumentReference noteRef2 =
-                    db.collection("child")
-                            .document(id)
-                            .collection("IBM")
-                            .document(id);
+            if (userID != null) {
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                DocumentReference noteRef =
+                        db.collection("child")
+                                .document(id);
 
 
-            noteRef.get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                // String h = documentSnapshot.getLong("weight") + "" ;
-                                String name = documentSnapshot.getString("childName");
-                                String lastname = documentSnapshot.getString("childLastName");
+                DocumentReference noteRef2 =
+                        db.collection("child")
+                                .document(id)
+                                .collection("IBM")
+                                .document(id);
 
-                                String childmothername = documentSnapshot.getString("childMotherName");
-                                String chlidboodtype = documentSnapshot.getString("blood");
-                                String childgender = documentSnapshot.getString("gender");
-                                String childPhone = documentSnapshot.getString("phone");
-                                String childage = documentSnapshot.getLong("birthday") + "";
+                db.collection("child")
+                        .document(id)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot document = task.getResult();
+                                    Date datetest = document.getTimestamp("birthday").toDate();
+
+                                    Calendar calander = Calendar.getInstance();
+                                    calander.setTime(datetest);
+                                    int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
+                                    int userBirthMonth = calander.get(Calendar.MONTH);
+                                    int userBirthYear = calander.get(Calendar.YEAR);
+
+                                    LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
+                                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+                                    final Period p = Period.between(userBirthDate, currentDate);
+
+                                    String y = p.getYears() + " y" + (p.getYears() > 1 ? "s " : " ");
+                                    String m = (p.getMonths()-1) + " m" + (p.getMonths() > 1 ? "s and " : " and ");
+                                    String d = (p.getDays()+1) + " d" + (p.getDays() > 1 ? "s.\n" : ".\n");
+                                    txtviewAge.setText(y+m+d);
 
 
-                                txtViewname.setText(name + " " + lastname);
-
-                                txtviewmotherName.setText(childmothername);
-                                txtviewbloodtype.setText(chlidboodtype);
-                                txtviewchildGender.setText(childgender);
-                                txtviewchildPhone.setText(childPhone);
-                                txtviewAge.setText(childage);
-
-
-                                // Map<String, Object> note = documentSnapshot.getData();
-
-                            } else {
-//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
-            noteRef2.get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                String childWeight = documentSnapshot.getLong("weight") + "";
-                                String childHeight = documentSnapshot.getLong("height") + "";
-
-                                txtviewWeight.setText(childWeight);
-                                txtviewHeight.setText(childHeight);
+                        });
 
 
-                                // Map<String, Object> note = documentSnapshot.getData();
+                noteRef.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                    // String h = documentSnapshot.getLong("weight") + "" ;
+                                    String name = documentSnapshot.getString("childName");
+                                    String lastname = documentSnapshot.getString("childLastName");
 
-                            } else {
+                                    String childmothername = documentSnapshot.getString("childMotherName");
+                                    String chlidboodtype = documentSnapshot.getString("blood");
+                                    String childgender = documentSnapshot.getString("gender");
+                                    String childPhone = documentSnapshot.getString("phone");
+//                                    String childage = documentSnapshot.getLong("birthday") + "";
+
+
+                                    txtViewname.setText(name + " " + lastname);
+
+                                    txtviewmotherName.setText(childmothername);
+                                    txtviewbloodtype.setText(chlidboodtype);
+                                    txtviewchildGender.setText(childgender);
+                                    txtviewchildPhone.setText(childPhone);
+
+
+                                    // Map<String, Object> note = documentSnapshot.getData();
+
+                                } else {
 //                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
+                        });
+                noteRef2.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                    String childWeight = documentSnapshot.getLong("weight") + "";
+                                    String childHeight = documentSnapshot.getLong("height") + "";
 
-                    });
+                                    txtviewWeight.setText(childWeight);
+                                    txtviewHeight.setText(childHeight);
+
+
+                                    // Map<String, Object> note = documentSnapshot.getData();
+
+                                } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        });
 
 //            String name = userID.getDisplayName();
-            String email = userID.getEmail();
+                String email = userID.getEmail();
 
 
-            // Check if user's email is verified
-            boolean emailVerified = userID.isEmailVerified();
+                // Check if user's email is verified
+                boolean emailVerified = userID.isEmailVerified();
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = userID.getUid();
+                // The user's ID, unique to the Firebase project. Do NOT use this value to
+                // authenticate with your backend server, if you have one. Use
+                // FirebaseUser.getIdToken() instead.
+                String uid = userID.getUid();
 
 
-
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

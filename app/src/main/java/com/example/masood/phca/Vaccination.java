@@ -4,8 +4,11 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.util.LocaleData;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,13 +24,19 @@ import com.example.masood.phca.Adapter.VaccinationAdapter;
 import com.example.masood.phca.Model.VaccinationItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import io.opencensus.tags.Tag;
 
 import static com.example.masood.phca.NotificationChannels.CHANNEL_1_ID;
 
@@ -79,47 +88,57 @@ public class Vaccination extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_vacc_items);
 
         db = FirebaseFirestore.getInstance();
-
-        db.collection("vaccination")
-                    .document("QAv2QZFhih39UGOKTTVM")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                            posts = new ArrayList<>();
-
-                            if (task.isSuccessful()) {
-
-                                SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
-
-                                String name = task.getResult().get("1to4_name").toString();
-                                String status = task.getResult().get("1to4_status").toString();
-                                String date = sfd.format(task.getResult().get("1to4_date"));
+try {
 
 
-                                String name2 = task.getResult().get("cc_name").toString();
-                                String status2 = task.getResult().get("cc_status").toString();
-                                String date2 = sfd.format(task.getResult().get("cc_date"));
+    db.collection("vaccination")
+            .document("QAv2QZFhih39UGOKTTVM")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    DocumentSnapshot document = task.getResult();
 
+                    posts = new ArrayList<>();
 
-                                posts.add(new VaccinationItem(name , status ,date));
-                                posts.add(new VaccinationItem(name2 , status2 ,date2));
+                    if (task.isSuccessful()) {
 
-                                adapter = new VaccinationAdapter(Vaccination.this,posts);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(Vaccination.this));
+                        SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+
+                        String name = task.getResult().get("1to4_name").toString();
+                        String status = task.getResult().get("1to4_status").toString();
+                        String date = sfd.format(task.getResult().get("1to4_date"));
+
+                       age.getAge("vaccination","QAv2QZFhih39UGOKTTVM","1to4_date");
 
 
 
+//                        Toast.makeText(Vaccination.this, ss + s2 + s3, Toast.LENGTH_LONG).show();
 
 
 
-                            }else {
-                                Log.d("ItinerariesSearch", "Error getting documents: ", task.getException());
-                            }
+                        String name2 = task.getResult().get("cc_name").toString();
+                        String status2 = task.getResult().get("cc_status").toString();
+                        String date2 = sfd.format(task.getResult().get("cc_date"));
+
+
+                        posts.add(new VaccinationItem(name, status, date));
+                        posts.add(new VaccinationItem(name2, status2, date2));
+
+                        adapter = new VaccinationAdapter(Vaccination.this, posts);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(Vaccination.this));
+
+
+                    } else {
+                        Log.d("ItinerariesSearch", "Error getting documents: ", task.getException());
                     }
-                    });
+                }
+            });
+} catch (Exception e) {
+                                    Toast.makeText(Vaccination.this, "error", Toast.LENGTH_LONG).show();
+}
 
     }
 
@@ -155,18 +174,18 @@ public class Vaccination extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
+
                                 Date userDate = document.getDate("cc_date");
-                                Date c = Calendar.getInstance().getTime();
+                                Date currentDate = Calendar.getInstance().getTime();
                                 String status = task.getResult().get("cc_status").toString();
 
-                                if ( userDate.compareTo(c) >= 0 && status.equals("waiting") ){
-                                    Toast.makeText(Vaccination.this, "comming", Toast.LENGTH_LONG).show();
-
-                                }else{
-                                    Toast.makeText(Vaccination.this, "gone", Toast.LENGTH_LONG).show();
-
-                                }
-
+//                                if ( userDate.compareTo(currentDate) >= 0 && status.equals("waiting") ){
+//                                    Toast.makeText(Vaccination.this, "comming", Toast.LENGTH_LONG).show();
+//
+//                                }else{
+//                                    Toast.makeText(Vaccination.this, "gone", Toast.LENGTH_LONG).show();
+//
+//                                }
 
 //                                Log.d("ItinerariesSearch", userDate.compareTo(c), task.getException());
 
