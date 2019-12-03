@@ -1,6 +1,8 @@
 package com.example.masood.phca.ui.profile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.masood.phca.Child;
@@ -48,21 +51,20 @@ import static android.support.constraint.Constraints.TAG;
 
 public class ProfileFragment extends Fragment {
 
-    EditText weight, height;
-    TextView resulttext;
-    String calculation, BMIresult;
-    Button calc;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
 
-    Button CheckDataUser;
     TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
             txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
     TextView txtViewEmail;
 
+    ImageView imgprofile ;
+
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
+
+
 
     @Nullable
 
@@ -93,8 +95,11 @@ public class ProfileFragment extends Fragment {
         txtviewHeight = (TextView) v.findViewById(R.id.txtViewHeight);
         txtviewWeight = (TextView) v.findViewById(R.id.txtViewWeight);
 
+        imgprofile = (ImageView) v.findViewById(R.id.txtViewImage);
 
-        // txtViewEmail = (TextView) v.findViewById(R.id.txtViewEmail);
+
+
+
 
 
         return v;
@@ -105,6 +110,8 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         final String id = userID.getUid();
         final String Email = userID.getEmail();
+//        String BDate = getArguments().getString("birthDate");
+
         txtViewEmail.setText(Email);
 
 
@@ -127,35 +134,7 @@ public class ProfileFragment extends Fragment {
                                 .collection("IBM")
                                 .document(id);
 
-                db.collection("child")
-                        .document(id)
-                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    DocumentSnapshot document = task.getResult();
-                                    Date datetest = document.getTimestamp("birthday").toDate();
 
-                                    Calendar calander = Calendar.getInstance();
-                                    calander.setTime(datetest);
-                                    int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
-                                    int userBirthMonth = calander.get(Calendar.MONTH);
-                                    int userBirthYear = calander.get(Calendar.YEAR);
-
-                                    LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
-                                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
-                                    final Period p = Period.between(userBirthDate, currentDate);
-
-                                    String y = p.getYears() + " y" + (p.getYears() > 1 ? "s " : " ");
-                                    String m = (p.getMonths()-1) + " m" + (p.getMonths() > 1 ? "s and " : " and ");
-                                    String d = (p.getDays()+1) + " d" + (p.getDays() > 1 ? "s.\n" : ".\n");
-                                    txtviewAge.setText(y+m+d);
-
-
-                                }
-                            }
-                        });
 
 
                 noteRef.get()
@@ -209,6 +188,36 @@ public class ProfileFragment extends Fragment {
                             }
 
                         });
+                db.collection("child")
+                        .document(id)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            Date datetest = document.getTimestamp("birthday").toDate();
+
+                            Calendar calander = Calendar.getInstance();
+                            calander.setTime(datetest);
+                            int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
+                            int userBirthMonth = calander.get(Calendar.MONTH);
+                            int userBirthYear = calander.get(Calendar.YEAR);
+
+                            LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
+                            LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+                            final Period p = Period.between(userBirthDate, currentDate);
+
+                            String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
+                            String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
+                            String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
+                            txtviewAge.setText(y+m+d);
+
+
+                        }
+                    }
+                });
+
 
 //            String name = userID.getDisplayName();
                 String email = userID.getEmail();

@@ -1,10 +1,14 @@
 package com.example.masood.phca;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -19,6 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,6 +33,8 @@ public class MyDrawer extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     Pediatrician pediatrician;
+//    private static final int PReqCode = 2 ;
+//    private static final int REQUESCODE = 2 ;
 
 
     @Override
@@ -64,6 +71,47 @@ public class MyDrawer extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+
+
+
+
+//    public void checkAndRequestForPermission() {
+//
+//
+//        if (ContextCompat.checkSelfPermission(MyDrawer.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(MyDrawer.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//
+//                Toast.makeText(MyDrawer.this,"Please accept for required permission",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            else
+//            {
+//                ActivityCompat.requestPermissions(MyDrawer.this,
+//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                        PReqCode);
+//            }
+//
+//        }
+//        else
+//            // everything goes well : we have permission to access user gallery
+//            openGallery();
+//
+//    }
+
+
+
+
+
+//    public void openGallery() {
+//        //TODO: open gallery intent and wait for user to pick an image !
+//
+//        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        galleryIntent.setType("image/*");
+//        startActivityForResult(galleryIntent,REQUESCODE);
+//    }
 
 
 

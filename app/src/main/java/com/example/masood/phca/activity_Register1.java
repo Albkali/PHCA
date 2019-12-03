@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.masood.phca.ui.profile.ProfileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -72,7 +74,7 @@ public class activity_Register1 extends AppCompatActivity {
 
             child = new Child();
             Spinner spinner = (Spinner)findViewById(id.spinnerBloodType);
-            String text = spinner.getSelectedItem().toString();
+            String typeofblood = spinner.getSelectedItem().toString();
 
 //            Birthnumber = Integer.parseInt(txtBirthday.getText().toString());
             Heightnumber = Integer.parseInt(txtHeight.getText().toString());
@@ -95,7 +97,9 @@ public class activity_Register1 extends AppCompatActivity {
             child.setPhone(Phone);
 
             child.setBirthday(DateUtil.getDateFromString(BDate+" 00:00"));
-            child.setBlood(text);
+
+
+            child.setBlood(typeofblood);
 
             final String strGender =
                     ((RadioButton)findViewById(mGender.getCheckedRadioButtonId()))
@@ -141,7 +145,9 @@ public class activity_Register1 extends AppCompatActivity {
 
 
             db.collection("child").document(id).set(child);
-            db.collection("child").document(id).collection("IBM").document(id).set(userh);
+
+
+            db.collection("child").document(id).collection("IBM").document(BDate).set(userh);
 
             if(SpecialNeeds.isChecked()){
                 Map<String,Object> SpecialNeeds = new HashMap<>();
@@ -167,22 +173,33 @@ public class activity_Register1 extends AppCompatActivity {
         }
     }
     public void setDate(View view) {
-        final EditText et = (EditText) view;
+        txtBirthday = (EditText) view;
 
         datePicker = new DatePickerDialog(activity_Register1.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        int et_id = et.getId();
-                        String date = (dayOfMonth) + "-" + (monthOfYear + 1) + "-" + (year);
+                        int et_id = txtBirthday.getId();
+                        String date = (dayOfMonth) + "-" + (monthOfYear) + "-" + (year);
 
                         if(et_id == id.editTextBabeBirthday) {
                             BDate = date;
                         }
-                        et.setText(date);
+
+
+//                        ProfileFragment fragment = new ProfileFragment();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("birthDate", date);
+//                        fragment.setArguments(bundle);
+
+                        txtBirthday.setText(date);
                     }
                 }, year, month, day);
         datePicker.show();
+
+
+
+
     }
     public void ClickBackToLogin2(View view) {
         Intent intent = new Intent(activity_Register1.this, Login_form.class);

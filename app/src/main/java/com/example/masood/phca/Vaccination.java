@@ -110,7 +110,6 @@ try {
                         String status = task.getResult().get("1to4_status").toString();
                         String date = sfd.format(task.getResult().get("1to4_date"));
 
-                       age.getAge("vaccination","QAv2QZFhih39UGOKTTVM","1to4_date");
 
 
 
