@@ -1,219 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
-    android:layout_gravity="center_vertical"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:background="#008577"
     android:orientation="vertical"
-    tools:context=".activity_Register1">
+    tools:context=".Register"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="122dp"
-        android:layout_height="74dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="16dp"
-        android:src="@drawable/logo" />
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
+        android:id="@+id/loginLayout"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextBabeBirthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Baby Birthday"
-            android:inputType="date"
-            android:onClick="setDate" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextHeight"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Height of Baby" />
-
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextWeight"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Weight of Baby" />
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textViewGender"
-            android:layout_width="match_parent"
+            android:id="@+id/login_title"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Gender"
-            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:text="New User Registration"
+            android:textColor="#fff"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/m_Gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <RadioButton
-                android:id="@+id/r_Fmale"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="18dp"
-                android:layout_toRightOf="@+id/r_Male"
-                android:text="Female"
-                android:textColor="#1B1A1A"
-                android:textSize="18dp" />
-            <RadioButton
-                android:id="@+id/r_Male"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="29dp"
-                android:text="Male"
-                android:textColor="#0F0F0F"
-                android:textSize="18dp" />
-
-        </RadioGroup>
-
-
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
 
         <RelativeLayout
-            android:id="@+id/checkbox_layoyt2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textViewBloodType"
-                android:layout_width="107dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="5dp"
-                android:text="Blood Type"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinnerBloodType"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_alignParentLeft="@+id/textViewBloodType"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="141dp"
-                android:layout_marginRight="141dp"
-                android:background="@drawable/common_google_signin_btn_text_dark_normal_background"
-                android:entries="@array/blood"
-                android:focusableInTouchMode="false"
-                android:spinnerMode="dropdown">
-
-            </Spinner>
-
-        </RelativeLayout>
-
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-        <RelativeLayout
-            android:id="@+id/checkbox_layoyt3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <TextView
-                android:id="@+id/textViewsn"
-                android:layout_width="128dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="10dp"
-                android:text="Special Needs"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/checkboxsn"
-                android:layout_width="80dp"
-                android:layout_height="32dp"
-                android:layout_alignParentLeft="@+id/textViewsn"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="29dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="166dp"
-                android:layout_marginRight="166dp"
-                android:hint="Yes"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/btn_register"
-            style="@style/DefaultButton"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_fill2"
-            android:onClick="submitData"
-            android:text="@string/register"
-            android:textSize="24sp" />
+            android:layout_below="@+id/login_title"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            android:background="#fff"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="30dp">
 
-    <TextView
-        android:id="@+id/textViewLogin2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:onClick="ClickBackToLogin2"
-        android:text="@string/back_to_login"
-        android:textColor="#0A0A0A" />
-</LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextBabeBirthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby Birthday"
+                        android:inputType="date" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextHeight"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Height of Baby" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/editTextWeight"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Weight of Baby" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/amountEt"
+                        android:layout_weight="15"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewGender"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:text="Gender"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <RadioGroup
+                            android:id="@+id/m_Gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/r_Male"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="16dp"
+                                android:layout_weight="1"
+                                android:buttonTint="#1A99C4"
+                                android:text="Male" />
+
+                            <RadioButton
+                                android:id="@+id/r_Fmale"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:buttonTint="#1A99C4"
+                                android:text="Female" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/checkbox_layoyt2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textViewBloodType"
+                            android:layout_width="107dp"
+                            android:layout_height="33dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Blood Type"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerBloodType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_alignParentLeft="@+id/textViewBloodType"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="77dp"
+                            android:layout_marginRight="77dp"
+                            android:background="@drawable/common_google_signin_btn_text_dark_normal_background"
+                            android:entries="@array/blood"
+                            android:focusableInTouchMode="false"
+                            android:spinnerMode="dropdown">
+
+                        </Spinner>
+
+                    </RelativeLayout>
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+                    <RelativeLayout
+                        android:id="@+id/checkbox_layoyt3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:id="@+id/textViewsn"
+                            android:layout_width="128dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Special Needs"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/checkboxsn"
+                            android:layout_width="80dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentLeft="@+id/textViewsn"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:buttonTint="#1A99C4"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="29dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="89dp"
+                            android:layout_marginRight="89dp"
+                            android:hint="Yes"
+                            android:textColor="#ffffff"
+                            android:textSize="18dp" />
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/btn_register"
+                        style="@style/DefaultButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_fill2"
+                        android:text="@string/register"
+                        android:textSize="24sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textViewLogin2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:onClick="ClickBackToLogin2"
+                    android:text="@string/back_to_login"
+                    android:textColor="#0A0A0A" />
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/login_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:elevation="4dp"
+
+            android:src="@drawable/logo" />
+
+</RelativeLayout>
+
+</RelativeLayout>
+
+

@@ -1,5 +1,6 @@
 package com.example.masood.phca;
 
+import android.net.Uri;
 import android.text.format.DateFormat;
 
 import java.util.Date;
@@ -11,6 +12,30 @@ public class Child {
     Date bday;
     String Gender ;
     String Blood ;
+    Uri photoUrl ;
+
+    public Uri getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(Uri photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    String uid ;
+
+    public Child(Uri photoUrl, String uid) {
+        this.photoUrl = photoUrl;
+        this.uid = uid;
+    }
 
     public Date getBirthday() {
         return bday;
