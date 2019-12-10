@@ -51,7 +51,6 @@ public class Register extends AppCompatActivity {
     EditText txtMotherName;
     EditText txtPhone;
     EditText txtFirstName;
-    Button btn_next;
     Child child;
     ImageView ImgUserPhoto;
     Uri pickedImgUri ;
