@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Article_activity"></activity>
+        <activity android:name=".Article_Web_View_activity" />
+
         <activity android:name=".BMI_Calculate"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
         <activity android:name=".Article"
