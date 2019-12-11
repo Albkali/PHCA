@@ -22,8 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
 
-
-public class Article_activity extends AppCompatActivity {
+public class ArticleActivity extends AppCompatActivity {
 
     Context ctx;
     private RecyclerView recyclerView;
@@ -34,14 +33,49 @@ public class Article_activity extends AppCompatActivity {
 
     itemArticle art = new itemArticle();
     private FirestoreRecyclerAdapter<itemArticle, NewsViewHolder> mPeopleRVAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article_activity);
+        setContentView(R.layout.activity_article);
+
+        setTitle("Articles");
+
         DBReference = FirebaseDatabase.getInstance().getReference().child("News");
         DBReference.keepSynced(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.myRecycleView);
+
+
+
+        // [START fs_order_by_country_population]
+        // [START fs_composite_index_chained_query]
+
+//
+//        DocumentReference personRef = db.document("article");
+
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//
+//        CollectionReference citice = firebaseDatabase.getReference();
+//        DatabaseReference databaseReference = firebaseDatabase.getReference("jnjjnbj");
+//        Query query = FirebaseFirestore.getInstance()
+//                .collection("article");
+//        DatabaseReference personsRef = FirebaseDatabase.getInstance().getReference().child("News");
+//        Query personsQuery = personsRef.orderByKey();
+//        Query query = personRef1.orderBy("jnj");
+//        personsQuery = FirebaseFirestore.getInstance()
+//                .collection("article").document(" " ).collection("reminders")
+//                .orderBy("");
+//        querySearch = FirebaseFirestore.getInstance()
+//                .collection("App").document(" " + userID).collection("reminders")
+//                .startAt("title", newText)
+//                .endAt("title", newText+"\uf8ff");
+//        FirebaseRecyclerOptions<article> personsOptions = new FirebaseRecyclerOptions.Builder<article>()
+//                .setQuery(personsQuery , article.class)
+//                .build();
+        //        FirebaseRecyclerOptions personsOptions = new FirebaseRecyclerOptions.Builder<article>()
+//        .setQuery(personsQuery, article.class).build();
+
         db = FirebaseFirestore.getInstance();
 
         CollectionReference cities = db.collection("article");
@@ -60,7 +94,7 @@ public class Article_activity extends AppCompatActivity {
         mPeopleRVAdapter = new FirestoreRecyclerAdapter<itemArticle, NewsViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(Article_activity.NewsViewHolder holder, final int position, final itemArticle model) {
+            protected void onBindViewHolder(ArticleActivity.NewsViewHolder holder, final int position, final itemArticle model) {
                 holder.setTitle(model.getTitle());
                 holder.setDesc(model.getDesc());
                 holder.setImage(getBaseContext(), model.getImage());
@@ -69,7 +103,7 @@ public class Article_activity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         final String url = model.getUrl();
-                        Intent intent = new Intent(getApplicationContext(), Article_activity.class);
+                        Intent intent = new Intent(getApplicationContext(), Article_WebView_activity.class);
                         intent.putExtra("id", url);
                         startActivity(intent);
                     }
@@ -122,5 +156,5 @@ public class Article_activity extends AppCompatActivity {
 
 
         }
-    }
-}
+
+}}

@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.masood.phca">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
         android:name=".NotificationChannels"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,20 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Article_activity"></activity>
-        <activity android:name=".Article_Web_View_activity" />
-
-        <activity android:name=".BMI_Calculate"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity android:name=".Article"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity android:name=".CSHCN"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity android:name=".Pediatrician"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-        <activity android:name=".Vaccination"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-
+        <activity android:name=".Article_WebView_activity"></activity>
+        <activity
+            android:name=".BMI_Calculate"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".ArticleActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".CSHCN"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".Pediatrician"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".Vaccination"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".activity_Register1" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_my_drawer"
@@ -45,7 +48,6 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

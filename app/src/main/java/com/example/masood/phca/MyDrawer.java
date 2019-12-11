@@ -141,7 +141,7 @@ public class MyDrawer extends AppCompatActivity {
 
     public void ClickToArticle(View view)
     {
-        Intent intent = new Intent ( this, Article_activity.class);
+        Intent intent = new Intent ( this, ArticleActivity.class);
         startActivity(intent);
     }
 

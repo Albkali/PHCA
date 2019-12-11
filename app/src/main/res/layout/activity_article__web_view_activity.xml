@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Article_Web_View_activity">
+    tools:context=".Article_WebView_activity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -24,3 +24,5 @@
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

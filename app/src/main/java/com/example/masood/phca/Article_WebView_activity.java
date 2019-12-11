@@ -1,5 +1,8 @@
 package com.example.masood.phca;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -8,17 +11,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-public class Article_Web_View_activity extends AppCompatActivity {
-
+public class Article_WebView_activity extends AppCompatActivity {
     WebView myWebView;
     private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_article__web__view_activity);
+        setContentView(R.layout.activity_article__web_view_activity);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -50,5 +50,4 @@ public class Article_Web_View_activity extends AppCompatActivity {
             }
         });
     }
-
 }
