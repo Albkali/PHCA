@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -116,6 +117,7 @@ public class Register extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Register.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 try {
@@ -128,12 +130,15 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+
                                     } else {
                                         Toast.makeText(Register.this, "Email or password not correct", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
 
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();
 
                     StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
                     final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
@@ -238,8 +243,6 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
-                    user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();
 
 
                     Map<String, Object> userh = new HashMap<>();
@@ -268,9 +271,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Register.this, MyDrawer.class);
                     startActivity(intent);
-
-
-                    Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
+                    finish();
 
 
 

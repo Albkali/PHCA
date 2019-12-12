@@ -4,6 +4,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +14,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login_form extends AppCompatActivity {
 
    private EditText txtEmail,txtPassword;
     private Button btn_login,btn_register;
 
+    FirebaseUser user;
 
     private FirebaseAuth firebaseAuth;
 
@@ -26,7 +29,6 @@ public class Login_form extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
@@ -74,6 +76,9 @@ public class Login_form extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String id = user.getUid();
+                                    Log.d("iddd", id);
 
                                     startActivity(new Intent(getApplicationContext(),MyDrawer.class));
 

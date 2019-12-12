@@ -1,5 +1,6 @@
 package com.example.masood.phca.ui.profile;
 
+import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -31,7 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -42,11 +42,11 @@ public class ProfileFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
 
-    TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
+    private TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
             txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
-    TextView txtViewEmail;
+    private TextView txtViewEmail;
 
-    ImageView imgprofile ;
+    private ImageView imgprofile ;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
 

@@ -36,4 +36,10 @@
     <string name="username">Username</string>
     <string name="register">Register</string>
     <string name="back_to_login">Back to Login</string>
+    <string name="notifications">notifications</string>
+    <string name="profile">Profile</string>
+    <string name="message">Message</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
 </resources>
