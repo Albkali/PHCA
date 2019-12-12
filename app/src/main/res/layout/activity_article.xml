@@ -18,7 +18,7 @@
             android:background="#0288D1"
             android:paddingTop="42dp"
             android:paddingBottom="42dp"
-            android:text="Articles"
+            android:text="Article"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="24sp" />
