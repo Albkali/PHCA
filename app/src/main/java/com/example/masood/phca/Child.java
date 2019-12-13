@@ -12,6 +12,28 @@ public class Child {
     Date bday;
     String Gender ;
     String Blood ;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public Child(String password, String email) {
+        this.password = password;
+        Email = email;
+    }
+
     Uri photoUrl ;
 
     public Uri getPhotoUrl() {
@@ -91,12 +113,10 @@ public class Child {
         Blood = blood;
     }
 
-    public Child(String childName, String childLastName, String password, String email, String childMotherName,
+    public Child(String childName, String childLastName,  String childMotherName,
                  String phone, Integer height, Integer weight, Date birthday, String gender, String blood) {
         ChildName = childName;
         ChildLastName = childLastName;
-        this.password = password;
-        Email = email;
         this.childMotherName = childMotherName;
         Phone = phone;
         Height = height;

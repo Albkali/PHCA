@@ -121,9 +121,8 @@ public class Register extends AppCompatActivity {
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Register.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 try {
-
-                    String email = txtEmail1.getText().toString().trim();
-                    String password = txtPassword1.getText().toString().trim();
+                    String email = txtEmail1.getText().toString();
+                    String password = txtPassword1.getText().toString();
 
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
@@ -139,6 +138,7 @@ public class Register extends AppCompatActivity {
 
                     user = FirebaseAuth.getInstance().getCurrentUser();
                     String id = user.getUid();
+                    child.setUid(id);
 
                     StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
                     final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
@@ -196,6 +196,8 @@ public class Register extends AppCompatActivity {
 
                     String ChildFirstName = txtFirstName.getText().toString();
                     child.setChildName(ChildFirstName);
+                    child.setEmail(email);
+                    child.setPassword(password);
 
 
                     String ChildLastName = txtLastName.getText().toString();

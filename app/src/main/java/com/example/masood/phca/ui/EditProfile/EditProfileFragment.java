@@ -1,0 +1,401 @@
+package com.example.masood.phca.ui.EditProfile;
+
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.icu.util.Calendar;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
+import com.example.masood.phca.Child;
+import com.example.masood.phca.DateUtil;
+import com.example.masood.phca.R;
+import com.example.masood.phca.Register;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
+public class EditProfileFragment extends Fragment {
+        private FirebaseAuth firebaseAuth;
+        private FirebaseDatabase firebaseDatabase;
+        private FirebaseStorage firebaseStorage;
+        FirebaseUser user;
+
+
+
+    Child child;
+    FirebaseFirestore db;
+
+    DatePickerDialog datePicker;
+    java.util.Calendar calendar;
+    int day;
+    int month;
+    int year;
+    String BDate;
+    int Heightnumber,Weightnumber;
+
+    private EditText txtEditFname,txtEditLname, txtEditchildPhone, txtEditmotherName,
+                 txtEditAge, txtEditHeight, txtEditWeight;
+        private EditText txtEditEmail,txtEditPassword;
+        private ImageView imgprofile ;
+        RadioGroup RG_Gender;
+        RadioButton RG_Male;
+        RadioButton RG_Female;
+    RadioButton mGenderOptions ;
+
+    CheckBox Special_Needs ;
+        Spinner spinner;
+        Button btn_update_profile ;
+        private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                 @Nullable Bundle savedInstanceState) {
+
+            firebaseAuth = FirebaseAuth.getInstance();
+            db = FirebaseFirestore.getInstance();
+            child = new Child();
+            calendar = java.util.Calendar.getInstance();
+            day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+            month = calendar.get(java.util.Calendar.MONTH);
+            year = calendar.get(java.util.Calendar.YEAR);
+
+            db = FirebaseFirestore.getInstance();
+            final View v = inflater.inflate(R.layout.fragment_editprofile, container, false);
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseStorage = FirebaseStorage.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+            StorageReference storageReference = firebaseStorage.getReference();
+            txtEditFname = (EditText) v.findViewById(R.id.editTextFirsttName_UpdateProfil);
+            txtEditLname = (EditText) v.findViewById(R.id.editTextLastName_UpdateProfil);
+            txtEditEmail = (EditText) v.findViewById(R.id.editTextEmail_UpdateProfil);
+            txtEditPassword = (EditText) v.findViewById(R.id.editTextPassword_UpdateProfil);
+            RG_Gender = (RadioGroup) v.findViewById(R.id.m_Gender_UpdateProfil);
+            RG_Male = (RadioButton) v.findViewById(R.id.r_Male_UpdateProfil);
+            RG_Female = (RadioButton) v.findViewById(R.id.r_Fmale_UpdateProfil);
+             spinner = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
+            Special_Needs = (CheckBox) v.findViewById(R.id.checkboxsn_UpdateProfil);
+            txtEditchildPhone = (EditText) v.findViewById(R.id.editTextPhoneNum_UpdateProfil);
+            txtEditmotherName = (EditText) v.findViewById(R.id.editTextMatherName_UpdateProfil);
+            txtEditAge = (EditText) v.findViewById(R.id.editTextBabeBirthday_UpdateProfil);
+            txtEditHeight = (EditText) v.findViewById(R.id.editTextHeight_UpdateProfil);
+            txtEditWeight = (EditText) v.findViewById(R.id.editTextWeight_UpdateProfil);
+            imgprofile = (ImageView) v.findViewById(R.id.user_profile_photo_UpdateProfil);
+            btn_update_profile = (Button) v.findViewById(R.id.btn__UpdateProfil);
+
+
+            btn_update_profile.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onClick(View view) {
+                    String email = txtEditEmail.getText().toString();
+                    String password = txtEditPassword.getText().toString();
+                    user.updatePassword(password)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                    }
+                                }
+                            });
+
+                    user.updateEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                    }
+                                }
+                            });
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();
+                    child.setUid(id);
+
+
+                    child = new Child();
+                    Spinner spinner2 = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
+                    String typeofblood = spinner2.getSelectedItem().toString();
+
+                    Heightnumber = Integer.parseInt(txtEditHeight.getText().toString());
+                    Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
+
+
+                    String ChildFirstName = txtEditFname.getText().toString();
+                    child.setChildName(ChildFirstName);
+                    child.setEmail(email);
+                    child.setPassword(password);
+
+
+                    String ChildLastName = txtEditLname.getText().toString();
+                    child.setChildLastName(ChildLastName);
+
+
+                    String ChildMotherName = txtEditmotherName.getText().toString();
+                    child.setChildMotherName(ChildMotherName);
+
+
+                    String Phone = txtEditchildPhone.getText().toString();
+                    child.setPhone(Phone);
+
+                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
+
+
+                    child.setBlood(typeofblood);
+
+                    final String strGender =
+                            ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
+                                    .getText().toString();
+                    child.setGender(strGender);
+
+                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                            mGenderOptions = RG_Gender.findViewById(i);
+
+                            switch (i) {
+                                case R.id.r_Male_UpdateProfil:
+//                                strGender  = mGenderOptions.getText().toString();
+//                                child.setGender(strGender);
+                                    break;
+
+                                case R.id.r_Fmale_UpdateProfil:
+//                                strGender  = mGenderOptions.getText().toString();
+//                                child.setGender(strGender);
+
+                                    break;
+
+                                default:
+
+
+                            }
+                        }
+                    });
+
+
+
+                    Map<String, Object> userh = new HashMap<>();
+                    userh.put("weight", Weightnumber);
+                    userh.put("height", Heightnumber);
+
+
+                    db.collection("child").document(id).set(child);
+
+                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+
+                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
+
+                    if (Special_Needs.isChecked()) {
+                        Map<String, Object> SpecialNeeds = new HashMap<>();
+                        SpecialNeeds.put("status", "Yes");
+                        SpecialNeeds.put("type", null);
+
+                        db.collection("child").document(id)
+                                .collection("Special Needs").document(id).set(SpecialNeeds);
+                    } else {
+//                    db.collection("child").document(id)
+//                            .collection("Special Needs").document(id).delete();
+                    }
+
+
+
+
+
+
+            }
+        });
+
+
+
+            return v;
+
+
+
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            final String id = userID.getUid();
+            final String Email = userID.getEmail();
+            txtEditEmail.setText(Email);
+            Log.i("my id", id);
+
+                if (userID != null) {
+
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference noteRef =
+                            db.collection("child")
+                                    .document(id);
+                    DocumentReference noteRef2 =
+                            db.collection("child")
+                                    .document(id)
+                                    .collection("IBM")
+                                    .document(id);
+                    DocumentReference noteRef3 =
+                            db.collection("child")
+                                    .document(id)
+                                    .collection("Special Needs")
+                                    .document(id);
+                    noteRef.get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        // String h = documentSnapshot.getLong("weight") + "" ;
+                                        String name = documentSnapshot.getString("childName");
+                                        String lastname = documentSnapshot.getString("childLastName");
+
+                                        String childmothername = documentSnapshot.getString("childMotherName");
+                                        String chlidboodtype = documentSnapshot.getString("blood");
+                                        String childgender = documentSnapshot.getString("gender");
+                                        String childPhone = documentSnapshot.getString("phone");
+                                        String password = documentSnapshot.getString("password");
+
+//                                        String childage = documentSnapshot.getLong("birthday") + "";
+//                                        Date datetest = documentSnapshot.getTimestamp("birthday").toDate();
+//                                        String tt = datetest.toString();
+
+                                        if (childgender.equals("Male")){
+                                            RG_Male.setChecked(true);
+                                        } else {
+                                            RG_Female.setChecked(true);
+                                        }
+                                        txtEditFname.setText(name);
+                                        txtEditLname.setText(lastname);
+                                        txtEditchildPhone.setText(childPhone);
+                                        txtEditmotherName.setText(childmothername);
+                                        txtEditPassword.setText(password);
+                                        spinner.setSelection(getIndex(spinner, chlidboodtype));
+
+                                    } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                    noteRef2.get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        String childWeight = documentSnapshot.getLong("weight") + "";
+                                        String childHeight = documentSnapshot.getLong("height") + "";
+                                        txtEditWeight.setText(childWeight);
+                                        txtEditHeight.setText(childHeight);
+                                        // Map<String, Object> note = documentSnapshot.getData();
+
+                                    } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                    db.collection("child")
+                            .document(id)
+                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot document = task.getResult();
+                                Date datetest = document.getTimestamp("birthday").toDate();
+
+                                Calendar calander = Calendar.getInstance();
+                                calander.setTime(datetest);
+                                int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
+                                int userBirthMonth = calander.get(Calendar.MONTH);
+                                int userBirthYear = calander.get(Calendar.YEAR);
+
+                                LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
+                                LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+                                final Period p = Period.between(userBirthDate, currentDate);
+
+                                String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
+                                String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
+                                String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
+                                txtEditAge.setText(y+m+d);
+                            }
+                        }
+                    });
+
+                    noteRef3.get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+                                        String sepecialNeedstr = documentSnapshot.getString("status");
+                                        if (sepecialNeedstr.equals("Yes") ){
+                                            Special_Needs.setChecked(true);
+                                        }
+                                        else
+                                        {
+                                            Special_Needs.setChecked(false);
+//                                            db.collection("child").document(id)
+//                                                    .collection("Special Needs").document(id).delete();
+                                        }
+
+                                    } else {
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            });
+//            String name = userID.getDisplayName();
+                    String email = userID.getEmail();
+                    // Check if user's email is verified
+                    boolean emailVerified = userID.isEmailVerified();
+                    // The user's ID, unique to the Firebase project. Do NOT use this value to
+                    // authenticate with your backend server, if you have one. Use
+                    // FirebaseUser.getIdToken() instead.
+                    String uid = userID.getUid();
+                }
+        }
+
+        //private method of your class
+        private int getIndex(Spinner spinner, String myString){
+            for (int i=0;i<spinner.getCount();i++){
+                if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+    }

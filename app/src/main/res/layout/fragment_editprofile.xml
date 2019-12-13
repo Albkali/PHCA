@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#008577"
+    android:orientation="vertical"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <RelativeLayout
+        android:id="@+id/updateprofile_Layout"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_UpdateProfil"
+            android:background="@drawable/corners"
+
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="15dp"
+
+            android:layout_marginRight="30dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="15dp">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextFirsttName_UpdateProfil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Frist Name"
+                            android:inputType="textPersonName"
+                            android:textColor="#1976D2"
+                            android:textStyle="normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextLastName_UpdateProfil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Last Name"
+                            android:inputType="textPersonName"
+                            android:textColor="#1976D2"
+                            android:textStyle="normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextMatherName_UpdateProfil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mather Name"
+                            android:inputType="textPersonName"
+                            android:textColor="#1976D2"
+                            android:textStyle="normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextEmail_UpdateProfil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"
+                            android:textColor="#1976D2"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/colorAccent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTextPassword_UpdateProfil"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/password"
+                            android:textColor="#1976D2"
+                            android:inputType="textPassword" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextPhoneNum_UpdateProfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Phone Number"
+                                android:textColor="#1976D2"
+
+                                android:inputType="number" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextBabeBirthday_UpdateProfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Baby Birthday"
+                                android:inputType="date"
+                                android:onClick="setDate"
+                                android:textColor="#1976D2" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextHeight_UpdateProfil"
+                                android:inputType="number"
+                                android:layout_width="match_parent"
+                                android:textColor="#1976D2"
+                                android:layout_height="wrap_content"
+                                android:hint="Height of Baby" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextWeight_UpdateProfil"
+                                android:inputType="number"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#1976D2"
+                                android:hint="Weight of Baby" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+
+                            <RadioGroup
+                                android:id="@+id/m_Gender_UpdateProfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="73dp"
+                                    android:layout_height="match_parent"
+                                    android:text="Gender"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+                                <RadioButton
+                                    android:id="@+id/r_Male_UpdateProfil"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:buttonTint="#1A99C4"
+                                    android:text="Male" />
+
+                                <RadioButton
+                                    android:id="@+id/r_Fmale_UpdateProfil"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:buttonTint="#1A99C4"
+                                    android:text="Female" />
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp">
+
+                                <TextView
+                                    android:id="@+id/textViewBloodType_UpdateProfil"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:text="Blood Type"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <Spinner
+                                    android:id="@+id/spinnerBloodType_UpdateProfil"
+                                    android:layout_width="80dp"
+                                    android:layout_height="35dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+                                    android:entries="@array/blood"
+                                    android:focusableInTouchMode="false"
+                                    android:scrollbarSize="3dp"
+                                    android:spinnerMode="dropdown">
+
+                                </Spinner>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+                            <RelativeLayout
+                                android:id="@+id/checkbox_layoyt3_UpdateProfil"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                                <TextView
+                                    android:id="@+id/textViewsn_UpdateProfil"
+                                    android:layout_width="128dp"
+                                    android:layout_height="32dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Special Needs"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <CheckBox
+                                    android:id="@+id/checkboxsn_UpdateProfil"
+                                    android:layout_width="80dp"
+                                    android:layout_height="32dp"
+                                    android:layout_alignParentLeft="@+id/textViewsn_UpdateProfil"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginLeft="29dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginEnd="87dp"
+                                    android:layout_marginRight="87dp"
+                                    android:buttonTint="#1A99C4"
+                                    android:hint="Yes"
+                                    android:textColor="#ffffff"
+                                    android:textSize="18dp" />
+                            </RelativeLayout>
+
+                            <Button
+                                android:id="@+id/btn__UpdateProfil"
+                                style="@style/DefaultButton"
+                                android:layout_width="168dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="25dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/button_fill2"
+                                android:text="Save Changes"
+                                android:textSize="20sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
+            </ScrollView>
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/user_profile_photo_UpdateProfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/title_UpdateProfil"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/photocercle"
+            android:elevation="4dp" />
+        <TextView
+            android:id="@+id/title_UpdateProfil"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="Update User Profile"
+            android:textColor="#fff"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-public class Article_WebView_activity extends AppCompatActivity {
+public class Article_WebView_activity extends AppCompatActivity{
     WebView myWebView;
     private ProgressBar progressBar;
     @Override
