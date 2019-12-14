@@ -1,5 +1,6 @@
 package com.example.masood.phca.ui.EditProfile;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -27,9 +29,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.masood.phca.Child;
 import com.example.masood.phca.DateUtil;
+import com.example.masood.phca.MyDrawer;
 import com.example.masood.phca.R;
 import com.example.masood.phca.Register;
+import com.example.masood.phca.ui.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -59,6 +64,7 @@ public class EditProfileFragment extends Fragment {
         private FirebaseStorage firebaseStorage;
         FirebaseUser user;
 
+    private FirebaseFirestore mDatabase;
 
 
     Child child;
@@ -97,6 +103,7 @@ public class EditProfileFragment extends Fragment {
             day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
             month = calendar.get(java.util.Calendar.MONTH);
             year = calendar.get(java.util.Calendar.YEAR);
+            Activity activity = getActivity();
 
             db = FirebaseFirestore.getInstance();
             final View v = inflater.inflate(R.layout.fragment_editprofile, container, false);
@@ -105,6 +112,11 @@ public class EditProfileFragment extends Fragment {
             firebaseStorage = FirebaseStorage.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
             StorageReference storageReference = firebaseStorage.getReference();
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            mDatabase = FirebaseFirestore.getInstance();
+
+            child = new Child();
+
             txtEditFname = (EditText) v.findViewById(R.id.editTextFirsttName_UpdateProfil);
             txtEditLname = (EditText) v.findViewById(R.id.editTextLastName_UpdateProfil);
             txtEditEmail = (EditText) v.findViewById(R.id.editTextEmail_UpdateProfil);
@@ -122,135 +134,247 @@ public class EditProfileFragment extends Fragment {
             imgprofile = (ImageView) v.findViewById(R.id.user_profile_photo_UpdateProfil);
             btn_update_profile = (Button) v.findViewById(R.id.btn__UpdateProfil);
 
+            final String id = userID.getUid();
+
+
+
+
+
+
+
 
             btn_update_profile.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
-                public void onClick(View view) {
-                    String email = txtEditEmail.getText().toString();
-                    String password = txtEditPassword.getText().toString();
-                    user.updatePassword(password)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                    }
-                                }
-                            });
-
-                    user.updateEmail(email)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                    }
-                                }
-                            });
-                    user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();
-                    child.setUid(id);
-
-
-                    child = new Child();
-                    Spinner spinner2 = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
-                    String typeofblood = spinner2.getSelectedItem().toString();
-
-                    Heightnumber = Integer.parseInt(txtEditHeight.getText().toString());
-                    Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
-
+                public void onClick(View v) {
 
                     String ChildFirstName = txtEditFname.getText().toString();
-                    child.setChildName(ChildFirstName);
-                    child.setEmail(email);
-                    child.setPassword(password);
-
-
                     String ChildLastName = txtEditLname.getText().toString();
-                    child.setChildLastName(ChildLastName);
-
-
-                    String ChildMotherName = txtEditmotherName.getText().toString();
-                    child.setChildMotherName(ChildMotherName);
-
-
-                    String Phone = txtEditchildPhone.getText().toString();
-                    child.setPhone(Phone);
-
-                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
-
-
-                    child.setBlood(typeofblood);
-
-                    final String strGender =
-                            ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
-                                    .getText().toString();
-                    child.setGender(strGender);
-
-                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                            mGenderOptions = RG_Gender.findViewById(i);
-
-                            switch (i) {
-                                case R.id.r_Male_UpdateProfil:
-//                                strGender  = mGenderOptions.getText().toString();
-//                                child.setGender(strGender);
-                                    break;
-
-                                case R.id.r_Fmale_UpdateProfil:
-//                                strGender  = mGenderOptions.getText().toString();
-//                                child.setGender(strGender);
-
-                                    break;
-
-                                default:
-
-
-                            }
-                        }
-                    });
+                    String Childmothername = txtEditmotherName.getText().toString();
+                    String Childemail = txtEditEmail.getText().toString();
+                    String Childpassword = txtEditPassword.getText().toString();
+                    String typeofbloodtype = spinner.getSelectedItem().toString();
+//                    String strGender = ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
+//                                    .getText().toString();
+//                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                        @Override
+//                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                            mGenderOptions = RG_Gender.findViewById(i);
+//
+//                            switch (i) {
+//                                case R.id.r_Male_UpdateProfil:
+////                                strGender  = mGenderOptions.getText().toString();
+////                                child.setGender(strGender);
+//                                    break;
+//
+//                                case R.id.r_Fmale_UpdateProfil:
+////                                strGender  = mGenderOptions.getText().toString();
+////                                child.setGender(strGender);
+//
+//                                    break;
+//
+//                                default:
+//
+//
+//                            }
+//                        }
+//                    });
+                    updateDocument(ChildFirstName, ChildLastName,Childmothername,Childemail,Childpassword,typeofbloodtype);
+                }
+            });
 
 
 
-                    Map<String, Object> userh = new HashMap<>();
-                    userh.put("weight", Weightnumber);
-                    userh.put("height", Heightnumber);
 
 
-                    db.collection("child").document(id).set(child);
 
-                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
 
-                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
-                    if (Special_Needs.isChecked()) {
-                        Map<String, Object> SpecialNeeds = new HashMap<>();
-                        SpecialNeeds.put("status", "Yes");
-                        SpecialNeeds.put("type", null);
 
-                        db.collection("child").document(id)
-                                .collection("Special Needs").document(id).set(SpecialNeeds);
-                    } else {
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            btn_update_profile.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View view) {
+//                    String email = txtEditEmail.getText().toString();
+////                    String password = txtEditPassword.getText().toString();
+////                    user.updatePassword(password)
+////                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+////                                @Override
+////                                public void onComplete(@NonNull Task<Void> task) {
+////                                    if (task.isSuccessful()) {
+////                                    }
+////                                }
+////                            });
+//
+//                    user.updateEmail(email)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                    }
+//                                }
+//                            });
+//
+//                    Spinner spinner2 = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
+//                    String typeofblood = spinner2.getSelectedItem().toString();
+//
+//                    Heightnumber = Integer.parseInt(txtEditHeight.getText().toString());
+//                    Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
+//
+//
+//                    String ChildFirstName = txtEditFname.getText().toString();
+//                    child.setChildName(ChildFirstName);
+//                    child.setEmail(email);
+//                   // child.setPassword(password);
+//
+//                    String id = user.getUid();
+//                    child.setUid(id);
+//
+//                    String ChildLastName = txtEditLname.getText().toString();
+//                    child.setChildLastName(ChildLastName);
+//
+//
+//                    String ChildMotherName = txtEditmotherName.getText().toString();
+//                    child.setChildMotherName(ChildMotherName);
+//
+//
+//                    String Phone = txtEditchildPhone.getText().toString();
+//                    child.setPhone(Phone);
+//
+////                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
+//
+//
+//                    child.setBlood(typeofblood);
+//
+//                    final String strGender =
+//                            ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
+//                                    .getText().toString();
+//                    child.setGender(strGender);
+//
+//                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//                        @Override
+//                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//                            mGenderOptions = RG_Gender.findViewById(i);
+//
+//                            switch (i) {
+//                                case R.id.r_Male_UpdateProfil:
+////                                strGender  = mGenderOptions.getText().toString();
+////                                child.setGender(strGender);
+//                                    break;
+//
+//                                case R.id.r_Fmale_UpdateProfil:
+////                                strGender  = mGenderOptions.getText().toString();
+////                                child.setGender(strGender);
+//
+//                                    break;
+//
+//                                default:
+//
+//
+//                            }
+//                        }
+//                    });
+//
+//
+//
+//                    Map<String, Object> userh = new HashMap<>();
+//                    userh.put("weight", Weightnumber);
+//                    userh.put("height", Heightnumber);
+//
+//
+//                    db.collection("child").document(id).set(child);
+//
+//                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+//
+//                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
+//
+//                    if (Special_Needs.isChecked()) {
+//                        Map<String, Object> SpecialNeeds = new HashMap<>();
+//                        SpecialNeeds.put("status", "Yes");
+//                        SpecialNeeds.put("type", null);
+//
+//                        db.collection("child").document(id)
+//                                .collection("Special Needs").document(id).set(SpecialNeeds);
+//                    } else {
 //                    db.collection("child").document(id)
 //                            .collection("Special Needs").document(id).delete();
-                    }
-
-
-
-
-
-
-            }
-        });
-
-
+//                    }
+//
+//
+//                    Toast.makeText(getActivity(),"Data Updated!",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//
+//            });
+//
+//
+////            txtEditAge.setOnClickListener(new View.OnClickListener() {
+////                @RequiresApi(api = Build.VERSION_CODES.O)
+////                @Override
+////                public void onClick(View view) {
+////                    txtEditAge = (EditText) view;
+////                    datePicker = new DatePickerDialog(EditProfileFragment.this,
+////                            new DatePickerDialog.OnDateSetListener() {
+////                                @Override
+////                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+////                                    int et_id = txtEditAge.getId();
+////                                    String date = (dayOfMonth) + "-" + (monthOfYear) + "-" + (year);
+////
+////                                    if (et_id == R.id.editTextBabeBirthday_UpdateProfil) {
+////                                        BDate = date;
+////                                    }
+////
+////
+////                                    txtEditAge.setText(date);
+////                                }
+////                            }, year, month, day);
+////                    datePicker.show();
+////
+////                }
+////            });
 
             return v;
 
 
 
         }
-
+    private void updateDocument(String Fname, String Lname,String Mohtername,String email,String password,String blood){
+        final String id = userID.getUid();
+        DocumentReference documentReference = mDatabase.collection("child").document(id);
+        documentReference.update("childName", Fname);
+        documentReference.update("childLastName", Lname);
+        documentReference.update("childMotherName", Mohtername);
+        documentReference.update("email", email);
+        documentReference.update("password", password);
+        documentReference.update("blood", blood)
+//        documentReference.update("gender", gender)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getActivity(),"Document Updated",Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+                        Log.d("Androidview", e.getMessage());
+                    }
+                });
+    }
         @Override
         public void onResume() {
             super.onResume();
@@ -327,33 +451,33 @@ public class EditProfileFragment extends Fragment {
                                     }
                                 }
                             });
-                    db.collection("child")
-                            .document(id)
-                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @RequiresApi(api = Build.VERSION_CODES.O)
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()){
-                                DocumentSnapshot document = task.getResult();
-                                Date datetest = document.getTimestamp("birthday").toDate();
-
-                                Calendar calander = Calendar.getInstance();
-                                calander.setTime(datetest);
-                                int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
-                                int userBirthMonth = calander.get(Calendar.MONTH);
-                                int userBirthYear = calander.get(Calendar.YEAR);
-
-                                LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
-                                LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
-                                final Period p = Period.between(userBirthDate, currentDate);
-
-                                String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
-                                String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
-                                String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
-                                txtEditAge.setText(y+m+d);
-                            }
-                        }
-                    });
+//                    db.collection("child")
+//                            .document(id)
+//                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                        @RequiresApi(api = Build.VERSION_CODES.O)
+//                        @Override
+//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                            if(task.isSuccessful()){
+//                                DocumentSnapshot document = task.getResult();
+//                                Date datetest = document.getTimestamp("birthday").toDate();
+//
+//                                Calendar calander = Calendar.getInstance();
+//                                calander.setTime(datetest);
+//                                int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
+//                                int userBirthMonth = calander.get(Calendar.MONTH);
+//                                int userBirthYear = calander.get(Calendar.YEAR);
+//
+//                                LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
+//                                LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+//                                final Period p = Period.between(userBirthDate, currentDate);
+//
+//                                String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
+//                                String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
+//                                String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
+//                                txtEditAge.setText(y+m+d);
+//                            }
+//                        }
+//                    });
 
                     noteRef3.get()
                             .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -397,5 +521,7 @@ public class EditProfileFragment extends Fragment {
             }
             return 0;
         }
+
+
 
     }
