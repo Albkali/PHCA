@@ -57,6 +57,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.masood.phca.R.id.r_Male_UpdateProfil;
 
 public class EditProfileFragment extends Fragment {
         private FirebaseAuth firebaseAuth;
@@ -76,7 +77,6 @@ public class EditProfileFragment extends Fragment {
     int month;
     int year;
     String BDate;
-    int Heightnumber,Weightnumber;
 
     private EditText txtEditFname,txtEditLname, txtEditchildPhone, txtEditmotherName,
                  txtEditAge, txtEditHeight, txtEditWeight;
@@ -115,14 +115,12 @@ public class EditProfileFragment extends Fragment {
             user = FirebaseAuth.getInstance().getCurrentUser();
             mDatabase = FirebaseFirestore.getInstance();
 
-            child = new Child();
-
             txtEditFname = (EditText) v.findViewById(R.id.editTextFirsttName_UpdateProfil);
             txtEditLname = (EditText) v.findViewById(R.id.editTextLastName_UpdateProfil);
             txtEditEmail = (EditText) v.findViewById(R.id.editTextEmail_UpdateProfil);
             txtEditPassword = (EditText) v.findViewById(R.id.editTextPassword_UpdateProfil);
             RG_Gender = (RadioGroup) v.findViewById(R.id.m_Gender_UpdateProfil);
-            RG_Male = (RadioButton) v.findViewById(R.id.r_Male_UpdateProfil);
+            RG_Male = (RadioButton) v.findViewById(r_Male_UpdateProfil);
             RG_Female = (RadioButton) v.findViewById(R.id.r_Fmale_UpdateProfil);
              spinner = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
             Special_Needs = (CheckBox) v.findViewById(R.id.checkboxsn_UpdateProfil);
@@ -138,47 +136,38 @@ public class EditProfileFragment extends Fragment {
 
 
 
-
-
-
-
-
             btn_update_profile.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
 
                     String ChildFirstName = txtEditFname.getText().toString();
                     String ChildLastName = txtEditLname.getText().toString();
                     String Childmothername = txtEditmotherName.getText().toString();
                     String Childemail = txtEditEmail.getText().toString();
+                    String phone = txtEditchildPhone.getText().toString();
                     String Childpassword = txtEditPassword.getText().toString();
                     String typeofbloodtype = spinner.getSelectedItem().toString();
-//                    String strGender = ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
-//                                    .getText().toString();
-//                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//                        @Override
-//                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                            mGenderOptions = RG_Gender.findViewById(i);
-//
-//                            switch (i) {
-//                                case R.id.r_Male_UpdateProfil:
-////                                strGender  = mGenderOptions.getText().toString();
-////                                child.setGender(strGender);
-//                                    break;
-//
-//                                case R.id.r_Fmale_UpdateProfil:
-////                                strGender  = mGenderOptions.getText().toString();
-////                                child.setGender(strGender);
-//
-//                                    break;
-//
-//                                default:
-//
-//
-//                            }
-//                        }
-//                    });
-                    updateDocument(ChildFirstName, ChildLastName,Childmothername,Childemail,Childpassword,typeofbloodtype);
+                    int Heightnumber = Integer.parseInt(txtEditHeight.getText().toString());
+                    int Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
+                    String strGender= "";
+                    if (RG_Male.isChecked()) {
+                        strGender = "Male";
+                    } else if (RG_Female.isChecked()) {
+                        strGender = "Female";
+                    }
+                    if (Special_Needs.isChecked()) {
+                        Map<String, Object> SpecialNeeds = new HashMap<>();
+                        SpecialNeeds.put("status", "Yes");
+                        SpecialNeeds.put("type", null);
+
+                        db.collection("child").document(id)
+                                .collection("Special Needs").document(id).set(SpecialNeeds);
+                    } else {
+                    db.collection("child").document(id)
+                            .collection("Special Needs").document(id).delete();
+                    }
+                    updateDocument(ChildFirstName, ChildLastName,Childmothername,Childemail,phone,
+                            Childpassword,typeofbloodtype, strGender,Heightnumber,Weightnumber);
                 }
             });
 
@@ -351,20 +340,30 @@ public class EditProfileFragment extends Fragment {
 
 
         }
-    private void updateDocument(String Fname, String Lname,String Mohtername,String email,String password,String blood){
+    private void updateDocument(String Fname, String Lname,String Mohtername,String email,String str_phone,
+                                String password,String blood,String str_Gender,int int_height, int int_weight){
         final String id = userID.getUid();
         DocumentReference documentReference = mDatabase.collection("child").document(id);
+        DocumentReference documentReference2 = mDatabase.collection("child").document(id).collection("IBM").document(id);
         documentReference.update("childName", Fname);
         documentReference.update("childLastName", Lname);
         documentReference.update("childMotherName", Mohtername);
         documentReference.update("email", email);
+        documentReference.update("phone", str_phone);
         documentReference.update("password", password);
-        documentReference.update("blood", blood)
+        documentReference.update("blood", blood);
+        documentReference.update("gender", str_Gender);
+        documentReference2.update("height", int_height);
+        documentReference2.update("weight", int_weight)
+
+
 //        documentReference.update("gender", gender)
+
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getActivity(),"Document Updated",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Profile Updated",Toast.LENGTH_LONG).show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

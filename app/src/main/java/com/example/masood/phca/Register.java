@@ -211,6 +211,7 @@ public class Register extends AppCompatActivity {
 
                     child.setPassword(password);
                     child.setEmail(email);
+                    child.setUid(id);
 
                     child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
 
