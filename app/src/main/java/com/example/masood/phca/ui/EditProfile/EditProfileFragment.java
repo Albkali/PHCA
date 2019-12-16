@@ -168,6 +168,26 @@ public class EditProfileFragment extends Fragment {
                     }
                     updateDocument(ChildFirstName, ChildLastName,Childmothername,Childemail,phone,
                             Childpassword,typeofbloodtype, strGender,Heightnumber,Weightnumber);
+
+
+                    user.updatePassword(Childpassword)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User password updated.");
+                                    }
+                                }
+                            });
+                    user.updateEmail(Childemail)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User Email updated.");
+                                    }
+                                }
+                            });
                 }
             });
 
