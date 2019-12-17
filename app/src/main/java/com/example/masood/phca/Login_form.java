@@ -32,10 +32,18 @@ public class Login_form extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
-            Intent groceryItemsIntent = new Intent(Login_form.this,
-                    MyDrawer.class);
-            startActivity(groceryItemsIntent);
-            finish();
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getEmail();
+            if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
+                Intent groceryItemsIntent = new Intent(Login_form.this,
+                        MainActivity.class);
+                startActivity(groceryItemsIntent);
+                finish();            } else {
+                Intent groceryItemsIntent = new Intent(Login_form.this,
+                        MyDrawer.class);
+                startActivity(groceryItemsIntent);
+                finish();            }
+
         }
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
@@ -77,10 +85,14 @@ public class Login_form extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     user = FirebaseAuth.getInstance().getCurrentUser();
-                                    String id = user.getUid();
-                                    Log.d("iddd", id);
-
-                                    startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                                    String id = user.getEmail();
+                                    if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                                        to show more optione to do condtions of type users , check this link
+//     https://stackoverflow.com/questions/50534695/how-to-log-in-two-different-types-of-users-to-different-activities-automatically
+                                    } else {
+                                        startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                                    }
 
                                 } else {
                                     //startActivity(new Intent(getApplicationContext(),MainActivity.class));

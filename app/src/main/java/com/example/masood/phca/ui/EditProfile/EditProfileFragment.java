@@ -133,10 +133,8 @@ public class EditProfileFragment extends Fragment {
             btn_update_profile = (Button) v.findViewById(R.id.btn__UpdateProfil);
 
             final String id = userID.getUid();
-
-
-
             btn_update_profile.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(final View v) {
 
@@ -169,7 +167,6 @@ public class EditProfileFragment extends Fragment {
                     updateDocument(ChildFirstName, ChildLastName,Childmothername,Childemail,phone,
                             Childpassword,typeofbloodtype, strGender,Heightnumber,Weightnumber);
 
-
                     user.updatePassword(Childpassword)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -179,6 +176,7 @@ public class EditProfileFragment extends Fragment {
                                     }
                                 }
                             });
+
                     user.updateEmail(Childemail)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -190,170 +188,6 @@ public class EditProfileFragment extends Fragment {
                             });
                 }
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//            btn_update_profile.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View view) {
-//                    String email = txtEditEmail.getText().toString();
-////                    String password = txtEditPassword.getText().toString();
-////                    user.updatePassword(password)
-////                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-////                                @Override
-////                                public void onComplete(@NonNull Task<Void> task) {
-////                                    if (task.isSuccessful()) {
-////                                    }
-////                                }
-////                            });
-//
-//                    user.updateEmail(email)
-//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                    }
-//                                }
-//                            });
-//
-//                    Spinner spinner2 = (Spinner) v.findViewById(R.id.spinnerBloodType_UpdateProfil);
-//                    String typeofblood = spinner2.getSelectedItem().toString();
-//
-//                    Heightnumber = Integer.parseInt(txtEditHeight.getText().toString());
-//                    Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
-//
-//
-//                    String ChildFirstName = txtEditFname.getText().toString();
-//                    child.setChildName(ChildFirstName);
-//                    child.setEmail(email);
-//                   // child.setPassword(password);
-//
-//                    String id = user.getUid();
-//                    child.setUid(id);
-//
-//                    String ChildLastName = txtEditLname.getText().toString();
-//                    child.setChildLastName(ChildLastName);
-//
-//
-//                    String ChildMotherName = txtEditmotherName.getText().toString();
-//                    child.setChildMotherName(ChildMotherName);
-//
-//
-//                    String Phone = txtEditchildPhone.getText().toString();
-//                    child.setPhone(Phone);
-//
-////                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
-//
-//
-//                    child.setBlood(typeofblood);
-//
-//                    final String strGender =
-//                            ((RadioButton) v.findViewById(RG_Gender.getCheckedRadioButtonId()))
-//                                    .getText().toString();
-//                    child.setGender(strGender);
-//
-//                    RG_Gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//                        @Override
-//                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                            mGenderOptions = RG_Gender.findViewById(i);
-//
-//                            switch (i) {
-//                                case R.id.r_Male_UpdateProfil:
-////                                strGender  = mGenderOptions.getText().toString();
-////                                child.setGender(strGender);
-//                                    break;
-//
-//                                case R.id.r_Fmale_UpdateProfil:
-////                                strGender  = mGenderOptions.getText().toString();
-////                                child.setGender(strGender);
-//
-//                                    break;
-//
-//                                default:
-//
-//
-//                            }
-//                        }
-//                    });
-//
-//
-//
-//                    Map<String, Object> userh = new HashMap<>();
-//                    userh.put("weight", Weightnumber);
-//                    userh.put("height", Heightnumber);
-//
-//
-//                    db.collection("child").document(id).set(child);
-//
-//                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
-//
-//                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
-//
-//                    if (Special_Needs.isChecked()) {
-//                        Map<String, Object> SpecialNeeds = new HashMap<>();
-//                        SpecialNeeds.put("status", "Yes");
-//                        SpecialNeeds.put("type", null);
-//
-//                        db.collection("child").document(id)
-//                                .collection("Special Needs").document(id).set(SpecialNeeds);
-//                    } else {
-//                    db.collection("child").document(id)
-//                            .collection("Special Needs").document(id).delete();
-//                    }
-//
-//
-//                    Toast.makeText(getActivity(),"Data Updated!",Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//
-//            });
-//
-//
-////            txtEditAge.setOnClickListener(new View.OnClickListener() {
-////                @RequiresApi(api = Build.VERSION_CODES.O)
-////                @Override
-////                public void onClick(View view) {
-////                    txtEditAge = (EditText) view;
-////                    datePicker = new DatePickerDialog(EditProfileFragment.this,
-////                            new DatePickerDialog.OnDateSetListener() {
-////                                @Override
-////                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-////                                    int et_id = txtEditAge.getId();
-////                                    String date = (dayOfMonth) + "-" + (monthOfYear) + "-" + (year);
-////
-////                                    if (et_id == R.id.editTextBabeBirthday_UpdateProfil) {
-////                                        BDate = date;
-////                                    }
-////
-////
-////                                    txtEditAge.setText(date);
-////                                }
-////                            }, year, month, day);
-////                    datePicker.show();
-////
-////                }
-////            });
 
             return v;
 
@@ -540,7 +374,6 @@ public class EditProfileFragment extends Fragment {
             }
             return 0;
         }
-
 
 
     }

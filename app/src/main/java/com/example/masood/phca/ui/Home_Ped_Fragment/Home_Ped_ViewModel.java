@@ -1,16 +1,16 @@
-package com.example.masood.phca.ui.slideshow;
+package com.example.masood.phca.ui.Home_Ped_Fragment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class Home_Ped_ViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public Home_Ped_ViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is ped fragment");
     }
 
     public LiveData<String> getText() {
