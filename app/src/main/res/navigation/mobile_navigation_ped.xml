@@ -14,11 +14,11 @@
     </fragment>
 
 
-<!--    <fragment-->
-<!--        android:id="@+id/nav_profile"-->
-<!--        android:name="com.example.masood.phca.ui.profile.ProfileFragment"-->
-<!--        android:label="Profile"-->
-<!--        tools:layout="@layout/fragment_profile" />-->
+    <fragment
+        android:id="@+id/nav_profile_ped"
+        android:name="com.example.masood.phca.ui.profile.ProfileFragmentPed"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile_ped" />
 
     <fragment
         android:id="@+id/nav_notifications"

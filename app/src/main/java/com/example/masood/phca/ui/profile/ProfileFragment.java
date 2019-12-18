@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.masood.phca.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -151,7 +150,7 @@ public class ProfileFragment extends Fragment {
                                     // Map<String, Object> note = documentSnapshot.getData();
 
                                 } else {
-                                Toast.makeText(getActivity(), "Document does not exist", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -170,40 +169,40 @@ public class ProfileFragment extends Fragment {
                                     // Map<String, Object> note = documentSnapshot.getData();
 
                                 } else {
-                                Toast.makeText(getActivity(), "Document does not exist", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ProfileFragment.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                         });
-//                db.collection("child")
-//                        .document(id)
-//                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @RequiresApi(api = Build.VERSION_CODES.O)
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            DocumentSnapshot document = task.getResult();
-//                            Date datetest = document.getTimestamp("birthday").toDate();
-//
-//                            Calendar calander = Calendar.getInstance();
-//                            calander.setTime(datetest);
-//                            int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
-//                            int userBirthMonth = calander.get(Calendar.MONTH);
-//                            int userBirthYear = calander.get(Calendar.YEAR);
-//
-//                            LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
-//                            LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
-//                            final Period p = Period.between(userBirthDate, currentDate);
-//
-//                            String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
-//                            String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
-//                            String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
-//                            txtviewAge.setText(y+m+d);
-//
-//
-//                        }
-//                    }
-//                });
+                db.collection("child")
+                        .document(id)
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            Date datetest = document.getTimestamp("birthday").toDate();
+
+                            Calendar calander = Calendar.getInstance();
+                            calander.setTime(datetest);
+                            int userBirthDay = calander.get(Calendar.DAY_OF_MONTH);
+                            int userBirthMonth = calander.get(Calendar.MONTH);
+                            int userBirthYear = calander.get(Calendar.YEAR);
+
+                            LocalDate userBirthDate = LocalDate.of(userBirthYear, userBirthMonth,userBirthDay );
+                            LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+                            final Period p = Period.between(userBirthDate, currentDate);
+
+                            String y = p.getYears() + "y" + (p.getYears() > 1 ? "s " : " ");
+                            String m = (p.getMonths()-1) + "m" + (p.getMonths() > 1 ? "s" : " and ");
+                            String d = (p.getDays()+1) + "d" + (p.getDays() > 1 ? "s.\n" : ".\n");
+                            txtviewAge.setText(y+m+d);
+
+
+                        }
+                    }
+                });
 
 
 //            String name = userID.getDisplayName();
