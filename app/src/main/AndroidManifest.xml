@@ -31,7 +31,6 @@
         <activity
             android:name=".Vaccination"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity android:name=".activity_Register1" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_my_drawer"

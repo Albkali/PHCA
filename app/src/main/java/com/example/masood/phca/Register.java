@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -116,6 +117,7 @@ public class Register extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Register.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 try {
@@ -128,58 +130,61 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+
                                     } else {
                                         Toast.makeText(Register.this, "Email or password not correct", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
 
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();
 
-                    StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
-                    final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
-                    imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            // image uploaded succesfully
-                            // now we can get our image url
-
-                            imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-
-                                    // uri contain user image url
-
-
-                                    UserProfileChangeRequest profleUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(txtFirstName +""+ txtLastName)
-                                            .setPhotoUri(uri)
-                                            .build();
-
-
-                                    currentUser.updateProfile(profleUpdate)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-
-                                                    if (task.isSuccessful()) {
-                                                        // user info updated successfully
-//                                            showMessage("Register Complete");
-//                                            updateUI();
-                                                    }
-
-                                                }
-                                            });
-
-                                }
-                            });
-
-
-
-
-
-                        }
-                    });
+//                    StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
+//                    final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
+//                    imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                            // image uploaded succesfully
+//                            // now we can get our image url
+//
+//                            imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                @Override
+//                                public void onSuccess(Uri uri) {
+//
+//                                    // uri contain user image url
+//
+//
+//                                    UserProfileChangeRequest profleUpdate = new UserProfileChangeRequest.Builder()
+//                                .setDisplayName(txtFirstName +""+ txtLastName)
+//                                            .setPhotoUri(uri)
+//                                            .build();
+//
+//
+//                                    currentUser.updateProfile(profleUpdate)
+//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                                    if (task.isSuccessful()) {
+//                                                        // user info updated successfully
+////                                            showMessage("Register Complete");
+////                                            updateUI();
+//                                                    }
+//
+//                                                }
+//                                            });
+//
+//                                }
+//                            });
+//
+//
+//
+//
+//
+//                        }
+//                    });
 
                     child = new Child();
                     Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
@@ -203,6 +208,10 @@ public class Register extends AppCompatActivity {
 
                     String Phone = txtPhone.getText().toString();
                     child.setPhone(Phone);
+
+                    child.setPassword(password);
+                    child.setEmail(email);
+                    child.setUid(id);
 
                     child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
 
@@ -238,8 +247,6 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
-                    user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();
 
 
                     Map<String, Object> userh = new HashMap<>();
@@ -268,9 +275,7 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Register.this, MyDrawer.class);
                     startActivity(intent);
-
-
-                    Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
+                    finish();
 
 
 
@@ -282,84 +287,84 @@ public class Register extends AppCompatActivity {
         });
 
 
-        ImgUserPhoto = findViewById(R.id.user_profile_photo) ;
-
-        ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (Build.VERSION.SDK_INT >= 22) {
-
-                    checkAndRequestForPermission();
-
-
-                }
-                else
-                {
-                   openGallery();
-                }
-
-
-
-            }
-        });
-
-    }
-    private void updateUserInfo( Uri pickedImgUri, final FirebaseUser currentUser) {
-
-        // first we need to upload user photo to firebase storage and get url
-
-
-
-
+//        ImgUserPhoto = findViewById(R.id.user_profile_photo) ;
+//
+//        ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (Build.VERSION.SDK_INT >= 22) {
+//
+//                    checkAndRequestForPermission();
+//
+//
+//                }
+//                else
+//                {
+//                   openGallery();
+//                }
+//
+//
+//
+//            }
+//        });
 
     }
-
-    private void openGallery() {
-        //TODO: open gallery intent and wait for user to pick an image !
-
-        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent,REQUESCODE);
-    }
-
-    private void checkAndRequestForPermission() {
-
-
-        if (ContextCompat.checkSelfPermission(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
-                Toast.makeText(Register.this,"Please accept for required permission",Toast.LENGTH_SHORT).show();
-
-            }
-
-            else
-            {
-                ActivityCompat.requestPermissions(Register.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PReqCode);
-            }
-
-        }
-        else
-            openGallery();
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null ) {
-
-            // the user has successfully picked an image
-            // we need to save its reference to a Uri variable
-            pickedImgUri = data.getData();
-            ImgUserPhoto.setImageURI(pickedImgUri);
-
-        }
-        }
+//    private void updateUserInfo( Uri pickedImgUri, final FirebaseUser currentUser) {
+//
+//        // first we need to upload user photo to firebase storage and get url
+//
+//
+//
+//
+//
+//    }
+//
+//    private void openGallery() {
+//        //TODO: open gallery intent and wait for user to pick an image !
+//
+//        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        galleryIntent.setType("image/*");
+//        startActivityForResult(galleryIntent,REQUESCODE);
+//    }
+//
+//    private void checkAndRequestForPermission() {
+//
+//
+//        if (ContextCompat.checkSelfPermission(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//
+//                Toast.makeText(Register.this,"Please accept for required permission",Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            else
+//            {
+//                ActivityCompat.requestPermissions(Register.this,
+//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                        PReqCode);
+//            }
+//
+//        }
+//        else
+//            openGallery();
+//
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null ) {
+//
+//            // the user has successfully picked an image
+//            // we need to save its reference to a Uri variable
+//            pickedImgUri = data.getData();
+//            ImgUserPhoto.setImageURI(pickedImgUri);
+//
+//        }
+//        }
         public void setDate(View view) {
             txtBirthday = (EditText) view;
 

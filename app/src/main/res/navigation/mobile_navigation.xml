@@ -34,16 +34,16 @@
 
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.masood.phca.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_EditProfile"
+        android:name="com.example.masood.phca.ui.EditProfile.EditProfileFragment"
+        android:label="EditProfile"
+        tools:layout="@layout/fragment_editprofile" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.masood.phca.ui.slideshow.SlideshowFragment"
+        android:name="com.example.masood.phca.ui.Home_Ped_Fragment.Home_Ped_Fragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_home_ped" />
 
     <fragment
         android:id="@+id/nav_tools"

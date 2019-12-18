@@ -4,6 +4,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +14,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login_form extends AppCompatActivity {
 
    private EditText txtEmail,txtPassword;
     private Button btn_login,btn_register;
 
+    FirebaseUser user;
 
     private FirebaseAuth firebaseAuth;
 
@@ -26,14 +29,21 @@ public class Login_form extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
-            Intent groceryItemsIntent = new Intent(Login_form.this,
-                    MyDrawer.class);
-            startActivity(groceryItemsIntent);
-            finish();
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getEmail();
+            if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
+                Intent groceryItemsIntent = new Intent(Login_form.this,
+                        MainActivity.class);
+                startActivity(groceryItemsIntent);
+                finish();            } else {
+                Intent groceryItemsIntent = new Intent(Login_form.this,
+                        MyDrawer.class);
+                startActivity(groceryItemsIntent);
+                finish();            }
+
         }
         txtEmail = (EditText)findViewById(R.id.etName);
         txtPassword = (EditText)findViewById(R.id.etPassword);
@@ -74,8 +84,15 @@ public class Login_form extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-
-                                    startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                                    user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String id = user.getEmail();
+                                    if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                                        to show more optione to do condtions of type users , check this link
+//     https://stackoverflow.com/questions/50534695/how-to-log-in-two-different-types-of-users-to-different-activities-automatically
+                                    } else {
+                                        startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                                    }
 
                                 } else {
                                     //startActivity(new Intent(getApplicationContext(),MainActivity.class));
