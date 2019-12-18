@@ -148,6 +148,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Baby Birthday"
                             android:inputType="date"
+                            android:focusableInTouchMode="false"
                             android:onClick="setDate"
                             android:textColor="#1976D2" />
 

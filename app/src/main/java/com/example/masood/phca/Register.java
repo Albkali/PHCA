@@ -1,17 +1,12 @@
 package com.example.masood.phca;
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,21 +18,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.masood.phca.ui.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -46,38 +34,23 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    EditText txtEmail1;
-    EditText txtPassword1;
-    EditText txtLastName;
-    EditText txtMotherName;
-    EditText txtPhone;
-    EditText txtFirstName;
+    EditText txtEmail1,txtPassword1,txtLastName,txtMotherName,txtPhone,txtFirstName,txtBirthday,txtHeight  ,txtWeight;
     Child child;
     ImageView ImgUserPhoto;
     Uri pickedImgUri ;
-    FirebaseUser currentUser ;
-
-    private FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser ,user;
     FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
+
    StorageTask uploadTask ;
-   public  Uri imguri ;
-
-
-
     DatePickerDialog datePicker;
     Calendar calendar;
-    int day;
-    int month;
-    int year;
+    int day,month,year,Heightnumber,Weightnumber;
     String BDate;
-    EditText txtBirthday,txtHeight  ,txtWeight;
     Button DoneRegister;
     RadioGroup mGender;
     RadioButton mGenderOptions ;
     CheckBox SpecialNeeds ;
-    FirebaseUser user;
-    int Heightnumber,Weightnumber;
-
     private static final int PReqCode = 2 ;
     private static final int REQUESCODE = 2 ;
 
@@ -86,6 +59,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -96,22 +70,17 @@ public class Register extends AppCompatActivity {
         txtLastName = (EditText) findViewById(R.id.editTextLastName);
         txtMotherName = (EditText) findViewById(R.id.editTextMatherName);
         txtPhone = (EditText) findViewById(R.id.editTextPhoneNum);
-        child = new Child();
-
-        calendar = Calendar.getInstance();
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = calendar.get(Calendar.MONTH);
-        year = calendar.get(Calendar.YEAR);
-
-        db = FirebaseFirestore.getInstance();
         txtBirthday = (EditText) findViewById(R.id.editTextBabeBirthday);
         txtHeight = (EditText) findViewById(R.id.editTextHeight);
         txtWeight = (EditText) findViewById(R.id.editTextWeight);
         mGender = (RadioGroup) findViewById(R.id.m_Gender);
         SpecialNeeds = (CheckBox) findViewById(R.id.checkboxsn);
-
         DoneRegister = (Button) findViewById(R.id.btn_register);
 
+        calendar = Calendar.getInstance();
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
 
         DoneRegister.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -186,41 +155,29 @@ public class Register extends AppCompatActivity {
 //                        }
 //                    });
 
-                    child = new Child();
+
                     Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
                     String typeofblood = spinner.getSelectedItem().toString();
-
                     Heightnumber = Integer.parseInt(txtHeight.getText().toString());
                     Weightnumber = Integer.parseInt(txtWeight.getText().toString());
-
-
                     String ChildFirstName = txtFirstName.getText().toString();
-                    child.setChildName(ChildFirstName);
-
-
                     String ChildLastName = txtLastName.getText().toString();
-                    child.setChildLastName(ChildLastName);
-
-
                     String ChildMotherName = txtMotherName.getText().toString();
-                    child.setChildMotherName(ChildMotherName);
-
-
                     String Phone = txtPhone.getText().toString();
-                    child.setPhone(Phone);
-
-                    child.setPassword(password);
-                    child.setEmail(email);
-                    child.setUid(id);
-
-                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
-
-
-                    child.setBlood(typeofblood);
-
                     final String strGender =
                             ((RadioButton) findViewById(mGender.getCheckedRadioButtonId()))
                                     .getText().toString();
+
+                    child = new Child();
+                    child.setChildMotherName(ChildMotherName);
+                    child.setChildLastName(ChildLastName);
+                    child.setChildName(ChildFirstName);
+                    child.setPhone(Phone);
+                    child.setPassword(password);
+                    child.setEmail(email);
+                    child.setUid(id);
+                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
+                    child.setBlood(typeofblood);
                     child.setGender(strGender);
 
                     mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -247,17 +204,13 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
-
-
                     Map<String, Object> userh = new HashMap<>();
                     userh.put("weight", Weightnumber);
                     userh.put("height", Heightnumber);
 
-
-                    db.collection("child").document(id).set(child);
-
                     LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
 
+                    db.collection("child").document(id).set(child);
                     db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
                     if (SpecialNeeds.isChecked()) {
@@ -276,8 +229,6 @@ public class Register extends AppCompatActivity {
                     Intent intent = new Intent(Register.this, MyDrawer.class);
                     startActivity(intent);
                     finish();
-
-
 
                 } catch (Exception e) {
                     Toast.makeText(Register.this, "Wrong input, please retry", Toast.LENGTH_SHORT).show();
