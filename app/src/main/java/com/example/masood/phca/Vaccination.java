@@ -16,53 +16,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-
-
 import com.example.masood.phca.Adapter.VaccinationAdapter;
 import com.example.masood.phca.Model.VaccinationItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import static com.example.masood.phca.NotificationChannels.CHANNEL_1_ID;
-
-//import com.google.firebase.Timestamp;
-//import com.google.firebase.Timestamp;
 
 public class Vaccination extends AppCompatActivity {
 
-//    private VaccinationAdapter adapter;
-//    private FirebaseDatabase database;
-//    private RecyclerView recyclerView ;
-//    private VaccinationItemFirebase groceryItemsFirebase;
-
-
-
-
-
     private static FirebaseFirestore db ;
+    private NotificationManagerCompat notificationManager;
 
     RecyclerView recyclerView;
     ArrayList<VaccinationItem> posts;
     VaccinationAdapter adapter;
-    private NotificationManagerCompat notificationManager;
-
-    //public static String  name = "";
-    public static String status = "";
-    public static String name2 = "";
-    public  static String status2 = "";
-
-
-    SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,73 +45,67 @@ public class Vaccination extends AppCompatActivity {
         getSupportActionBar().setTitle("Vaccinations");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
-
         notificationManager = NotificationManagerCompat.from(this);
-//        CheckVacciDate ch = new CheckVacciDate();
+        //call check method to check vaccination date
         check();
+        //call notification method to send notification
         notification();
 
         recyclerView = findViewById(R.id.rv_vacc_items);
-
         db = FirebaseFirestore.getInstance();
-try {
+        try {
+            //access vaccination in firebase
+            db.collection("vaccination")
+                    .document("QAv2QZFhih39UGOKTTVM")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            DocumentSnapshot document = task.getResult();
 
+                            posts = new ArrayList<>();
 
-    db.collection("vaccination")
-            .document("QAv2QZFhih39UGOKTTVM")
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    DocumentSnapshot document = task.getResult();
+                            if (task.isSuccessful()) {
 
-                    posts = new ArrayList<>();
+                                //to convert timestone to normal date
+                                SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
 
-                    if (task.isSuccessful()) {
+                                //call first vacc from firestore
+                                String name = task.getResult().get("1to4_name").toString();
+                                String status = task.getResult().get("1to4_status").toString();
+                                String date = sfd.format(task.getResult().get("1to4_date"));
 
-                        SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+                                //call second vacc from firestore
+                                String name2 = task.getResult().get("cc_name").toString();
+                                String status2 = task.getResult().get("cc_status").toString();
+                                String date2 = sfd.format(task.getResult().get("cc_date"));
 
-                        String name = task.getResult().get("1to4_name").toString();
-                        String status = task.getResult().get("1to4_status").toString();
-                        String date = sfd.format(task.getResult().get("1to4_date"));
+                                //send to each item in resyclerView
+                                posts.add(new VaccinationItem(name, status, date));
+                                posts.add(new VaccinationItem(name2, status2, date2));
 
+                                //initialize adapter
+                                adapter = new VaccinationAdapter(Vaccination.this, posts);
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(Vaccination.this));
 
-
-
-//                        Toast.makeText(Vaccination.this, ss + s2 + s3, Toast.LENGTH_LONG).show();
-
-
-
-                        String name2 = task.getResult().get("cc_name").toString();
-                        String status2 = task.getResult().get("cc_status").toString();
-                        String date2 = sfd.format(task.getResult().get("cc_date"));
-
-
-                        posts.add(new VaccinationItem(name, status, date));
-                        posts.add(new VaccinationItem(name2, status2, date2));
-
-                        adapter = new VaccinationAdapter(Vaccination.this, posts);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(Vaccination.this));
-
-
-                    } else {
-                        Log.d("ItinerariesSearch", "Error getting documents: ", task.getException());
-                    }
-                }
-            });
-} catch (Exception e) {
-                                    Toast.makeText(Vaccination.this, "error", Toast.LENGTH_LONG).show();
-}
-
-    }
+                            } else {
+                                Log.d("ItinerariesSearch", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Toast.makeText(Vaccination.this, "error", Toast.LENGTH_LONG).show();
+            }
+        }
 
     public void notification() {
         Intent activityIntent = new Intent(this, Vaccination.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0 , activityIntent,0);
 
+        //initialize notification to send via notificatin manager class
         Notification notification = new NotificationCompat.Builder(this,CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_hospital)
                 .setContentTitle("Vaccination alert")
@@ -150,13 +117,13 @@ try {
                 .setColor(Color.GRAY)
                 .build();
 
+        //send to notificathion manager
         notificationManager.notify(1, notification);
 
     }
     public void check () {
 
         db = FirebaseFirestore.getInstance();
-
         db.collection("vaccination")
                 .document("QAv2QZFhih39UGOKTTVM")
                 .get()
@@ -171,6 +138,7 @@ try {
                                 Date currentDate = Calendar.getInstance().getTime();
                                 String status = task.getResult().get("cc_status").toString();
 
+                                //check if the vaccination date is passed and not done yet
 //                                if ( userDate.compareTo(currentDate) >= 0 && status.equals("waiting") ){
 //                                    Toast.makeText(Vaccination.this, "comming", Toast.LENGTH_LONG).show();
 //
@@ -187,7 +155,6 @@ try {
                     }
                 });
     }
-
         @Override
     public boolean onOptionsItemSelected(MenuItem item) {
             //  Auto-generated method stub
