@@ -149,9 +149,9 @@ public class EditProfileFragment extends Fragment {
                     int Weightnumber = Integer.parseInt(txtEditWeight.getText().toString());
                     String strGender= "";
                     if (RG_Male.isChecked()) {
-                        strGender = "Male";
+                        strGender = getString(R.string.male);
                     } else if (RG_Female.isChecked()) {
-                        strGender = "Female";
+                        strGender = getString(R.string.female);;
                     }
                     if (Special_Needs.isChecked()) {
                         Map<String, Object> SpecialNeeds = new HashMap<>();
@@ -177,15 +177,15 @@ public class EditProfileFragment extends Fragment {
                                 }
                             });
 
-                    user.updateEmail(Childemail)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "User Email updated.");
-                                    }
-                                }
-                            });
+//                    user.updateEmail(Childemail)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "User Email updated.");
+//                                    }
+//                                }
+//                            });
                 }
             });
 
@@ -198,7 +198,7 @@ public class EditProfileFragment extends Fragment {
                                 String password,String blood,String str_Gender,int int_height, int int_weight){
         final String id = userID.getUid();
         DocumentReference documentReference = mDatabase.collection("child").document(id);
-        DocumentReference documentReference2 = mDatabase.collection("child").document(id).collection("IBM").document(id);
+//        DocumentReference documentReference2 = mDatabase.collection("child").document(id).collection("IBM").document(id);
         documentReference.update("childName", Fname);
         documentReference.update("childLastName", Lname);
         documentReference.update("childMotherName", Mohtername);
@@ -206,17 +206,14 @@ public class EditProfileFragment extends Fragment {
         documentReference.update("phone", str_phone);
         documentReference.update("password", password);
         documentReference.update("blood", blood);
-        documentReference.update("gender", str_Gender);
-        documentReference2.update("height", int_height);
-        documentReference2.update("weight", int_weight)
-
+        documentReference.update("gender", str_Gender)
 
 //        documentReference.update("gender", gender)
 
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getActivity(),"Profile Updated",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), R.string.toast_profileupdated,Toast.LENGTH_LONG).show();
 
                     }
                 })
@@ -227,6 +224,14 @@ public class EditProfileFragment extends Fragment {
                         Log.d("Androidview", e.getMessage());
                     }
                 });
+
+
+        Map<String, Object> userh = new HashMap<>();
+        userh.put("weight", int_weight);
+        userh.put("height", int_height);
+
+
+        db.collection("child").document(id).collection("IBM").document(id).set(userh);
     }
         @Override
         public void onResume() {
@@ -235,8 +240,8 @@ public class EditProfileFragment extends Fragment {
             final String Email = userID.getEmail();
             txtEditEmail.setText(Email);
             Log.i("my id", id);
-
-                if (userID != null) {
+//
+//                if (userID != null) {
 
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     DocumentReference noteRef =
@@ -271,7 +276,7 @@ public class EditProfileFragment extends Fragment {
 //                                        Date datetest = documentSnapshot.getTimestamp("birthday").toDate();
 //                                        String tt = datetest.toString();
 
-                                        if (childgender.equals("Male")){
+                                        if (childgender.equals(getString(R.string.male))){
                                             RG_Male.setChecked(true);
                                         } else {
                                             RG_Female.setChecked(true);
@@ -363,7 +368,7 @@ public class EditProfileFragment extends Fragment {
                     // FirebaseUser.getIdToken() instead.
                     String uid = userID.getUid();
                 }
-        }
+//        }
 
         //private method of your class
         private int getIndex(Spinner spinner, String myString){

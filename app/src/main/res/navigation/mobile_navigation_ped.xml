@@ -17,13 +17,13 @@
     <fragment
         android:id="@+id/nav_profile_ped"
         android:name="com.example.masood.phca.ui.profile.ProfileFragmentPed"
-        android:label="Profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile_ped" />
 
     <fragment
         android:id="@+id/nav_notifications"
         android:name="com.example.masood.phca.ui.notifications.NotificatonsFragment"
-        android:label="Notification"
+        android:label="@string/notifications"
         tools:layout="@layout/fragment_notifications" >
 
     </fragment>

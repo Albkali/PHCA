@@ -18,7 +18,7 @@
             android:background="@color/purpleDark"
             android:paddingTop="42dp"
             android:paddingBottom="42dp"
-            android:text="News"
+            android:text=""
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="24sp" />

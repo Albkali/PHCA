@@ -39,7 +39,7 @@ public class CSHCN_WebView_activity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
-                setTitle("Loading...");
+                setTitle(getString(R.string.loading));
             }
 
             @Override

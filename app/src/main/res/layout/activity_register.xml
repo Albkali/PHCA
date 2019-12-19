@@ -50,7 +50,7 @@
                         android:id="@+id/editTextFirsttName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Frist Name"
+                        android:hint="@string/frist_name"
                         android:inputType="textPersonName"
                         android:textColor="#1976D2"
                         android:textStyle="normal" />
@@ -67,7 +67,7 @@
                         android:id="@+id/editTextLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Last Name"
+                        android:hint="@string/last_name"
                         android:inputType="textPersonName"
                         android:textColor="#1976D2"
                         android:textStyle="normal" />
@@ -83,7 +83,7 @@
                         android:id="@+id/editTextMatherName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Mather Name"
+                        android:hint="@string/mather_name"
                         android:inputType="textPersonName"
                         android:textColor="#1976D2"
                         android:textStyle="normal" />
@@ -130,7 +130,7 @@
                             android:id="@+id/editTextPhoneNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Phone Number"
+                            android:hint="@string/phone_number"
                             android:textColor="#1976D2"
 
                             android:inputType="number" />
@@ -146,7 +146,7 @@
                             android:id="@+id/editTextBabeBirthday"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Baby Birthday"
+                            android:hint="@string/baby_birthday"
                             android:inputType="date"
                             android:focusableInTouchMode="false"
                             android:onClick="setDate"
@@ -165,7 +165,7 @@
                             android:layout_width="match_parent"
                             android:textColor="#1976D2"
                             android:layout_height="wrap_content"
-                            android:hint="Height of Baby" />
+                            android:hint="@string/height_of_baby" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,7 +182,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#1976D2"
-                            android:hint="Weight of Baby" />
+                            android:hint="@string/weight_of_baby" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,7 +200,7 @@
                             <TextView
                                 android:layout_width="73dp"
                                 android:layout_height="match_parent"
-                                android:text="Gender"
+                                android:text="@string/gender"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
                             <RadioButton
@@ -209,7 +209,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:buttonTint="#1A99C4"
-                                android:text="Male" />
+                                android:text="@string/male" />
 
                             <RadioButton
                                 android:id="@+id/r_Fmale"
@@ -217,7 +217,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:buttonTint="#1A99C4"
-                                android:text="Female" />
+                                android:text="@string/female" />
                         </RadioGroup>
 
                     </LinearLayout>
@@ -235,9 +235,9 @@
 
                         <TextView
                                 android:id="@+id/textViewBloodType"
-                                android:layout_width="100dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="Blood Type"
+                                android:text="@string/blood_type"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
@@ -272,29 +272,24 @@
 
                             <TextView
                                 android:id="@+id/textViewsn"
-                                android:layout_width="128dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="32dp"
                                 android:layout_marginTop="5dp"
-                                android:text="Special Needs"
+                                android:text="@string/special_needs"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <CheckBox
                                 android:id="@+id/checkboxsn"
-                                android:layout_width="80dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="32dp"
-                                android:layout_alignParentLeft="@+id/textViewsn"
                                 android:layout_alignParentTop="true"
                                 android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
                                 android:layout_marginStart="16dp"
-                                android:layout_marginLeft="29dp"
                                 android:layout_marginTop="2dp"
-                                android:layout_marginEnd="87dp"
-                                android:layout_marginRight="87dp"
                                 android:layout_toEndOf="@+id/textViewsn"
                                 android:buttonTint="#1A99C4"
-                                android:hint="Yes"
+                                android:hint="@string/yes"
                                 android:textColor="#ffffff"
                                 android:textSize="18dp" />
                         </RelativeLayout>
@@ -347,7 +342,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
-        android:text="New User Registration"
+        android:text="@string/new_user_registration"
         android:textColor="#fff"
         android:textSize="26sp"
         android:textStyle="bold" />

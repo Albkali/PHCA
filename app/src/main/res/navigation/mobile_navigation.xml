@@ -19,13 +19,13 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.masood.phca.ui.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_notifications"
         android:name="com.example.masood.phca.ui.notifications.NotificatonsFragment"
-        android:label="Notification"
+        android:label="@string/notifications"
         tools:layout="@layout/fragment_notifications" >
         <action
             android:id="@+id/action_nav_notifications_to_nav_profile"
@@ -36,14 +36,14 @@
     <fragment
         android:id="@+id/nav_EditProfile"
         android:name="com.example.masood.phca.ui.EditProfile.EditProfileFragment"
-        android:label="EditProfile"
+        android:label="@string/edit_profile"
         tools:layout="@layout/fragment_editprofile" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.masood.phca.ui.Home_Ped_Fragment.Home_Ped_Fragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_home_ped" />
+<!--    <fragment-->
+<!--        android:id="@+id/nav_slideshow"-->
+<!--        android:name="com.example.masood.phca.ui.Home_Ped_Fragment.Home_Ped_Fragment"-->
+<!--        android:label="@string/menu_slideshow"-->
+<!--        tools:layout="@layout/fragment_home_ped" />-->
 
     <fragment
         android:id="@+id/nav_tools"

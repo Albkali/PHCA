@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:background="#E75F24"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Pediatrician"
+            app:title="@string/Pediatrician"
             app:titleTextColor="#C3131010">
 
 
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:text="Add an appointment"
+                        android:text="@string/add_an_appointment"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -163,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:text="Location"
+                        android:text="@string/location"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>

@@ -70,7 +70,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Height"
+                        android:text="@string/height"
                         android:textSize="20sp" />
 
                     <TextView
@@ -95,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Age"
+                        android:text="@string/age"
                         android:textSize="20sp" />
 
                     <TextView
@@ -120,7 +120,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Weight"
+                        android:text="@string/weight"
                         android:textSize="20sp" />
 
                     <TextView

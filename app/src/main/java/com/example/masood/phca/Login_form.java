@@ -108,7 +108,7 @@ public class Login_form extends AppCompatActivity {
 
                                 } else {
                                     //startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                    Toast.makeText(Login_form.this, "Login Failed ", Toast.LENGTH_SHORT);
+                                    Toast.makeText(Login_form.this, R.string.login_faild, Toast.LENGTH_SHORT);
                                 }
 
                                 // ...
@@ -139,10 +139,10 @@ public class Login_form extends AppCompatActivity {
 //        input.setText(getIntent().getStringExtra("image_name"));
         AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
         alertDialog.setView(pedName); // uncomment this line
-        alertDialog.setTitle("Are You Pediatrician");
-        alertDialog.setMessage("Enter your  Email or mobile phone , We will connect with you.");
+        alertDialog.setTitle(getString(R.string.are_u_ped));
+        alertDialog.setMessage(getString(R.string.connect_with_u));
 
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Send", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.send), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

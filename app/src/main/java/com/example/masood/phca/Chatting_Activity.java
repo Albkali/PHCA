@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,12 +29,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chatting_Activity extends AppCompatActivity {
@@ -153,17 +156,19 @@ public class Chatting_Activity extends AppCompatActivity {
                         if(e != null){
                             //an error has occured
                         }else{
-                            List<MessageDTO> messages = snapshots.toObjects(MessageDTO.class);
+                            Log.d( "New city: " ,"");
 
-//                            ArrayList<MessageDTO> messages = new ArrayList<>();
+//                            List<MessageDTO> messages = snapshots.toObjects(MessageDTO.class);
 
-//                            for (DocumentChange dc : snapshots.getDocumentChanges()) {
-//                                if (dc.getType() == DocumentChange.Type.ADDED) {
-////                                    Log.d(TAG, "New city: " + dc.getDocument().getData());
-//                                    messages.add(dc.getDocument().toObject(MessageDTO.class));
-//
-//                                }
-//                            }
+                            ArrayList<MessageDTO> messages = new ArrayList<>();
+
+                            for (DocumentChange dc : snapshots.getDocumentChanges()) {
+                                if (dc.getType() == DocumentChange.Type.ADDED) {
+//                                    Log.d(TAG, "New city: " + dc.getDocument().getData());
+                                    messages.add(dc.getDocument().toObject(MessageDTO.class));
+
+                                }
+                            }
 
                             mAdapter.setData(messages);
                             mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);

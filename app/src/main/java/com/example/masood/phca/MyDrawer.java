@@ -86,7 +86,7 @@ public class MyDrawer extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_notifications, R.id.nav_profile,
-                R.id.nav_EditProfile, R.id.nav_slideshow,
+                R.id.nav_EditProfile,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();

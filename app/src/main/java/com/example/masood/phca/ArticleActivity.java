@@ -39,7 +39,7 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-        setTitle("Articles");
+        setTitle(getString(R.string.articles));
 
         DBReference = FirebaseDatabase.getInstance().getReference().child("News");
         DBReference.keepSynced(true);

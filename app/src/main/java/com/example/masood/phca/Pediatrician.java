@@ -96,14 +96,14 @@ public class Pediatrician extends AppCompatActivity {
 
 
                         } else {
-                            Toast.makeText(Pediatrician.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Pediatrician.this, R.string.information_not_exist, Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Pediatrician.this, "Error!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Pediatrician.this, R.string.error, Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });

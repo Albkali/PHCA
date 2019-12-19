@@ -101,7 +101,7 @@ public class Register extends AppCompatActivity {
                                     if (task.isSuccessful()) {
 
                                     } else {
-                                        Toast.makeText(Register.this, "Email or password not correct", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, R.string.email_password_not_correct, Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -225,13 +225,13 @@ public class Register extends AppCompatActivity {
 //                            .collection("Special Needs").document(id).delete();
                     }
 
-                    Toast.makeText(Register.this, "data inserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this, R.string.registered_successfully, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Register.this, MyDrawer.class);
                     startActivity(intent);
                     finish();
 
                 } catch (Exception e) {
-                    Toast.makeText(Register.this, "Wrong input, please retry", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, R.string.worn_input_retry, Toast.LENGTH_SHORT).show();
 
                 }
             }

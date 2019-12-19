@@ -36,19 +36,19 @@ public class BMI_Calculate extends AppCompatActivity {
 
 
         if (bmi < 16) {
-            BMIresult = "Severely Under Weight";
+            BMIresult = getString(R.string.severely_under_weight);
         } else if (bmi < 18.5) {
-            BMIresult = "Under Weight";
+            BMIresult = getString(R.string.under_weight);
         } else if (bmi >= 18.5 && bmi <= 24.9) {
-            BMIresult = "Normal Weight";
+            BMIresult = getString(R.string.normal_weight);
         } else if (bmi >= 25 && bmi <= 29.9) {
-            BMIresult = "Overweight";
+            BMIresult = getString(R.string.over_weight);
         } else {
-            BMIresult = "Obese";
+            BMIresult = getString(R.string.obese);
         }
 
 
-        calculation = "BMI is : " + bmi + "\n" + "The Status is " + BMIresult;
+        calculation = getString(R.string.bmi_is) + bmi + "\n" + getString(R.string.the_status_is) + BMIresult;
 
 
         resulttext.setText(calculation);
