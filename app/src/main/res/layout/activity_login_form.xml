@@ -107,4 +107,19 @@
         app:layout_constraintTop_toBottomOf="@+id/login_button"
         app:layout_constraintVertical_bias="0.877" />
 
+    <TextView
+        android:id="@+id/textView_joinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Click_joinus"
+        android:text="Join us"
+        android:textAlignment="center"
+        android:textColor="#2CA5DE"
+        app:layout_constraintBottom_toBottomOf="@+id/toRegister_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toEndOf="@+id/toRegister_button"
+        app:layout_constraintTop_toTopOf="@+id/toRegister_button"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

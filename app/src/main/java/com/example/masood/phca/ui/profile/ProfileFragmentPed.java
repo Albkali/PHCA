@@ -1,28 +1,34 @@
-package com.example.masood.phca;
+package com.example.masood.phca.ui.profile;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.masood.phca.Pediatrician;
+import com.example.masood.phca.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Pediatrician extends AppCompatActivity {
+public class ProfileFragmentPed extends Fragment {
 
     private  String PedName , PedEmail;
-    Button btnsetped;
 
     Pediatrician pediatrician;
 
-    public Pediatrician(String pedName, String pedEmail) {
+    public ProfileFragmentPed(String pedName, String pedEmail) {
         PedName = pedName;
         PedEmail = pedEmail;
     }
@@ -43,7 +49,7 @@ public class Pediatrician extends AppCompatActivity {
         PedEmail = pedEmail;
     }
 
-    public Pediatrician() {
+    public ProfileFragmentPed() {
 
     }
     private static final String TAG = "MainActivity";
@@ -56,25 +62,23 @@ public class Pediatrician extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pediatrician);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_profile_ped, container, false);
 
         pediatrician = new Pediatrician();
 
-        btnsetped= (Button)findViewById(R.id.sbtnsetped);
 
-        PedName1 =findViewById(R.id.txtViewPedName);
-        PedEmail1 =findViewById(R.id.txtViewPedEmail);
-        PedPhone1 =findViewById(R.id.txtViewPedPhone);
+        PedName1 =v.findViewById(R.id.txtViewPedName);
+        PedEmail1 =v.findViewById(R.id.txtViewPedEmail);
+        PedPhone1 =v.findViewById(R.id.txtViewPedPhone);
 
-
+        return v;
     }
 
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         noteRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -96,14 +100,14 @@ public class Pediatrician extends AppCompatActivity {
 
 
                         } else {
-                            Toast.makeText(Pediatrician.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Pediatrician.this, "Error!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, e.toString());
                     }
                 });

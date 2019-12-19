@@ -1,13 +1,17 @@
 package com.example.masood.phca;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Login_form extends AppCompatActivity {
 
    private EditText txtEmail,txtPassword;
+   private  TextView joinped;
     private Button btn_login,btn_register;
 
     FirebaseUser user;
@@ -34,21 +39,28 @@ public class Login_form extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser();
             String id = user.getEmail();
-            if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
+            if (id.equals("moh@gmail.com") || id.equals("ped@gmail.com")) {
                 Intent groceryItemsIntent = new Intent(Login_form.this,
                         MainActivity.class);
                 startActivity(groceryItemsIntent);
-                finish();            } else {
+                finish();
+            } else {
                 Intent groceryItemsIntent = new Intent(Login_form.this,
                         MyDrawer.class);
                 startActivity(groceryItemsIntent);
-                finish();            }
+                finish();
+            }
 
         }
-        txtEmail = (EditText)findViewById(R.id.etName);
-        txtPassword = (EditText)findViewById(R.id.etPassword);
+        txtEmail = (EditText) findViewById(R.id.etName);
+
+        txtPassword = (EditText) findViewById(R.id.etPassword);
         btn_login = (Button) findViewById(R.id.login_button);
-        btn_register = (Button)findViewById(R.id.toRegister_button);
+        btn_register = (Button) findViewById(R.id.toRegister_button);
+
+
+        joinped = (TextView) findViewById(R.id.textView_joinus);
+
 
 //        if (firebaseAuth.getCurrentUser() != null) {
 //            Intent Intent = new Intent(Login_form.this,
@@ -61,7 +73,7 @@ public class Login_form extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               String email = txtEmail.getText().toString().trim();
+                String email = txtEmail.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
 
                 /*firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -86,17 +98,17 @@ public class Login_form extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     user = FirebaseAuth.getInstance().getCurrentUser();
                                     String id = user.getEmail();
-                                    if(id.equals("moh@gmail.com")||id.equals("yasser2@gmail.com")){
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    if (id.equals("moh@gmail.com") || id.equals("ped@gmail.com")) {
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //                                        to show more optione to do condtions of type users , check this link
 //     https://stackoverflow.com/questions/50534695/how-to-log-in-two-different-types-of-users-to-different-activities-automatically
                                     } else {
-                                        startActivity(new Intent(getApplicationContext(),MyDrawer.class));
+                                        startActivity(new Intent(getApplicationContext(), MyDrawer.class));
                                     }
 
                                 } else {
                                     //startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                    Toast.makeText(Login_form.this,"Login Failed ", Toast.LENGTH_SHORT);
+                                    Toast.makeText(Login_form.this, "Login Failed ", Toast.LENGTH_SHORT);
                                 }
 
                                 // ...
@@ -112,6 +124,34 @@ public class Login_form extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public boolean Click_joinus(View v) {
+
+
+        final EditText pedName = new EditText(this);
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+
+//        input.setText(getIntent().getStringExtra("image_name"));
+        AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+        alertDialog.setView(pedName); // uncomment this line
+        alertDialog.setTitle("Are You Pediatrician");
+        alertDialog.setMessage("Enter your  Email or mobile phone , We will connect with you.");
+
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+
+        });
+        alertDialog.show();
+
+        return true;
     }
 
 

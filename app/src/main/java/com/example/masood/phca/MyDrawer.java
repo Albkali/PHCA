@@ -3,6 +3,8 @@ package com.example.masood.phca;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
@@ -23,18 +25,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 
 public class MyDrawer extends AppCompatActivity {
-
     private AppBarConfiguration mAppBarConfiguration;
-
+    private TextView par_name, par_email;
     Pediatrician pediatrician;
-//    private static final int PReqCode = 2 ;
+    //    private static final int PReqCode = 2 ;
 //    private static final int REQUESCODE = 2 ;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseUser userID ;
 
 
     @Override
@@ -42,9 +54,14 @@ public class MyDrawer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_drawer);
 
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        userID = FirebaseAuth.getInstance().getCurrentUser();
         pediatrician = new Pediatrician();
 
-
+        par_name = (TextView) findViewById(R.id.header_name);
+        par_email = (TextView) findViewById(R.id.header_email);
 
 
         Toolbar toolbar = findViewById(R.id.ped_toolbar);
@@ -63,27 +80,20 @@ public class MyDrawer extends AppCompatActivity {
         });
 
 
-
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            NavigationView navigationView = findViewById(R.id.nav_view);
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_notifications, R.id.nav_profile,
-                    R.id.nav_EditProfile, R.id.nav_slideshow,
-                    R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                    .setDrawerLayout(drawer)
-                    .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationView, navController);
-        }
-
-
-
-
-
-
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_notifications, R.id.nav_profile,
+                R.id.nav_EditProfile, R.id.nav_slideshow,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
 
 //    public void checkAndRequestForPermission() {
@@ -112,9 +122,6 @@ public class MyDrawer extends AppCompatActivity {
 //    }
 
 
-
-
-
 //    public void openGallery() {
 //        //TODO: open gallery intent and wait for user to pick an image !
 //
@@ -124,45 +131,39 @@ public class MyDrawer extends AppCompatActivity {
 //    }
 
 
-
-    public void ClickToVaccination(View view)
-    {
-        Intent intent = new Intent ( this, Vaccination.class);
+    public void ClickToVaccination(View view) {
+        Intent intent = new Intent(this, Vaccination.class);
         startActivity(intent);
     }
 
-    public void ClickToPediatrician(View view)
-    {
+    public void ClickToPediatrician(View view) {
 
-        Intent intent = new Intent ( this, Pediatrician.class);
-        startActivity(intent);
-    }
-
-
-    public void click_bnt_mbi(View view)
-    {
-        Intent intent = new Intent( this, BMI_Calculate.class);
+        Intent intent = new Intent(this, Pediatrician.class);
         startActivity(intent);
     }
 
 
-    public void ClickToCSHCN(View view)
-    {
-        Intent intent = new Intent ( this, CSHCN.class);
+    public void click_bnt_mbi(View view) {
+        Intent intent = new Intent(this, BMI_Calculate.class);
         startActivity(intent);
     }
 
-    public void ClickToArticle(View view)
-    {
-        Intent intent = new Intent ( this, ArticleActivity.class);
+
+    public void ClickToCSHCN(View view) {
+        Intent intent = new Intent(this, CSHCN.class);
+        startActivity(intent);
+    }
+
+    public void ClickToArticle(View view) {
+        Intent intent = new Intent(this, ArticleActivity.class);
         startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_logout){
+        if (item.getItemId() == R.id.action_logout) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
-            Intent intent = new Intent ( this, Login_form.class);
+            Intent intent = new Intent(this, Login_form.class);
             startActivity(intent);
 
         }
@@ -181,5 +182,49 @@ public class MyDrawer extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    @Override
+    public void onResume() {
+
+        try {
+
+
+            if (userID != null) {
+                super.onResume();
+                final String id = userID.getUid();
+                final String Email = userID.getEmail();
+
+                par_email.setText(Email);
+
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                DocumentReference noteRef =
+                        db.collection("child")
+                                .document(id);
+                noteRef.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                    String name = documentSnapshot.getString("childName");
+                                    String lastname = documentSnapshot.getString("childLastName");
+                                    par_name.setText(name + " " + lastname);
+
+                                } else {
+                                }
+                            }
+                        });
+
+
+
+            } else {
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
