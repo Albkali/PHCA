@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:layout_marginTop="8dp"
+    android:layout_height="92dp"
     android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:background="#FFFFE8">
+    android:background="#BAB0B7F5">
 
     <TextView
         android:id="@+id/Vacci_name"
-        android:layout_width="78dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/vacc_date"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewName"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Vacci_name" />
 
@@ -26,12 +26,11 @@
         android:id="@+id/vacc_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
         android:layout_marginTop="2dp"
         android:text="later"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/Vacci_name"
         app:layout_constraintTop_toBottomOf="@+id/Vacci_name"
         tools:text="vacc_date" />
 
@@ -39,8 +38,9 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Vaccination Name"
+        android:layout_marginTop="7dp"
+        android:text="Vaccination Name :"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
-        android:text="Vaccination Date"
+        android:text="Vaccination Date :"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewName" />
 
@@ -59,7 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="Status"
+        android:text="Status :"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDate"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
@@ -68,6 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vacc_date"
         app:layout_constraintTop_toBottomOf="@+id/vacc_date"
         tools:text="vacc_status" />

@@ -29,6 +29,7 @@ import com.google.firebase.storage.StorageTask;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -321,10 +322,13 @@ public class Register extends AppCompatActivity {
 
             datePicker = new DatePickerDialog(Register.this,
                     new DatePickerDialog.OnDateSetListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                             int et_id = txtBirthday.getId();
                             String date = (dayOfMonth) + "-" + (monthOfYear) + "-" + (year);
+
+
 
                             if(et_id == R.id.editTextBabeBirthday) {
                                 BDate = date;
@@ -339,6 +343,14 @@ public class Register extends AppCompatActivity {
                             txtBirthday.setText(date);
                         }
                     }, year, month, day);
+
+            //limit the birthdate
+            Calendar cal = Calendar.getInstance();
+            datePicker.getDatePicker().setMinDate( cal.getTimeInMillis());
+            cal.setTime(cal.getTime());
+            cal.add(Calendar.YEAR, 5);
+            long newDate = cal.getTimeInMillis();
+            datePicker.getDatePicker().setMaxDate( newDate);
             datePicker.show();
 
         }
@@ -346,8 +358,6 @@ public class Register extends AppCompatActivity {
             Intent intent = new Intent(Register.this, Login_form.class);
             startActivity(intent);
         }
-
-
 
     public void ClickBackToLogin(View view)
     {
