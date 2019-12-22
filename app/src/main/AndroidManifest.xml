@@ -34,7 +34,6 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_my_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Register"
