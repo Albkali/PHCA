@@ -60,8 +60,8 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="213dp"
-        android:layout_height="54dp"
+        android:layout_width="234dp"
+        android:layout_height="50dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="45dp"
         android:elevation="3dp"
@@ -70,7 +70,7 @@
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/ped_btn"
         app:layout_constraintEnd_toEndOf="@+id/ped_btn"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ped_btn" />
 
@@ -136,7 +136,7 @@
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/sn_btn"
         app:layout_constraintEnd_toEndOf="@+id/sn_btn"
-        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="@+id/sn_btn"
         app:layout_constraintTop_toTopOf="@+id/sn_btn" />
 
@@ -164,6 +164,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/btn_ar"
         android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="ClickToArticle"
         android:textAlignment="viewStart"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -174,8 +175,8 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="208dp"
-        android:layout_height="56dp"
+        android:layout_width="234dp"
+        android:layout_height="53dp"
         android:layout_marginTop="45dp"
         android:layout_marginBottom="45dp"
         android:elevation="3dp"
@@ -184,7 +185,7 @@
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/vac_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/vac_btn" />
 

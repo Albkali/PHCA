@@ -321,8 +321,14 @@
             </ScrollView>
 
         </RelativeLayout>
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/user_profile_photo_UpdateProfil"
+            app:civ_border_color="#EEEEEE"
+            app:civ_border_width="2dp"
+            app:civ_shadow="true"
+            android:layout_gravity="center_horizontal"
+            app:civ_shadow_radius="10"
+            app:civ_shadow_color="#8BC34A"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@+id/title_UpdateProfil"

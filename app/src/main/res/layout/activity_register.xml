@@ -326,8 +326,14 @@
             </ScrollView>
 
     </RelativeLayout>
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
+            app:civ_border_color="#EEEEEE"
+            app:civ_border_width="2dp"
+            app:civ_shadow="true"
             android:id="@+id/user_profile_photo"
+            android:layout_gravity="center_horizontal"
+            app:civ_shadow_radius="10"
+            app:civ_shadow_color="#8BC34A"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@+id/login_title"
