@@ -24,6 +24,9 @@
             android:name=".ArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
             android:name=".CSHCN"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity

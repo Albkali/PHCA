@@ -160,12 +160,19 @@ public class MyDrawer extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
+        if(item.getItemId() == R.id.action_logout){
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
-            Intent intent = new Intent(this, Login_form.class);
+            Intent intent = new Intent ( this, Login_form.class);
             startActivity(intent);
 
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
