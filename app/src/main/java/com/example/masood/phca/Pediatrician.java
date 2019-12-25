@@ -2,6 +2,8 @@ package com.example.masood.phca;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +63,9 @@ public class Pediatrician extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pediatrician);
 
+        getSupportActionBar().setTitle("Vaccinations");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
+
         pediatrician = new Pediatrician();
 
         btnsetped= (Button)findViewById(R.id.sbtnsetped);
@@ -109,6 +114,13 @@ public class Pediatrician extends AppCompatActivity {
                 });
     }
 
+
+    public void loadNote(View view) {
+
+        Intent intent = new Intent(Pediatrician.this, Chatting_Activity.class);
+        startActivity(intent);
+
+    }
 
 
 }

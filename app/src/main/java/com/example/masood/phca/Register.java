@@ -258,13 +258,15 @@ public class Register extends AppCompatActivity {
                         }
                     }, year, month, day);
 
-            //limit the birthdate
+            //limit the birth date picker
             Calendar cal = Calendar.getInstance();
+            cal.setTime(cal.getTime());
+            cal.add(Calendar.YEAR, -1);
             datePicker.getDatePicker().setMinDate( cal.getTimeInMillis());
             cal.setTime(cal.getTime());
-            cal.add(Calendar.YEAR, 5);
-            long newDate = cal.getTimeInMillis();
-            datePicker.getDatePicker().setMaxDate( newDate);
+            cal.add(Calendar.YEAR, 6);
+
+            datePicker.getDatePicker().setMaxDate( cal.getTimeInMillis());
             datePicker.show();
 
         }

@@ -96,10 +96,11 @@ public class Chatting_Activity extends AppCompatActivity {
 //        super.onStart();
         currentUser = mAuth.getCurrentUser();
 
-        if(currentUser.getDisplayName() == null || currentUser.getDisplayName().isEmpty()){
-//            Intent signinScreenIntent = new Intent(this, Chatting_Activity.class);
-//            startActivity(signinScreenIntent);
-        }else{
+//        if(currentUser.getDisplayName() == null || currentUser.getDisplayName().isEmpty()){
+////            Intent signinScreenIntent = new Intent(this, Chatting_Activity.class);
+////            startActivity(signinScreenIntent);
+//        }else
+//          {
             mDisplayNameTV.setText(currentUser.getDisplayName());
             Uri imageUrl = currentUser.getPhotoUrl();
 
@@ -110,7 +111,7 @@ public class Chatting_Activity extends AppCompatActivity {
             }
 
             startListeningForMessages();
-        }
+//        }
 
 
 
