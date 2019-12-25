@@ -25,14 +25,19 @@
             android:backgroundTint="#1BC0DF"
             android:orientation="vertical">
 
-            <ImageView
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
                 android:id="@+id/txtViewImage"
                 android:layout_width="141dp"
-                android:layout_height="130dp"
+                android:layout_height="132dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="35dp"
-                android:src="@drawable/photocercle" />
-
+                android:src="@drawable/photocercle"
+                app:civ_shadow_radius="10"
+                app:civ_shadow_color="#8BC34A"/>
             <TextView
                 android:id="@+id/txtViewFname"
                 android:layout_width="215dp"

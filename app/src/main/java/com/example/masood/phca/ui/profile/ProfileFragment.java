@@ -1,6 +1,7 @@
 package com.example.masood.phca.ui.profile;
 
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -41,7 +43,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
-
+    FirebaseUser user;
     private TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
             txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
     private TextView txtViewEmail;
@@ -83,9 +85,18 @@ public class ProfileFragment extends Fragment {
 
         imgprofile = (ImageView) v.findViewById(R.id.txtViewImage);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
 
-
-
+        storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Using "Picasso" (http://square.github.io/picasso/) after adding the dependency in the Gradle.
+                // ".fit().centerInside()" fits the entire image into the specified area.
+                // Finally, add "READ" and "WRITE" external storage permissions in the Manifest.
+                Picasso.get().load(uri).fit().centerInside().into(imgprofile);
+            }
+        });
 
 
         return v;

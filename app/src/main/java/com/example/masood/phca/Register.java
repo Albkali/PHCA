@@ -1,12 +1,14 @@
 package com.example.masood.phca;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,15 +19,24 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.masood.phca.ui.profile.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -37,13 +48,10 @@ public class Register extends AppCompatActivity {
 
     EditText txtEmail1,txtPassword1,txtLastName,txtMotherName,txtPhone,txtFirstName,txtBirthday,txtHeight  ,txtWeight;
     Child child;
-    ImageView ImgUserPhoto;
-    Uri pickedImgUri ;
     FirebaseUser currentUser ,user;
     FirebaseFirestore db;
     private FirebaseAuth firebaseAuth;
 
-   StorageTask uploadTask ;
     DatePickerDialog datePicker;
     Calendar calendar;
     int day,month,year,Heightnumber,Weightnumber;
@@ -52,10 +60,15 @@ public class Register extends AppCompatActivity {
     RadioGroup mGender;
     RadioButton mGenderOptions ;
     CheckBox SpecialNeeds ;
-    private static final int PReqCode = 2 ;
-    private static final int REQUESCODE = 2 ;
 
 
+
+    private ImageView profileImageView;
+    private FirebaseStorage firebaseStorage;
+    private static int PICK_IMAGE = 123;
+    Uri imagePath;
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +77,7 @@ public class Register extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         txtEmail1 = (EditText) findViewById(R.id.editTextEmail);
         txtPassword1 = (EditText) findViewById(R.id.editTextPassword);
@@ -78,10 +92,17 @@ public class Register extends AppCompatActivity {
         SpecialNeeds = (CheckBox) findViewById(R.id.checkboxsn);
         DoneRegister = (Button) findViewById(R.id.btn_register);
 
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        storageReference = firebaseStorage.getReference();
+
         calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
+
+        profileImageView = findViewById(R.id.user_profile_photo);
+
 
         DoneRegister.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -110,52 +131,8 @@ public class Register extends AppCompatActivity {
                     user = FirebaseAuth.getInstance().getCurrentUser();
                     String id = user.getUid();
 
-//                    StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("users_photos");
-//                    final StorageReference imageFilePath = mStorage.child(pickedImgUri.getLastPathSegment());
-//                    imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                        @Override
-//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//
-//                            // image uploaded succesfully
-//                            // now we can get our image url
-//
-//                            imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                @Override
-//                                public void onSuccess(Uri uri) {
-//
-//                                    // uri contain user image url
-//
-//
-//                                    UserProfileChangeRequest profleUpdate = new UserProfileChangeRequest.Builder()
-//                                .setDisplayName(txtFirstName +""+ txtLastName)
-//                                            .setPhotoUri(uri)
-//                                            .build();
-//
-//
-//                                    currentUser.updateProfile(profleUpdate)
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//
-//                                                    if (task.isSuccessful()) {
-//                                                        // user info updated successfully
-////                                            showMessage("Register Complete");
-////                                            updateUI();
-//                                                    }
-//
-//                                                }
-//                                            });
-//
-//                                }
-//                            });
-//
-//
-//
-//
-//
-//                        }
-//                    });
-
+                    StorageReference imageReference = storageReference.child("ProfileImage").child(id); //User id/Images/Profile Pic.jpg
+                    UploadTask uploadTask = imageReference.putFile(imagePath);
 
                     Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
                     String typeofblood = spinner.getSelectedItem().toString();
@@ -235,88 +212,25 @@ public class Register extends AppCompatActivity {
                     Toast.makeText(Register.this, R.string.worn_input_retry, Toast.LENGTH_SHORT).show();
 
                 }
-            }
+                       }
+
+
         });
 
 
-//        ImgUserPhoto = findViewById(R.id.user_profile_photo) ;
-//
-//        ImgUserPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if (Build.VERSION.SDK_INT >= 22) {
-//
-//                    checkAndRequestForPermission();
-//
-//
-//                }
-//                else
-//                {
-//                   openGallery();
-//                }
-//
-//
-//
-//            }
-//        });
 
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profileIntent = new Intent();
+                profileIntent.setType("image/*");
+                profileIntent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(profileIntent, "Select Image."), PICK_IMAGE);
+            }
+        });
     }
-//    private void updateUserInfo( Uri pickedImgUri, final FirebaseUser currentUser) {
-//
-//        // first we need to upload user photo to firebase storage and get url
-//
-//
-//
-//
-//
-//    }
-//
-//    private void openGallery() {
-//        //TODO: open gallery intent and wait for user to pick an image !
-//
-//        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-//        galleryIntent.setType("image/*");
-//        startActivityForResult(galleryIntent,REQUESCODE);
-//    }
-//
-//    private void checkAndRequestForPermission() {
-//
-//
-//        if (ContextCompat.checkSelfPermission(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(Register.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-//
-//                Toast.makeText(Register.this,"Please accept for required permission",Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            else
-//            {
-//                ActivityCompat.requestPermissions(Register.this,
-//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-//                        PReqCode);
-//            }
-//
-//        }
-//        else
-//            openGallery();
-//
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == RESULT_OK && requestCode == REQUESCODE && data != null ) {
-//
-//            // the user has successfully picked an image
-//            // we need to save its reference to a Uri variable
-//            pickedImgUri = data.getData();
-//            ImgUserPhoto.setImageURI(pickedImgUri);
-//
-//        }
-//        }
+
+
         public void setDate(View view) {
             txtBirthday = (EditText) view;
 
@@ -364,4 +278,18 @@ public class Register extends AppCompatActivity {
         Intent intent = new Intent( this, Login_form.class);
         startActivity(intent);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData() != null) {
+            imagePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagePath);
+                profileImageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

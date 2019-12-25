@@ -3,10 +3,12 @@ package com.example.masood.phca.ui.EditProfile;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +50,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -56,6 +60,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.app.Activity.RESULT_OK;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.masood.phca.R.id.r_Male_UpdateProfil;
 
@@ -86,7 +91,8 @@ public class EditProfileFragment extends Fragment {
         RadioButton RG_Male;
         RadioButton RG_Female;
     RadioButton mGenderOptions ;
-
+    private static int PICK_IMAGE = 123;
+    Uri imagePath;
     CheckBox Special_Needs ;
         Spinner spinner;
         Button btn_update_profile ;
@@ -111,7 +117,7 @@ public class EditProfileFragment extends Fragment {
             firebaseDatabase = FirebaseDatabase.getInstance();
             firebaseStorage = FirebaseStorage.getInstance();
             DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
-            StorageReference storageReference = firebaseStorage.getReference();
+            final StorageReference storageReference = firebaseStorage.getReference();
             user = FirebaseAuth.getInstance().getCurrentUser();
             mDatabase = FirebaseFirestore.getInstance();
 
@@ -131,9 +137,27 @@ public class EditProfileFragment extends Fragment {
             txtEditWeight = (EditText) v.findViewById(R.id.editTextWeight_UpdateProfil);
             imgprofile = (ImageView) v.findViewById(R.id.user_profile_photo_UpdateProfil);
             btn_update_profile = (Button) v.findViewById(R.id.btn__UpdateProfil);
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            String id = user.getUid();
+            storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
 
-            final String id = userID.getUid();
+                    Picasso.get().load(uri).fit().centerInside().into(imgprofile);
+                }
+            });
+            imgprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent profileIntent = new Intent();
+                    profileIntent.setType("image/*");
+                    profileIntent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(profileIntent, "Select Image."), PICK_IMAGE);
+                }
+            });
+
             btn_update_profile.setOnClickListener(new View.OnClickListener() {
+                final String id = userID.getUid();
 
                 @Override
                 public void onClick(final View v) {
@@ -176,6 +200,13 @@ public class EditProfileFragment extends Fragment {
                                     }
                                 }
                             });
+
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    String id = user.getUid();
+
+                    StorageReference imageReference = storageReference.child("ProfileImage").child(id); //User id/Images/Profile Pic.jpg
+                    UploadTask uploadTask = imageReference.putFile(imagePath);
+
 
 //                    user.updateEmail(Childemail)
 //                            .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -278,7 +309,7 @@ public class EditProfileFragment extends Fragment {
 
                                         if (childgender.equals(getString(R.string.male))){
                                             RG_Male.setChecked(true);
-                                        } else {
+                                        } if (childgender.equals(getString(R.string.female))) {
                                             RG_Female.setChecked(true);
                                         }
                                         txtEditFname.setText(name);
@@ -309,6 +340,15 @@ public class EditProfileFragment extends Fragment {
                                     }
                                 }
                             });
+
+//            storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//
+//                    Picasso.get().load(uri).fit().centerInside().into(imgprofile);
+//                }
+//            });
+
 //                    db.collection("child")
 //                            .document(id)
 //                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -380,5 +420,17 @@ public class EditProfileFragment extends Fragment {
             return 0;
         }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data.getData() != null) {
+            imagePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), imagePath);
+                imgprofile.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     }
