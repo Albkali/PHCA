@@ -91,10 +91,8 @@ public class ProfileFragment extends Fragment {
         storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                // Using "Picasso" (http://square.github.io/picasso/) after adding the dependency in the Gradle.
-                // ".fit().centerInside()" fits the entire image into the specified area.
-                // Finally, add "READ" and "WRITE" external storage permissions in the Manifest.
                 Picasso.get().load(uri).fit().centerInside().into(imgprofile);
+
             }
         });
 

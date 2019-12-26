@@ -3,6 +3,8 @@ package com.example.masood.phca;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.example.masood.phca.ChildList.Childlist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.core.app.ActivityCompat;
@@ -120,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void ClickToVaccination(View view)
+    public void ClickToVaccination2(View view)
     {
-        Intent intent = new Intent ( this, Vaccination.class);
+        Intent intent = new Intent ( this, Childlist.class);
         startActivity(intent);
     }
 

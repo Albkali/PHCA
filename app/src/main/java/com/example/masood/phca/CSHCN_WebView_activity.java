@@ -19,8 +19,8 @@ public class CSHCN_WebView_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cshcn__web_view_activity);
 
-        Toolbar toolbar = findViewById(R.id.toolbarCSHCN);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbarCSHCN);
+//        setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

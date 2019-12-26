@@ -93,7 +93,7 @@ public class VaccinationAdapter extends RecyclerView.Adapter<VaccinationAdapter.
 
     @Override
     public int getItemCount() {
-            return post.size();
+        return post.size();
     }
 
 

@@ -24,6 +24,12 @@
             android:name=".ArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
+            android:name=".CSHCN_WebView_activity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".ChildList.Childlist"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
             android:name=".SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
