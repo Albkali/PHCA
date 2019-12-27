@@ -1,19 +1,22 @@
 package com.example.masood.phca.ChildList;
 
+import com.google.firebase.firestore.Exclude;
+
 public class ChildItem {
+    @Exclude
     private String childName;
+    @Exclude
     private String ChildLastName;
-    private int phone;
+    @Exclude
+    private String photoUrl;
+
 
     public ChildItem() {
-        //empty constructor needed
+        this.childName = childName;
+        this.ChildLastName = ChildLastName;
+        this.photoUrl = photoUrl;
     }
 
-    public ChildItem(String childName, String childLastName, int phone) {
-        this.childName = childName;
-        ChildLastName = childLastName;
-        this.phone = phone;
-    }
 
     public String getChildName() {
         return childName;
@@ -31,11 +34,12 @@ public class ChildItem {
         ChildLastName = childLastName;
     }
 
-    public int getPhone() {
-        return phone;
+    public String getphotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setphotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
+

@@ -136,7 +136,7 @@ public class CSHCN extends AppCompatActivity {
 
     }
     public static class NewsViewHolder extends RecyclerView.ViewHolder{
-        View mView;
+        public View mView;
         public NewsViewHolder(View itemView){
             super(itemView);
             mView = itemView;

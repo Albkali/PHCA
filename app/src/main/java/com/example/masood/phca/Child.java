@@ -1,7 +1,6 @@
 package com.example.masood.phca;
 
 import android.net.Uri;
-import android.text.format.DateFormat;
 
 import java.util.Date;
 
@@ -29,18 +28,13 @@ public class Child {
         Email = email;
     }
 
-    public Child(String password, String email) {
-        this.password = password;
-        Email = email;
-    }
+    String photoUrl ;
 
-    Uri photoUrl ;
-
-    public Uri getPhotoUrl() {
+    public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(Uri photoUrl) {
+    public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
 
@@ -54,7 +48,8 @@ public class Child {
 
     String uid ;
 
-    public Child(Uri photoUrl, String uid) {
+
+    public Child(String photoUrl, String uid) {
         this.photoUrl = photoUrl;
         this.uid = uid;
     }

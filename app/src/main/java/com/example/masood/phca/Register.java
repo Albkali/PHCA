@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -21,7 +22,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.masood.phca.ChildList.Childlist;
 import com.example.masood.phca.ui.profile.ProfileFragment;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -55,12 +60,13 @@ public class Register extends AppCompatActivity {
     DatePickerDialog datePicker;
     Calendar calendar;
     int day,month,year,Heightnumber,Weightnumber;
-    String BDate;
+    String BDate  ;
     Button DoneRegister;
     RadioGroup mGender;
     RadioButton mGenderOptions ;
     CheckBox SpecialNeeds ;
 
+    final String TAG = Register.class.getSimpleName();
 
 
     private ImageView profileImageView;
@@ -73,6 +79,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        child = new Child();
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -113,8 +120,8 @@ public class Register extends AppCompatActivity {
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 try {
 
-                    String email = txtEmail1.getText().toString().trim();
-                    String password = txtPassword1.getText().toString().trim();
+                    final String email = txtEmail1.getText().toString().trim();
+                    final String password = txtPassword1.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
@@ -129,34 +136,83 @@ public class Register extends AppCompatActivity {
                             });
 
                     user = FirebaseAuth.getInstance().getCurrentUser();
-                    String id = user.getUid();
-
-                    StorageReference imageReference = storageReference.child("ProfileImage").child(id); //User id/Images/Profile Pic.jpg
+                    final String id = user.getUid();
+                    final StorageReference imageReference = storageReference.child("ProfileImage").child(id); //User id/Images/Profile Pic.jpg
                     UploadTask uploadTask = imageReference.putFile(imagePath);
 
-                    Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
-                    String typeofblood = spinner.getSelectedItem().toString();
-                    Heightnumber = Integer.parseInt(txtHeight.getText().toString());
-                    Weightnumber = Integer.parseInt(txtWeight.getText().toString());
-                    String ChildFirstName = txtFirstName.getText().toString();
-                    String ChildLastName = txtLastName.getText().toString();
-                    String ChildMotherName = txtMotherName.getText().toString();
-                    String Phone = txtPhone.getText().toString();
-                    final String strGender =
-                            ((RadioButton) findViewById(mGender.getCheckedRadioButtonId()))
-                                    .getText().toString();
+                    // child = new Child();
 
-                    child = new Child();
-                    child.setChildMotherName(ChildMotherName);
-                    child.setChildLastName(ChildLastName);
-                    child.setChildName(ChildFirstName);
-                    child.setPhone(Phone);
-                    child.setPassword(password);
-                    child.setEmail(email);
-                    child.setUid(id);
-                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
-                    child.setBlood(typeofblood);
-                    child.setGender(strGender);
+                    imageReference.putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String image = uri.toString();
+                                    Log.d(TAG, "onSuccess: uri= "+ uri.toString());
+
+                                    Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
+                                    String typeofblood = spinner.getSelectedItem().toString();
+                                    Heightnumber = Integer.parseInt(txtHeight.getText().toString());
+                                    Weightnumber = Integer.parseInt(txtWeight.getText().toString());
+                                    String ChildFirstName = txtFirstName.getText().toString();
+                                    String ChildLastName = txtLastName.getText().toString();
+                                    String ChildMotherName = txtMotherName.getText().toString();
+                                    String Phone = txtPhone.getText().toString();
+                                    final String strGender =
+                                            ((RadioButton) findViewById(mGender.getCheckedRadioButtonId()))
+                                                    .getText().toString();
+
+                                    child = new Child();
+                                    child.setChildMotherName(ChildMotherName);
+                                    child.setChildLastName(ChildLastName);
+                                    child.setChildName(ChildFirstName);
+                                    child.setPhone(Phone);
+                                    child.setPassword(password);
+                                    child.setEmail(email);
+                                    child.setUid(id);
+                                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
+                                    child.setBlood(typeofblood);
+                                    child.setGender(strGender);
+                                    child.setPhotoUrl(image);
+
+                                    db.collection("child").document(id).set(child);
+
+                                }
+
+                            });
+
+                        }
+
+
+                    });
+
+
+//                    Spinner spinner = (Spinner) findViewById(R.id.spinnerBloodType);
+//                    String typeofblood = spinner.getSelectedItem().toString();
+//                    Heightnumber = Integer.parseInt(txtHeight.getText().toString());
+//                    Weightnumber = Integer.parseInt(txtWeight.getText().toString());
+//                    String ChildFirstName = txtFirstName.getText().toString();
+//                    String ChildLastName = txtLastName.getText().toString();
+//                    String ChildMotherName = txtMotherName.getText().toString();
+//                    String Phone = txtPhone.getText().toString();
+//                    final String strGender =
+//                            ((RadioButton) findViewById(mGender.getCheckedRadioButtonId()))
+//                                    .getText().toString();
+//
+//                    child = new Child();
+//                    child.setChildMotherName(ChildMotherName);
+//                    child.setChildLastName(ChildLastName);
+//                    child.setChildName(ChildFirstName);
+//                    child.setPhone(Phone);
+//                    child.setPassword(password);
+//                    child.setEmail(email);
+//                    child.setUid(id);
+//                    child.setBirthday(DateUtil.getDateFromString(BDate + " 00:00"));
+//                    child.setBlood(typeofblood);
+//                    child.setGender(strGender);
+//                    child.setPhotoUrl(image);
 
                     mGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                         @Override
@@ -188,7 +244,7 @@ public class Register extends AppCompatActivity {
 
                     LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
 
-                    db.collection("child").document(id).set(child);
+//                    db.collection("child").document(id).set(child);
                     db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
                     if (SpecialNeeds.isChecked()) {
