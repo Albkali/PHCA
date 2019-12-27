@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.masood.phca.CSHCN;
 import com.example.masood.phca.CSHCN_WebView_activity;
+import com.example.masood.phca.Child;
 import com.example.masood.phca.R;
 import com.example.masood.phca.itemCSHCN;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -33,8 +34,8 @@ public class Childlist extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseFirestore querySearch;
 
-    ChildItem art = new ChildItem();
-    private FirestoreRecyclerAdapter<ChildItem, Childlist.NewsViewHolder> mPeopleRVAdapter;
+    Child art = new Child();
+    private FirestoreRecyclerAdapter<Child, Childlist.NewsViewHolder> mPeopleRVAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +56,21 @@ public class Childlist extends AppCompatActivity {
 
 //        Query chainedQuery2 = cities.whereEqualTo("state", "CA").whereLessThan("population", 1000000L);
 
-        FirestoreRecyclerOptions<ChildItem> options = new FirestoreRecyclerOptions.Builder<ChildItem>()
-                .setQuery(chainedQuery2, ChildItem.class)
+        FirestoreRecyclerOptions<Child> options = new FirestoreRecyclerOptions.Builder<Child>()
+                .setQuery(chainedQuery2, Child.class)
                 .build();
 
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        mPeopleRVAdapter = new FirestoreRecyclerAdapter<ChildItem, Childlist.NewsViewHolder>(options) {
+        mPeopleRVAdapter = new FirestoreRecyclerAdapter<Child, Childlist.NewsViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(Childlist.NewsViewHolder holder, final int position, final ChildItem model) {
+            protected void onBindViewHolder(Childlist.NewsViewHolder holder, final int position, final Child model) {
                 holder.setTitle(model.getChildName());
                 holder.setDesc(model.getChildLastName());
-                holder.setphotoUrl(getBaseContext(), model.getphotoUrl());
+                holder.setphotoUrl(getBaseContext(), model.getPhotoUrl());
 
 
             }
