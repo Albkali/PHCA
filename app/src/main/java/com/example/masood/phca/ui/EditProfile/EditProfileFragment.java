@@ -142,7 +142,10 @@ public class EditProfileFragment extends Fragment {
             storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-
+                    String id = user.getUid();
+                    String image = uri.toString();
+                    DocumentReference documentReference = mDatabase.collection("child").document(id);
+                    documentReference.update("photoUrl", image);
                     Picasso.get().load(uri).fit().centerInside().into(imgprofile);
                 }
             });
@@ -206,7 +209,16 @@ public class EditProfileFragment extends Fragment {
 
                     StorageReference imageReference = storageReference.child("ProfileImage").child(id); //User id/Images/Profile Pic.jpg
                     UploadTask uploadTask = imageReference.putFile(imagePath);
-
+                    storageReference.child("ProfileImage").child(id).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String id = user.getUid();
+                            String image = uri.toString();
+                            DocumentReference documentReference = mDatabase.collection("child").document(id);
+                            documentReference.update("photoUrl", image);
+                            Picasso.get().load(uri).fit().centerInside().into(imgprofile);
+                        }
+                    });
 
 //                    user.updateEmail(Childemail)
 //                            .addOnCompleteListener(new OnCompleteListener<Void>() {

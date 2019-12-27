@@ -176,6 +176,14 @@ public class Register extends AppCompatActivity {
                                     child.setBlood(typeofblood);
                                     child.setGender(strGender);
                                     child.setPhotoUrl(image);
+                                    Map<String, Object> userh = new HashMap<>();
+                                    userh.put("weight", Weightnumber);
+                                    userh.put("height", Heightnumber);
+
+                                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+
+//                    db.collection("child").document(id).set(child);
+                                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
                                     db.collection("child").document(id).set(child);
 
@@ -238,14 +246,14 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
-                    Map<String, Object> userh = new HashMap<>();
-                    userh.put("weight", Weightnumber);
-                    userh.put("height", Heightnumber);
-
-                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
-
-//                    db.collection("child").document(id).set(child);
-                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
+//                    Map<String, Object> userh = new HashMap<>();
+//                    userh.put("weight", Weightnumber);
+//                    userh.put("height", Heightnumber);
+//
+//                    LocalDate currentDate = LocalDate.now(ZoneId.systemDefault());
+//
+////                    db.collection("child").document(id).set(child);
+//                    db.collection("child").document(id).collection("IBM").document(id).set(userh);
 
                     if (SpecialNeeds.isChecked()) {
                         Map<String, Object> SpecialNeeds = new HashMap<>();
