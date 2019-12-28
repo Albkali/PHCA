@@ -87,6 +87,12 @@
     <string name="registered_successfully" translatable="false">تم التسجيل بنجاح</string>
     <string name="worn_input_retry" translatable="false">الرجاء النقر مرة اخرى</string>
     <string name="vacc_child_home_btn" translatable="false">التطعيمات</string>
-    <string name="CSHCN" translatable="false">ذوي الإحتياجات الخاصة</string>
+    <string name="CSHCN" translatable="false">ذوي الهمم </string>
     <string name="children" translatable="false">الأطفال</string>
+    <string name="children_special_heathcare_need" translatable="false">الرعاية الصحية لذوي الهمم</string>
+    <string name="my_children" translatable="false">سجل الأطفال</string>
+    <string name="my_vaccinations" translatable="false">تطعيماتي</string>
+    <string name="vaccination_name" translatable="false">نوع التطعيم :</string>
+    <string name="vaccination_date" translatable="false">تاريخ التطعيم :</string>
+    <string name="status" translatable="false">حالة التطعيم :</string>
 </resources>

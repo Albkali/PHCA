@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,13 +43,42 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-        setTitle(getString(R.string.articles));
-
+        getSupportActionBar().setTitle(getString(R.string.articles));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         DBReference = FirebaseDatabase.getInstance().getReference().child("News");
         DBReference.keepSynced(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.myRecycleView);
 
+
+
+        // [START fs_order_by_country_population]
+        // [START fs_composite_index_chained_query]
+
+//
+//        DocumentReference personRef = db.document("article");
+
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//
+//        CollectionReference citice = firebaseDatabase.getReference();
+//        DatabaseReference databaseReference = firebaseDatabase.getReference("jnjjnbj");
+//        Query query = FirebaseFirestore.getInstance()
+//                .collection("article");
+//        DatabaseReference personsRef = FirebaseDatabase.getInstance().getReference().child("News");
+//        Query personsQuery = personsRef.orderByKey();
+//        Query query = personRef1.orderBy("jnj");
+//        personsQuery = FirebaseFirestore.getInstance()
+//                .collection("article").document(" " ).collection("reminders")
+//                .orderBy("");
+//        querySearch = FirebaseFirestore.getInstance()
+//                .collection("App").document(" " + userID).collection("reminders")
+//                .startAt("title", newText)
+//                .endAt("title", newText+"\uf8ff");
+//        FirebaseRecyclerOptions<article> personsOptions = new FirebaseRecyclerOptions.Builder<article>()
+//                .setQuery(personsQuery , article.class)
+//                .build();
+        //        FirebaseRecyclerOptions personsOptions = new FirebaseRecyclerOptions.Builder<article>()
+//        .setQuery(personsQuery, article.class).build();
 
         db = FirebaseFirestore.getInstance();
 
@@ -129,4 +162,34 @@ public class ArticleActivity extends AppCompatActivity {
         }
 
 }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_logout){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
+
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
+
+
 }

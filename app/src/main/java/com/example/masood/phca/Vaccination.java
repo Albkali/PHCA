@@ -14,12 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.example.masood.phca.Adapter.VaccinationAdapter;
 import com.example.masood.phca.Model.VaccinationItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
@@ -42,7 +44,7 @@ public class Vaccination extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccination);
 
-        getSupportActionBar().setTitle("Vaccinations");
+        getSupportActionBar().setTitle(getString(R.string.vacc_child_home_btn));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         notificationManager = NotificationManagerCompat.from(this);
@@ -155,14 +157,34 @@ public class Vaccination extends AppCompatActivity {
                     }
                 });
     }
-        @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-            //  Auto-generated method stub
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_logout){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
+
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
             int id = item.getItemId();
+
             if (id == android.R.id.home) {
                 finish();
             }
+        }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
+
 }
 

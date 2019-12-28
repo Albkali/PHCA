@@ -15,19 +15,18 @@
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="241dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/ped_toolbar"
-            android:layout_width="418dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
             android:background="#E75F24"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/Pediatrician"
-            app:titleTextColor="#C3131010">
-
-
-        </androidx.appcompat.widget.Toolbar>
-
+            android:text="@string/Pediatrician"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

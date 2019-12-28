@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -11,16 +16,23 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.masood.phca.PedChildVaccination;
+import com.example.masood.phca.Chatting_Activity;
+import com.example.masood.phca.Login_form;
+import com.example.masood.phca.MyDrawer;
 import com.example.masood.phca.R;
+import com.example.masood.phca.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -46,11 +58,12 @@ public class Child4Ped extends AppCompatActivity {
     private TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
             txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
     private TextView txtViewEmail;
-private Button btn_child_vacc;
+
     private ImageView imgprofile ;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
 
+    private AppBarConfiguration mAppBarConfiguration;
 
 
     @Nullable
@@ -59,13 +72,30 @@ private Button btn_child_vacc;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child4_ped);
+
+        getSupportActionBar().setTitle(getString(R.string.children));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent ( Child4Ped.this, Chatting_Activity.class);
+                startActivity(intent);
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
 
         StorageReference storageReference = firebaseStorage.getReference();
 
-        btn_child_vacc = (Button)findViewById(R.id.button_show_vacc);
 
         txtViewname = (TextView) findViewById(R.id.txtViewFname);
         txtViewEmail = (TextView) findViewById(R.id.txtViewchildEmail);
@@ -83,16 +113,7 @@ private Button btn_child_vacc;
 
 
         Bundle b = getIntent().getExtras();
-        final String id = b.getString("id");
-
-        btn_child_vacc.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                Intent intent = new Intent(getApplicationContext(), PedChildVaccination.class);
-                intent.putExtra("id", id);
-                startActivity(intent);
-            }
-        });
+        String id = b.getString("id");
 //        user = FirebaseAuth.getInstance().getCurrentUser();
 //        String id = user.getUid();
 
@@ -229,6 +250,36 @@ private Button btn_child_vacc;
 //            e.printStackTrace();
 //        }
 //    }
+public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if(item.getItemId() == R.id.action_logout){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
+        Intent intent = new Intent ( this, Login_form.class);
+        startActivity(intent);
+
+    }
+    else {
+
+        if(item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+        }
+    }
+    return super.onOptionsItemSelected(item);
+}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
+
 
 
 }

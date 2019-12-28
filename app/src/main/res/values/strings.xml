@@ -92,4 +92,10 @@
     <string name="vacc_child_home_btn" translatable="false">   Vaccination</string>
     <string name="CSHCN" translatable="false">CSHCN</string>
     <string name="children" translatable="false">Children</string>
+    <string name="children_special_heathcare_need" translatable="false">Children Special HeathCare Need</string>
+    <string name="my_children" translatable="false">My Children </string>
+    <string name="my_vaccinations" translatable="false">My Vaccinations</string>
+    <string name="vaccination_name" translatable="false">Vaccination Name :</string>
+    <string name="vaccination_date" translatable="false">Vaccination Date :</string>
+    <string name="status" translatable="false">Status :</string>
 </resources>

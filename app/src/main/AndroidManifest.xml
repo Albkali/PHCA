@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Vacci_for_Ped"></activity>
-        <activity android:name=".PedChildVaccination" />
-        <activity android:name=".ChildList.Child4Ped" />
         <activity android:name=".Chatting_Activity" />
         <activity android:name=".Article_WebView_activity" />
         <activity
@@ -28,7 +25,7 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".CSHCN_WebView_activity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            />
         <activity
             android:name=".ChildList.Childlist"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
@@ -43,6 +40,9 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".Vaccination"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".ChildList.Child4Ped"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".MainActivity"

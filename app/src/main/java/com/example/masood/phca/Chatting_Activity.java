@@ -61,6 +61,8 @@ public class Chatting_Activity extends AppCompatActivity {
         sendingProgress = findViewById(R.id.sending_progress);
         sendingProgress.setVisibility(View.INVISIBLE);
 
+
+
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
 
@@ -143,6 +145,12 @@ public class Chatting_Activity extends AppCompatActivity {
             finish();
             return true;
         }
+        else {
+
+            if (id == android.R.id.home) {
+                finish();
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -204,5 +212,7 @@ public class Chatting_Activity extends AppCompatActivity {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+
 }
 

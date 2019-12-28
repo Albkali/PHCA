@@ -5,11 +5,14 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.masood.phca.CSHCN_WebView_activity;
 import com.example.masood.phca.Child;
 import com.example.masood.phca.DateUtil;
+import com.example.masood.phca.Login_form;
 import com.example.masood.phca.MyDrawer;
 import com.example.masood.phca.R;
+import com.example.masood.phca.SettingsActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,9 +57,9 @@ public class Childlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_childlist);
 
-        setTitle("my childern");
 
-
+        getSupportActionBar().setTitle(getString(R.string.children));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         recyclerView = (RecyclerView) findViewById(R.id.rv_child_items);
 
 
@@ -162,4 +168,34 @@ public class Childlist extends AppCompatActivity {
 
             childage.setText(y+m);
         }
-    }}
+    }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_logout){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
+
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
+
+}

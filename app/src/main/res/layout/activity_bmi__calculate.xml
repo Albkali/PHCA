@@ -16,19 +16,18 @@
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="241dp">
 
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/BMI_Calculate_toolbar"
-            android:layout_width="418dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:background="#6D3DC2"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="BMI Calculate"
-            app:titleTextColor="#C3131010">
-
-
-        </androidx.appcompat.widget.Toolbar>
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/calculate_bmi"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"

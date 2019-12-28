@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -63,7 +66,7 @@ public class Pediatrician extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pediatrician);
 
-        getSupportActionBar().setTitle("Vaccinations");
+        getSupportActionBar().setTitle(getString(R.string.Pediatrician));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         pediatrician = new Pediatrician();
@@ -122,5 +125,33 @@ public class Pediatrician extends AppCompatActivity {
 
     }
 
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_logout){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
+
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
 
 }
