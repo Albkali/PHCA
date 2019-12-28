@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:text="Vaccination Name :"
+        android:text="@string/vaccination_name"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
-        android:text="Vaccination Date :"
+        android:text="@string/vaccination_date"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNamechild" />
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="Status :"
+        android:text="@string/status"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
         app:layout_constraintTop_toBottomOf="@+id/textViewDatechild" />

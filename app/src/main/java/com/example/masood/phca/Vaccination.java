@@ -44,7 +44,7 @@ public class Vaccination extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vaccination);
 
-        getSupportActionBar().setTitle("Vaccinations");
+        getSupportActionBar().setTitle(getString(R.string.vacc_child_home_btn));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         notificationManager = NotificationManagerCompat.from(this);

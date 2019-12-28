@@ -58,7 +58,7 @@ public class Childlist extends AppCompatActivity {
         setContentView(R.layout.activity_childlist);
 
 
-        getSupportActionBar().setTitle("Childern");
+        getSupportActionBar().setTitle(getString(R.string.children));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         recyclerView = (RecyclerView) findViewById(R.id.rv_child_items);
 

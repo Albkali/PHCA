@@ -43,7 +43,7 @@ public class CSHCN extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cshcn);
 
-        getSupportActionBar().setTitle("CSHCN");
+        getSupportActionBar().setTitle(getString(R.string.CSHCN));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
         DBReference = FirebaseDatabase.getInstance().getReference().child("CSHCN");
         DBReference.keepSynced(true);

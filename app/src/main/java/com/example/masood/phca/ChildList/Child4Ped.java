@@ -73,7 +73,7 @@ public class Child4Ped extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child4_ped);
 
-        getSupportActionBar().setTitle("Childern");
+        getSupportActionBar().setTitle(getString(R.string.children));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         FloatingActionButton fab = findViewById(R.id.fab);

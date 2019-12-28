@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:background="#0288D1"
+        android:background="#87B74B"
         android:paddingTop="8dp"
         android:paddingBottom="4dp"
-        android:text="My Vaccinations"
+        android:text="@string/my_vaccinations"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="24sp" />

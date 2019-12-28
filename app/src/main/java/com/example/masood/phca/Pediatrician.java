@@ -66,7 +66,7 @@ public class Pediatrician extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pediatrician);
 
-        getSupportActionBar().setTitle("Pediatrician");
+        getSupportActionBar().setTitle(getString(R.string.Pediatrician));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         pediatrician = new Pediatrician();

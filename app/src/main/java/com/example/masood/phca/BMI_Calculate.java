@@ -27,7 +27,7 @@ public class BMI_Calculate extends AppCompatActivity {
         weight = findViewById(R.id.weight);
         height = findViewById(R.id.height);
         resulttext = findViewById(R.id.result);
-        getSupportActionBar().setTitle("BMI Calculate");
+        getSupportActionBar().setTitle(getString(R.string.calculate_bmi));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
     }
 
