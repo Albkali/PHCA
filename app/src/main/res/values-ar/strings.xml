@@ -85,7 +85,7 @@
     <string name="error" translatable="false">حدث خطأ!</string>
     <string name="email_password_not_correct" translatable="false">البريد الإلكتروني او كلمة السر ليست صحيحة</string>
     <string name="registered_successfully" translatable="false">تم التسجيل بنجاح</string>
-    <string name="worn_input_retry" translatable="false">خطأ في اداخل البيانات , الرجاء المحاولة</string>
+    <string name="worn_input_retry" translatable="false">الرجاء النقر مرة اخرى</string>
     <string name="vacc_child_home_btn" translatable="false">التطعيمات</string>
     <string name="CSHCN" translatable="false">ذوي الهمم </string>
     <string name="children" translatable="false">الأطفال</string>

@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     public void ClickToPediatrician(View view)
     {
 
-        Intent intent = new Intent ( this, Pediatrician.class);
+        Intent intent = new Intent ( this, Vacci_for_Ped.class);
         startActivity(intent);
     }
 

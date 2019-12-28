@@ -52,6 +52,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -349,9 +350,10 @@ public class EditProfileFragment extends Fragment {
                             String password = documentSnapshot.getString("password");
 
 //                                        String childage = documentSnapshot.getLong("birthday") + "";
-                                        Date datetest = documentSnapshot.getTimestamp("birthday").toDate();
-                            Calendar calander = Calendar.getInstance();
-                            calander.setTime(datetest);
+                            Date datetest = documentSnapshot.getTimestamp("birthday").toDate();
+                            SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
+                            String bdate = sfd.format(datetest);
+
 //                                        String tt = datetest.toString();
 
                             if (childgender.equals(getString(R.string.male))){
@@ -364,8 +366,7 @@ public class EditProfileFragment extends Fragment {
                             txtEditchildPhone.setText(childPhone);
                             txtEditmotherName.setText(childmothername);
                             txtEditPassword.setText(password);
-                            txtEditPassword.setText(password);
-                            txtEditAge.setText(calander.toString());
+                            txtEditAge.setText(bdate);
                             spinner.setSelection(getIndex(spinner, chlidboodtype));
 
                         } else {

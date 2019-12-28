@@ -88,7 +88,7 @@
     <string name="error" translatable="false">Error!</string>
     <string name="email_password_not_correct" translatable="false">Email or password not correct</string>
     <string name="registered_successfully" translatable="false">Registered successfully</string>
-    <string name="worn_input_retry" translatable="false">Wrong input, please retry</string>
+    <string name="worn_input_retry" translatable="false">Press again please</string>
     <string name="vacc_child_home_btn" translatable="false">   Vaccination</string>
     <string name="CSHCN" translatable="false">CSHCN</string>
     <string name="children" translatable="false">Children</string>
