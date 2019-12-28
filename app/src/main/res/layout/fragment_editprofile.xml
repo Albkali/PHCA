@@ -147,7 +147,6 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/baby_birthday"
                                 android:inputType="date"
-                                android:onClick="setDate"
                                 android:textColor="#1976D2" />
 
                         </com.google.android.material.textfield.TextInputLayout>

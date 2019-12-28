@@ -325,10 +325,10 @@ public class Register extends AppCompatActivity {
             //limit the birth date picker
             Calendar cal = Calendar.getInstance();
             cal.setTime(cal.getTime());
-            cal.add(Calendar.YEAR, -1);
+            cal.add(Calendar.YEAR, -5);
             datePicker.getDatePicker().setMinDate( cal.getTimeInMillis());
             cal.setTime(cal.getTime());
-            cal.add(Calendar.YEAR, 6);
+            cal.add(Calendar.YEAR, 5);
 
             datePicker.getDatePicker().setMaxDate( cal.getTimeInMillis());
             datePicker.show();
