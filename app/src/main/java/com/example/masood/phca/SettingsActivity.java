@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -119,4 +122,33 @@ public class SettingsActivity extends AppCompatActivity implements OnClickListen
 //            setPreferencesFromResource(R.xml.root_preferences, rootKey);
 //        }
 //    }
+public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if(item.getItemId() == R.id.action_logout){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
+        Intent intent = new Intent ( this, Login_form.class);
+        startActivity(intent);
+
+    }
+    else {
+
+        if(item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+        }
+    }
+    return super.onOptionsItemSelected(item);
+}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
+
 }

@@ -1,10 +1,17 @@
 package com.example.masood.phca;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class BMI_Calculate extends AppCompatActivity {
 
@@ -20,7 +27,8 @@ public class BMI_Calculate extends AppCompatActivity {
         weight = findViewById(R.id.weight);
         height = findViewById(R.id.height);
         resulttext = findViewById(R.id.result);
-
+        getSupportActionBar().setTitle("BMI Calculate");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
     }
 
     public void calculateBMI(View view){
@@ -57,7 +65,34 @@ public class BMI_Calculate extends AppCompatActivity {
 
 
 
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_logout){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent ( this, Login_form.class);
+            startActivity(intent);
 
+        }
+        else {
+
+            if(item.getItemId() == R.id.action_settings) {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+            }
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_drawer, menu);
+        return true;
+    }
 
 
 }

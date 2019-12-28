@@ -92,4 +92,5 @@
     <string name="vacc_child_home_btn" translatable="false">   Vaccination</string>
     <string name="CSHCN" translatable="false">CSHCN</string>
     <string name="children" translatable="false">Children</string>
+    <string name="children_special_heathcare_need">Children Special HeathCare Need</string>
 </resources>

@@ -25,7 +25,7 @@
             android:background="#6D3DC2"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="BMI Calculate"
-            app:titleTextColor="#C3131010">
+            app:titleTextColor="#F7EEEE">
 
 
         </androidx.appcompat.widget.Toolbar>

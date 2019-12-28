@@ -9,15 +9,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/bannerchildlist"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginBottom="10dp"
-        android:background="#0288D1"
-        android:paddingTop="18dp"
-        android:paddingBottom="2dp"
-        android:text="My children"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="#87B74B"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:text="My Children"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="24sp" />
