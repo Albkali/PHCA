@@ -57,7 +57,7 @@ public class Pediatrician extends AppCompatActivity {
 
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference noteRef = db.document("Pediatrician/100");
+    private DocumentReference noteRef = db.document("Pediatrician/PF6xoMp0pWbZvhwizAJiwmQuZ2Z2");
 
 
 
