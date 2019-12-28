@@ -39,7 +39,7 @@ public class Login_form extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser() != null) {
             user = FirebaseAuth.getInstance().getCurrentUser();
             String id = user.getEmail();
-            if (id.equals("moh@gmail.com") || id.equals("ped@gmail.com")) {
+            if (id.equals("khalid@gmail.com") || id.equals("ped@gmail.com")) {
                 Intent groceryItemsIntent = new Intent(Login_form.this,
                         MainActivity.class);
                 startActivity(groceryItemsIntent);

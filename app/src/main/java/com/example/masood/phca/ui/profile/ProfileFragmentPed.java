@@ -18,14 +18,20 @@ import com.example.masood.phca.Pediatrician;
 import com.example.masood.phca.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class ProfileFragmentPed extends Fragment {
 
     private  String PedName , PedEmail;
+    private FirebaseAuth firebaseAuth;
 
+    FirebaseUser user;
     Pediatrician pediatrician;
 
     public ProfileFragmentPed(String pedName, String pedEmail) {
@@ -57,8 +63,7 @@ public class ProfileFragmentPed extends Fragment {
     private TextView PedName1 , PedEmail1 ,PedPhone1;
 
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference noteRef = db.document("Pediatrician/pDE6RSGuX9XXeqaMiOSqEW11H2G3");
+
 
 
 
@@ -68,18 +73,17 @@ public class ProfileFragmentPed extends Fragment {
 
         pediatrician = new Pediatrician();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
+         FirebaseFirestore db = FirebaseFirestore.getInstance();
+         DocumentReference noteRef = db.collection("Pediatrician").document(id);
 
         PedName1 =v.findViewById(R.id.txtViewPedName);
         PedEmail1 =v.findViewById(R.id.txtViewPedEmail);
         PedPhone1 =v.findViewById(R.id.txtViewPedPhone);
 
-        return v;
-    }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
         noteRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -111,8 +115,10 @@ public class ProfileFragmentPed extends Fragment {
                         Log.d(TAG, e.toString());
                     }
                 });
-    }
 
+
+        return v;
+    }
 
 
 }
