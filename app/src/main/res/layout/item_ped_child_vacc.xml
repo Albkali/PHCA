@@ -11,11 +11,11 @@
 
     <TextView
         android:id="@+id/Vacci_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="24dp"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textViewNamechild"
@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/vacc_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="139dp"
+        android:layout_height="30dp"
         android:layout_marginTop="2dp"
         android:text="later"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -36,13 +36,13 @@
 
     <TextView
         android:id="@+id/textViewNamechild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="141dp"
+        android:layout_height="28dp"
         android:layout_marginTop="7dp"
-        android:text="Vaccination Name :"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/vaccination_name" />
 
     <TextView
         android:id="@+id/textViewDatechild"
@@ -50,25 +50,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
-        android:text="Vaccination Date :"
+        android:text="@string/vaccination_date"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNamechild" />
 
     <TextView
         android:id="@+id/textViewStatuschild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="25dp"
         android:layout_marginTop="2dp"
-        android:text="Status :"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDatechild" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDatechild"
+        android:text="@string/status" />
 
     <TextView
         android:id="@+id/vacc_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="23dp"
         android:layout_marginTop="2dp"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"

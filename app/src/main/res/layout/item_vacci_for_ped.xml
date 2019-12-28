@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textViewNamechild"
@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/vacc_month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="28dp"
         android:layout_marginTop="2dp"
         android:text="later"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -36,31 +36,31 @@
 
     <TextView
         android:id="@+id/textViewNamechild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="25dp"
         android:layout_marginTop="7dp"
-        android:text="Vaccination Name :"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/vaccination_name" />
 
     <TextView
         android:id="@+id/textViewDatechild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="23dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
-        android:text="Vaccination age :"
         android:textSize="18sp"
+        android:text="@string/vaccination_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNamechild" />
 
     <TextView
         android:id="@+id/textViewStatuschild"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="26dp"
         android:layout_marginTop="2dp"
-        android:text="Type :"
+        android:text="@string/type"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewDatechild"
         app:layout_constraintTop_toBottomOf="@+id/textViewDatechild" />

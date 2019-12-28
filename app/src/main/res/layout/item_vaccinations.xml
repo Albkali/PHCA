@@ -20,7 +20,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textViewNamechild"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Vacci_name" />
+        tools:text="@string/vaccination_name" />
 
     <TextView
         android:id="@+id/vacc_date"
@@ -32,7 +32,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/Vacci_name"
         app:layout_constraintTop_toBottomOf="@+id/Vacci_name"
-        tools:text="vacc_date" />
+        tools:text="@string/vaccination_date" />
 
     <TextView
         android:id="@+id/textViewNamechild"
@@ -75,7 +75,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/vacc_date"
         app:layout_constraintTop_toBottomOf="@+id/vacc_date"
-        tools:text="vacc_status" />
+        tools:text="@string/status"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
     <!--<LinearLayout-->
     <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->

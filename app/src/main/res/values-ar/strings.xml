@@ -95,4 +95,7 @@
     <string name="vaccination_name" translatable="false">نوع التطعيم :</string>
     <string name="vaccination_date" translatable="false">تاريخ التطعيم :</string>
     <string name="status" translatable="false">حالة التطعيم :</string>
+    <string name="show_vaccination_schedule" translatable="false">سجل التطعيمات</string>
+    <string name="type" translatable="false">النوع :</string>
+
 </resources>

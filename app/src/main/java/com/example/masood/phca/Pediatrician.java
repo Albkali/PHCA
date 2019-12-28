@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class Pediatrician extends AppCompatActivity {
 
@@ -26,6 +31,8 @@ public class Pediatrician extends AppCompatActivity {
     Button btnsetped;
 
     Pediatrician pediatrician;
+    private FirebaseStorage firebaseStorage;
+    private ImageView imgprofile ;
 
     public Pediatrician(String pedName, String pedEmail) {
         PedName = pedName;
@@ -70,12 +77,18 @@ public class Pediatrician extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // for add back arrow in action bar
 
         pediatrician = new Pediatrician();
+        firebaseStorage = FirebaseStorage.getInstance();
+
+        StorageReference storageReference = firebaseStorage.getReference();
+        imgprofile = (ImageView) findViewById(R.id.ped_photo);
 
         btnsetped= (Button)findViewById(R.id.sbtnsetped);
 
         PedName1 =findViewById(R.id.txtViewPedName);
         PedEmail1 =findViewById(R.id.txtViewPedEmail);
         PedPhone1 =findViewById(R.id.txtViewPedPhone);
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/phca-project.appspot.com/o/ProfileImage%2Fdoctor-bulk-billing-doctors-chapel-hill-health-care-medical-3.png?alt=media&token=c39f46ae-fbaf-4a50-8988-37d70875b96d").fit().centerInside().into(imgprofile);
+
 
 
     }

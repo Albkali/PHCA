@@ -98,7 +98,7 @@ public class Login_form extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     user = FirebaseAuth.getInstance().getCurrentUser();
                                     String id = user.getEmail();
-                                    if (id.equals("moh@gmail.com") || id.equals("ped@gmail.com")) {
+                                    if (id.equals("khalid@gmail.com") || id.equals("ped@gmail.com")) {
                                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //                                        to show more optione to do condtions of type users , check this link
 //     https://stackoverflow.com/questions/50534695/how-to-log-in-two-different-types-of-users-to-different-activities-automatically

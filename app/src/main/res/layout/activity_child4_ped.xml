@@ -179,18 +179,16 @@
                 android:orientation="horizontal"
                 android:paddingLeft="25dp">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_email_black_24dp" />
 
-                <TextView
-                    android:id="@+id/txtViewchildEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:textStyle="bold" />
+                <Button
+                    android:id="@+id/button_show_vacc"
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/buttonstyle"
+                    android:text="@string/show_vaccination_schedule"
+                    android:textSize="16sp" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -277,13 +275,6 @@
                     android:paddingLeft="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/button_show_vacc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_effect"
-                android:text="Show Vaccination schedule" />
 
 
         </LinearLayout>

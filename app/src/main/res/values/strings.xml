@@ -98,4 +98,6 @@
     <string name="vaccination_name" translatable="false">Vaccination Name :</string>
     <string name="vaccination_date" translatable="false">Vaccination Date :</string>
     <string name="status" translatable="false">Status :</string>
+    <string name="show_vaccination_schedule" translatable="false">Show Vaccination schedule</string>
+    <string name="type" translatable="false">Type :</string>
 </resources>
