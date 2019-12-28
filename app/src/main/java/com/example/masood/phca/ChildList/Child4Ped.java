@@ -19,12 +19,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.masood.phca.Chatting_Activity;
 import com.example.masood.phca.Login_form;
 import com.example.masood.phca.MyDrawer;
+import com.example.masood.phca.PedChildVaccination;
 import com.example.masood.phca.R;
 import com.example.masood.phca.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,6 +63,7 @@ public class Child4Ped extends AppCompatActivity {
 
     private ImageView imgprofile ;
 
+    private Button btn_child_vacc;
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -90,6 +93,20 @@ public class Child4Ped extends AppCompatActivity {
         });
 
 
+        btn_child_vacc = (Button)findViewById(R.id.button_show_vacc);
+
+
+        Bundle b = getIntent().getExtras();
+        final String id = b.getString("id");
+
+        btn_child_vacc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(getApplicationContext(), PedChildVaccination.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
@@ -112,8 +129,6 @@ public class Child4Ped extends AppCompatActivity {
         imgprofile = (ImageView) findViewById(R.id.txtViewImage);
 
 
-        Bundle b = getIntent().getExtras();
-        String id = b.getString("id");
 //        user = FirebaseAuth.getInstance().getCurrentUser();
 //        String id = user.getUid();
 

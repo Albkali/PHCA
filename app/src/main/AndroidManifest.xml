@@ -24,6 +24,13 @@
             android:name=".ArticleActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
+            android:name=".Vacci_for_Ped"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+
+        <activity
+            android:name=".PedChildVaccination"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
             android:name=".CSHCN_WebView_activity"
             />
         <activity
