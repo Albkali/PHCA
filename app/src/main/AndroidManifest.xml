@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ChildList.Child4Ped"></activity>
+        <activity android:name=".Vacci_for_Ped"></activity>
+        <activity android:name=".PedChildVaccination" />
+        <activity android:name=".ChildList.Child4Ped" />
         <activity android:name=".Chatting_Activity" />
         <activity android:name=".Article_WebView_activity" />
         <activity

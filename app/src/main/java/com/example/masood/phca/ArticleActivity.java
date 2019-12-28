@@ -47,35 +47,6 @@ public class ArticleActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.myRecycleView);
 
 
-
-        // [START fs_order_by_country_population]
-        // [START fs_composite_index_chained_query]
-
-//
-//        DocumentReference personRef = db.document("article");
-
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//
-//        CollectionReference citice = firebaseDatabase.getReference();
-//        DatabaseReference databaseReference = firebaseDatabase.getReference("jnjjnbj");
-//        Query query = FirebaseFirestore.getInstance()
-//                .collection("article");
-//        DatabaseReference personsRef = FirebaseDatabase.getInstance().getReference().child("News");
-//        Query personsQuery = personsRef.orderByKey();
-//        Query query = personRef1.orderBy("jnj");
-//        personsQuery = FirebaseFirestore.getInstance()
-//                .collection("article").document(" " ).collection("reminders")
-//                .orderBy("");
-//        querySearch = FirebaseFirestore.getInstance()
-//                .collection("App").document(" " + userID).collection("reminders")
-//                .startAt("title", newText)
-//                .endAt("title", newText+"\uf8ff");
-//        FirebaseRecyclerOptions<article> personsOptions = new FirebaseRecyclerOptions.Builder<article>()
-//                .setQuery(personsQuery , article.class)
-//                .build();
-        //        FirebaseRecyclerOptions personsOptions = new FirebaseRecyclerOptions.Builder<article>()
-//        .setQuery(personsQuery, article.class).build();
-
         db = FirebaseFirestore.getInstance();
 
         CollectionReference cities = db.collection("article");
@@ -157,4 +128,5 @@ public class ArticleActivity extends AppCompatActivity {
 
         }
 
-}}
+}
+}

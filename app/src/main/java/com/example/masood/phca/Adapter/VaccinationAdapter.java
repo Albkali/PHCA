@@ -59,6 +59,7 @@ public class VaccinationAdapter extends RecyclerView.Adapter<VaccinationAdapter.
     @Override
     public VaccinationItemsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v =LayoutInflater.from(context).inflate(R.layout.item_vaccinations,viewGroup,false);
+        return new VaccinationItemsViewHolder(v);
 
 //        int layoutIdForListItem=R.layout.item_vaccinations;
 //        boolean shouldAttachToParentImmediately=false;
@@ -67,12 +68,10 @@ public class VaccinationAdapter extends RecyclerView.Adapter<VaccinationAdapter.
 //        VaccinationItemsViewHolder viewHolder = new
 //                VaccinationItemsViewHolder(view);
         //View view = mInflater.inflate(R.layout.item_vaccinations, viewGroup, false);
-        return new VaccinationItemsViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VaccinationItemsViewHolder holder, int i) {
-        VaccinationItem p = post.get(i);
 
 //        holder.documentSnapshot = post.get(i);
 //
@@ -83,6 +82,7 @@ public class VaccinationAdapter extends RecyclerView.Adapter<VaccinationAdapter.
 //
 //        String Fname = holder.documentSnapshot.get("Fname").toString();
 //        String Lname = holder.documentSnapshot.get("Lname").toString();
+        VaccinationItem p = post.get(i);
 
         holder.Vname.setText(p.getName());
         holder.Vstatus.setText(p.getStatus());

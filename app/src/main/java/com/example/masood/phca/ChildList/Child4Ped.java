@@ -5,14 +5,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.masood.phca.PedChildVaccination;
 import com.example.masood.phca.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,7 +46,7 @@ public class Child4Ped extends AppCompatActivity {
     private TextView txtViewname, txtviewchildPhone, txtviewmotherName, txtviewbloodtype,
             txtviewchildGender, txtviewAge, txtviewHeight, txtviewWeight;
     private TextView txtViewEmail;
-
+private Button btn_child_vacc;
     private ImageView imgprofile ;
 
     private FirebaseUser userID = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,6 +65,7 @@ public class Child4Ped extends AppCompatActivity {
 
         StorageReference storageReference = firebaseStorage.getReference();
 
+        btn_child_vacc = (Button)findViewById(R.id.button_show_vacc);
 
         txtViewname = (TextView) findViewById(R.id.txtViewFname);
         txtViewEmail = (TextView) findViewById(R.id.txtViewchildEmail);
@@ -78,7 +83,16 @@ public class Child4Ped extends AppCompatActivity {
 
 
         Bundle b = getIntent().getExtras();
-        String id = b.getString("id");
+        final String id = b.getString("id");
+
+        btn_child_vacc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                Intent intent = new Intent(getApplicationContext(), PedChildVaccination.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+            }
+        });
 //        user = FirebaseAuth.getInstance().getCurrentUser();
 //        String id = user.getUid();
 
